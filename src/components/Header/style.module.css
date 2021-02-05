@@ -1,0 +1,178 @@
+.header {
+    background: var(--head-bg-color);
+    padding: 15px 0;
+}
+
+.headerWrap {
+    max-width: var(--wrap-size);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mainIcon {
+    display: flex;
+    align-items: center;
+}
+
+.logoLink {
+    display: flex;
+}
+
+.logo {
+    width: 60px;
+    margin-right: 10px;
+}
+
+.title {
+    width: 156px;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.06;
+    color: #ffffff;
+    text-align: left;
+}
+
+.isAuthUserBlock {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.userLogName {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.29;
+    text-align: right;
+    color: #ffffff;
+    margin-right: 10px;
+}
+
+.userPhoto {
+    width: 48px;
+    border-radius: 24px;
+    border: solid 2px #61dafb;
+}
+
+.function {
+    display: none;
+    width: 16px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.popup {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 6;
+    background: #000;
+    opacity: 0.7;
+    top: 0;
+    left: 0;
+}
+
+.content {
+    position: absolute;
+    z-index: 300;
+    border-radius: 10px;
+    background-color: var(--body-bg-color);
+    top: 220px;
+    left: calc(50% - 100px);
+    padding: 25px 20px;
+}
+
+.night {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.exit {
+    color: red
+}
+
+.button {
+    display: inline-block;
+    width: 45px; /* ширина */
+    height: 24px; /* высота */
+    border-radius: 19px; /* радиус скругления */
+    background: #bfbfbf; /* цвет фона */
+    z-index: 0;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition-duration: 300ms; /* анимация */
+
+}
+
+.button::after {
+    content: "";
+    height: 20px; /* высота кнопки */
+    width: 20px; /* ширина кнопки */
+    border-radius: 17px;
+    background: #fff; /* цвет кнопки */
+    top: 2px; /* положение кнопки по вертикали относительно основы */
+    left: 3px; /* положение кнопки по горизонтали относительно основы */
+    transition-duration: 300ms; /* анимация */
+    position: absolute;
+    z-index: 1;
+}
+
+.switchOn {
+    background: var(--secondary-color);
+}
+
+.switchOn::after {
+    left: 23px;
+}
+
+.label {
+    line-height: 1.29;
+    margin-right: 10px;
+    color: var(--b-w-text-color);
+}
+
+.login {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.29;
+    text-align: right;
+    color: #ffffff;
+    display: block;
+    margin-top: 16px;
+    transition: .2s ease-in-out;
+}
+
+.login:hover {
+    color: var(--secondary-color);
+}
+
+@media screen and (max-width: 1440px) {
+    .headerWrap {
+        margin: 0 10px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .header {
+        padding: 8px 0;
+    }
+
+    .logo {
+        width: 45px;
+    }
+
+    .userLogName, .title {
+        display: none;
+    }
+
+    .userPhoto {
+        width: 45px;
+    }
+
+    .function {
+        display: block;
+    }
+}

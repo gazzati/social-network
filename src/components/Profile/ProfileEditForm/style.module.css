@@ -1,0 +1,202 @@
+.editInfoBlock {
+    width: 100%;
+    color: var(--dark-blue-w-text-color);
+    background-color: var(--wrap-bg-color);
+    border-radius: 10px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+}
+
+.topBlock {
+    display: flex;
+    height: 50%;
+}
+
+.contactsBlock {
+    height: 50%;
+    margin-top: 64px;
+}
+
+.leftBlock {
+}
+
+.upload {
+    margin-top: 30px;
+    position: relative;
+    height: 140px;
+}
+
+.name_surname {
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.name {
+    margin-right: 16px;
+}
+
+.uploadBtn {
+    margin-top: 40px;
+    display: block;
+    width: fit-content;
+}
+
+.photos {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-top: 30px;
+    max-height: 110px;
+    max-width: 150px;
+}
+
+.largePhoto {
+    max-width: 80px;
+    width: 100%;
+    max-height: 80px;
+    border: solid 2px #61dafb;
+    border-radius: 50px;
+    margin-right: 15px;
+}
+
+.smallPhoto {
+    max-width: 50px;
+    width: 100%;
+    max-height: 50px;
+    border: solid 2px #61dafb;
+    border-radius: 40px;
+}
+
+.rightBlock {
+    margin-left: 64px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.rightBlock input[type = "text"] {
+    width: 100%;
+}
+
+.checkbox {
+    display: flex;
+}
+
+.checkbox input {
+    margin-left: 8px;
+    margin-top: 2px;
+    height: auto;
+}
+
+.secondP {
+    font-size: 12px;
+    line-height: 1.29;
+    text-align: left;
+    font-weight: 400;
+    color: #9d9aa8;
+}
+
+.upload input {
+    height: 0;
+    overflow: hidden;
+    width: 0;
+    display: none;
+}
+
+.photos {
+    justify-self: right;
+    margin-top: 30px;
+    max-height: 110px;
+    max-width: 150px;
+}
+
+.largePhoto {
+    max-width: 80px;
+    width: 100%;
+    max-height: 80px;
+    border: solid 2px #61dafb;
+    border-radius: 50px;
+    margin-right: 15px;
+}
+
+.smallPhoto {
+    max-width: 50px;
+    width: 100%;
+    max-height: 50px;
+    border: solid 2px #61dafb;
+    border-radius: 40px;
+}
+
+.contacts {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.contactsItem {
+    margin-top: 16px;
+    margin-right: 32px;
+}
+
+.contactKey {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.29;
+    text-align: left;
+    color: var(--dark-blue-w-text-color);
+}
+
+.contactValue {
+    width: 250px;
+}
+
+.buttons {
+    align-self: center;
+    display: flex;
+    margin-top: 32px;
+}
+
+.saveBtn {
+    margin-left: 16px;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: left;
+    color: var(--b-w-text-color);
+}
+
+p {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.29;
+    text-align: left;
+    color: var(--b-w-text-color);
+}
+
+@media (max-width: 600px) {
+    .editInfoBlock {
+        padding: 16px;
+    }
+
+    .topBlock {
+        flex-direction: column;
+    }
+
+    .name_surname {
+        flex-direction: column;
+    }
+
+    .rightBlock {
+        margin-left: 0;
+        margin-top: 32px;
+    }
+
+    .rightBlock div {
+        margin-top: 16px;
+    }
+}

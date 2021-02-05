@@ -1,0 +1,84 @@
+.friendsBlock {
+    width: 100%;
+    height: 100%;
+}
+
+.friends {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.friend {
+    background: linear-gradient(to top, var(--wrap-bg-color) 72%, var(--color-block) 28%);
+    border-radius: 10px;
+    width: 24%;
+    height: 230px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+    margin-right: 16px;
+}
+
+.pag {
+    height: 50px;
+    margin-top: 20px;
+}
+
+.photo {
+    width: 70px;
+    height: 70px;
+    margin-top: 28px;
+    border: solid 2px #61dafb;
+    border-radius: 40px;
+    background-color: var(--b-w-text-color);
+}
+
+.name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.descriptionUser {
+    text-align: center;
+    cursor: default;
+    color: var(--b-w-text-color);
+    height: 70px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.unfollow {
+    margin-left: 8px;
+}
+
+@media screen and (max-width: 900px) {
+    .friends {
+        justify-content: left;
+    }
+
+    .friend {
+        width: 31%;
+        margin: 0 10px 10px 0;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .friends {
+        justify-content: space-around;
+    }
+
+    .friend {
+        width: 49%;
+        height: 230px;
+        margin: 0 0 6px 0;
+    }
+
+    .pag {
+        height: 70px;
+        margin-left: 15%;
+    }
+}

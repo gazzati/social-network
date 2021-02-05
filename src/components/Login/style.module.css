@@ -1,0 +1,43 @@
+.loginPage {
+    background-color: var(--wrap-bg-color);
+    width: 100%;
+    height: 100%;
+    padding: 3.5% 20%;
+    border-radius: 10px;
+    color: var(--b-w-text-color);
+    display: flex;
+    justify-content: space-around;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+.login,
+.registration {
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    margin-top: 10px;
+}
+
+.name, .surname, .mail, .password {
+    margin-top: 10px;
+}
+
+.s1 {
+    display: flex;
+    margin-top: 5px;
+}
+
+.s2 {
+    margin-right: 5px;
+}
+
+.s3 {
+    margin-top: -1px
+}
+
+

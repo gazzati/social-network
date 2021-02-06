@@ -33,7 +33,6 @@ const authReducer = (state = initialState, action: ActionsType): initialStateTyp
 export const actions = {
     setAuthUserData: (userData: UserDataType, isAuth: boolean) =>
         ({ type: 'auth/SET_USER_DATA', payload: { userData, isAuth } } as const),
-
     toggleIsFetching: (isFetching: boolean) => ({ type: 'auth/TOGGLE_IS_FETCHING', isFetching } as const)
 }
 
@@ -54,7 +53,8 @@ export const login = (email: string, password: string): ThunkType =>
         dispatch(actions.toggleIsFetching(true))
         let res = await authAPI.login(email, password)
         if (res.resultCode === ResultCodeEnum.Success) {
-            dispatch(actions.setAuthUserData(res.data, true))
+            localStorage.setItem('authToken', res.data.authToken)
+            dispatch(actions.setAuthUserData(res.data.userData, true))
             dispatch(actions.toggleIsFetching(false))
         }
     }
@@ -64,7 +64,8 @@ export const registration = (name: string, surname: string, email: string, passw
         dispatch(actions.toggleIsFetching(true))
         let res = await authAPI.registration(name, surname, email, password)
         if (res.resultCode === ResultCodeEnum.Success) {
-            dispatch(actions.setAuthUserData(res.data, true))
+            localStorage.setItem('authToken', res.data.authToken)
+            dispatch(actions.setAuthUserData(res.data.userData, true))
         }
         dispatch(actions.toggleIsFetching(false))
     }
@@ -72,6 +73,7 @@ export const registration = (name: string, surname: string, email: string, passw
 export const logout = (): ThunkType => async (dispatch) => {
     let response = await authAPI.logout()
     if (response.data.resultCode === 0) {
+        localStorage.removeItem('authToken')
         dispatch(actions.setAuthUserData({ id: null, name: null, surname: null, photo: null }, false))
     }
 }

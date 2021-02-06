@@ -5,7 +5,8 @@ export const instance = axios.create({
     //baseURL: 'http://localhost:4000/api',
     baseURL: 'https://gazzati-sc-backend.herokuapp.com/api',
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'authToken': localStorage.getItem('authToken')
     }
 })
 

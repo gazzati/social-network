@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import s from './style.module.css'
+import s from './style.module.scss'
 
 type PropsType = {
     status: string

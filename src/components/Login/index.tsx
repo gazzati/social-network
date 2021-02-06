@@ -1,5 +1,5 @@
 import React from 'react'
-import s from './style.module.css'
+import s from './style.module.scss'
 import {connect} from 'react-redux'
 import {login} from '../../redux/auth-reducer'
 import {registration} from '../../redux/auth-reducer'

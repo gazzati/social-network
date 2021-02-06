@@ -1,5 +1,5 @@
 import React, {FC} from 'react'
-import s from './style.module.css'
+import s from './style.module.scss'
 import Paginator from '../common/Paginator'
 import Preloader from '../common/Preloader'
 import NewsItem from './NewsItem'

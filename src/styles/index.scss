@@ -13,12 +13,8 @@ main {
   max-width: var(--wrap-size);
   margin: 20px auto 0;
   display: flex;
-  @media (max-width: 900px) {
-    margin-top: 10px;
-  }
-  @media (max-width: 600px) {
-    margin-top: 5px;
-    margin-bottom: 42px;
+  @media (max-width: 678px) {
+    margin: 5px 5px 56px;
   }
 }
 

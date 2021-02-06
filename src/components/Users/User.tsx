@@ -1,5 +1,5 @@
 import React, {FC} from 'react'
-import s from './style.module.css'
+import s from './style.module.scss'
 import userPhoto from '../../assets/images/user.png'
 import {NavLink} from 'react-router-dom'
 import {ProfileType} from '../../types/types'
@@ -24,6 +24,7 @@ const User: FC<PropsType> = ({ user, currentUserId, followingInProgress, unfollo
                     <div className={s.name}>{user.info.name}</div>
                     <div>{user.status}</div>
                 </div>
+                {currentUserId &&
                 <div className={s.fol}>
                     {currentUserId && user.followers.includes(currentUserId)
                         ? <button /*disabled={followingInProgress.some(id => id === user.userId)}*/
@@ -42,6 +43,7 @@ const User: FC<PropsType> = ({ user, currentUserId, followingInProgress, unfollo
                             Follow
                         </button>}
                 </div>
+                }
             </div>
         </div>)
 }

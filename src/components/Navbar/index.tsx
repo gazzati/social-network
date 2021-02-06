@@ -1,5 +1,5 @@
 import React from 'react'
-import s from './style.module.css'
+import s from './style.module.scss'
 import {NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {logout} from '../../redux/auth-reducer'

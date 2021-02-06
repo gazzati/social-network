@@ -1,5 +1,5 @@
 import React from 'react'
-import s from './style.module.css'
+import s from './style.module.scss'
 import cn from 'classnames'
 import {connect} from 'react-redux'
 import {toggleBlackTheme, toggleDynamicBackground} from '../../redux/settings-reducer'

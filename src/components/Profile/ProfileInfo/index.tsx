@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import s from './style.module.css'
+import s from './style.module.scss'
 import userPhoto from '../../../assets/images/user.png'
 import ProfileStatus from './ProfileStatus'
 import vk from '../../../assets/images/contacts/vk.svg'

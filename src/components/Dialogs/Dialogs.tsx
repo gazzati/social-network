@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 
 import formatDate from '../../helpers/formatDate'
 
-import s from './style.module.css'
+import s from './style.module.scss'
 import DialogItem from './DialogItem'
 import Message from './Message'
 import AddMessageForm from './AddMessageForm'

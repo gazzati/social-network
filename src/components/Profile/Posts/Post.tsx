@@ -1,5 +1,5 @@
 import React from 'react'
-import s from './style.module.css'
+import s from './style.module.scss'
 import userPhoto from '../../../assets/images/user.png'
 import likeIcon from '../../../assets/images/like.png'
 import removePost from '../../../assets/images/removePost.svg'

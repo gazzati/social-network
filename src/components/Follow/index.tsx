@@ -4,7 +4,7 @@ import {compose} from 'redux'
 import {useHistory} from 'react-router-dom'
 
 import {getFollow, unfollow} from '../../redux/follow-reducer'
-import s from './style.module.css'
+import s from './style.module.scss'
 import {AppStateType} from '../../redux'
 import {withAuthRedirect} from '../../hoc/withAuthRedirect'
 import {startChat} from '../../redux/dialogs-reducer'

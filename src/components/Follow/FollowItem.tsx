@@ -1,5 +1,5 @@
 import React, {FC} from 'react'
-import s from './style.module.css'
+import s from './style.module.scss'
 import userPhoto from '../../assets/images/user.png'
 import {NavLink} from 'react-router-dom'
 import {ProfileType} from '../../types/types'

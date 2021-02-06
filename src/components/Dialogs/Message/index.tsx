@@ -1,5 +1,5 @@
 import React from 'react'
-import s from '../style.module.css'
+import s from '../style.module.scss'
 import {MessageType} from '../../../types/types'
 import formatDate from '../../../helpers/formatDate'
 

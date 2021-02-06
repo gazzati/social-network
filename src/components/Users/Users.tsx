@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react'
-import s from './style.module.css'
+import s from './style.module.scss'
 import User from './User'
 import Paginator from '../common/Paginator'
 import {ProfileType} from '../../types/types'

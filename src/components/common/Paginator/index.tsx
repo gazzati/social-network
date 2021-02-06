@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import styles from './Paginator.module.css'
+import styles from './Paginator.module.scss'
 import cn from 'classnames'
 import leftArrowIcon from '../../../assets/images/leftArrowIcon.svg'
 import rightArrowIcon from '../../../assets/images/rightArrowIcon.svg'

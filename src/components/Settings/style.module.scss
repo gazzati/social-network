@@ -6,12 +6,11 @@
     padding-top: 20px;
     background-color: var(--wrap-bg-color);
     margin-bottom: 50px;
-}
-
-.settingsItem {
-    display: flex;
-    align-items: center;
-    margin-top: 28px;
+    .settingsItem {
+        display: flex;
+        align-items: center;
+        margin-top: 28px;
+    }
 }
 
 .label {

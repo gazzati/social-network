@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import s from './style.module.css'
+import s from './style.module.scss'
 import Post from './Post'
 import {ProfileType} from '../../../types/types'
 

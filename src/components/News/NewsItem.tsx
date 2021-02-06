@@ -1,5 +1,5 @@
 import React, {FC} from 'react'
-import s from './style.module.css'
+import s from './style.module.scss'
 import {NewsType} from '../../types/types'
 
 type PropsType = {

@@ -2,6 +2,11 @@
 
 ## Backend реализован с помощью express на NodeJs
 
+
+## Приложение опубликовано на gh-pages по адресу https://gazzati.github.io/sc-front/
+  Данные для входа: login: gazzaevtimur@gmail.com
+                    password: timur99
+
 ## Разработка
 
   -Данные приложение берет с API для курса Путь Самурая(ссылка: https://www.youtube.com/watch?v=gb7gMluAeao&list=PLcvhF2Wqh7DNVy1OCUpG3i5lyxyBWhGZ8&index=1). Запросы на сервер отправляются с использованием Axios и вынесены в отдельные файлы в директории api.

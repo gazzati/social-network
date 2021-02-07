@@ -7,7 +7,7 @@ import {getFollow, unfollow} from '../../redux/follow-reducer'
 import s from './style.module.scss'
 import {AppStateType} from '../../redux'
 import {withAuthRedirect} from '../../hoc/withAuthRedirect'
-import {startChat} from '../../redux/dialogs-reducer'
+import {getAllDialogs, startChat} from '../../redux/dialogs-reducer'
 import Preloader from '../common/Preloader'
 import FollowItem from './FollowItem'
 
@@ -17,6 +17,7 @@ type MapDispatchPropsType = {
     getFollow: (type: 'followers' | 'following') => void
     unfollow: (userId: string) => void
     startChat: (chatId?: string) => string
+    getAllDialogs: (chatId?: string) => void
 }
 
 type OwnPropsType = {
@@ -39,6 +40,8 @@ const Follow: React.FC<PropsType> = (props) => {
             chat.participants.includes(userId) && chat.participants.length === 2)[0]?._id
         if (!chatId) {
             chatId = await props.startChat(userId)
+        } else {
+            props.getAllDialogs(chatId)
         }
         history.push(`dialogs/${chatId}`)
     }
@@ -77,5 +80,5 @@ const mapStateToProps = (state: AppStateType) => {
 }
 
 export default compose<React.FC<OwnPropsType>>(
-    connect(mapStateToProps, { getFollow, unfollow, startChat }),
+    connect(mapStateToProps, { getFollow, unfollow, startChat, getAllDialogs }),
     withAuthRedirect)(Follow)

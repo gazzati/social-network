@@ -46,17 +46,19 @@ const Login: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
 
     return (
         <div className={s.loginPage}>
-            {props.isFetching && <Preloader/>}
-            <div className={s.login}>
-                <h2>LOG IN</h2>
-                <LoginForm onSubmit={onSubmitLogin}/>
-            </div>
+            <div className={s.loginWrap}>
+                {props.isFetching && <Preloader/>}
+                <div className={s.login}>
+                    <h2>LOG IN</h2>
+                    <LoginForm onSubmit={onSubmitLogin}/>
+                </div>
 
-            <h4>or</h4>
+                <h4>or</h4>
 
-            <div className={s.registration}>
-                <h2>REGISTRATION</h2>
-                <RegistrationForm onSubmit={onSubmitRegistration}/>
+                <div className={s.registration}>
+                    <h2>REGISTRATION</h2>
+                    <RegistrationForm onSubmit={onSubmitRegistration}/>
+                </div>
             </div>
         </div>
     )

@@ -4,7 +4,7 @@ import {ChatType, MessageType, ChatsAndMessagesType} from '../types/types'
 
 let initialState = {
     chats: [] as ChatType[],
-    messages: [] as MessageType[],
+    messages: [] as MessageType[] | 'no choose',
     isFetching: false
 }
 

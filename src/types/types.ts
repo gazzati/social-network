@@ -68,5 +68,5 @@ export type MessageType = {
 
 export type ChatsAndMessagesType = {
     chats: ChatType[],
-    messages: MessageType[]
+    messages: MessageType[] | 'no choose'
 }

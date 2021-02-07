@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 
 import formatDate from '../../helpers/formatDate'
 
@@ -9,10 +9,13 @@ import AddMessageForm from './AddMessageForm'
 import {MessageType} from '../../types/types'
 import {ChatType} from '../../types/types'
 import Preloader from '../common/Preloader'
+import leftIco from '../../assets/images/left-arrow.svg'
+import classNames from 'classnames'
+import userPhoto from "../../assets/images/user.png";
 
 type PropsType = {
     chats: ChatType[]
-    messages: MessageType[]
+    messages: MessageType[] | 'no choose'
     isLoading: boolean
     sendMessage: (chatId: string, message: string) => void
     authorizedUserId: string
@@ -22,50 +25,68 @@ type PropsType = {
 }
 
 const Dialogs: React.FC<PropsType> = (props) => {
+    const [isMessagesOpen, setIsMessagesOpen] = useState(props.currentChat !== 'all')
+    const currentUser = props.chats.filter(user => user._id === props.currentChat)[0]
     const messages = props.messages
     let haveTodayMessage = false
 
-    const messagesElements = messages.map(m => {
+    const setCurrentChat = (chatId: string) => {
+        props.setCurrentChat(chatId)
+        setIsMessagesOpen(true)
+    }
+
+    const messagesElements = Array.isArray(messages) && messages.map(m => {
             let isFirstToday = false
             if (formatDate(m.date).isToday) {
                 isFirstToday = !haveTodayMessage
                 haveTodayMessage = true
             }
             return <Message key={m._id}
-                          message={m}
-                          isItMe={props.authorizedUserId === m.senderId}
-                          isFirstToday={isFirstToday}
+                            message={m}
+                            isItMe={props.authorizedUserId === m.senderId}
+                            isFirstToday={isFirstToday}
             />
         }
     )
 
     useEffect(() => {
-        const lastMessage = messages.length && document.getElementById(messages[messages.length - 1]._id)
+        const lastMessage = Array.isArray(messages) && messages.length && document.getElementById(messages[messages.length - 1]._id)
         lastMessage && lastMessage.scrollIntoView()
     })
 
     return (
         <div className={s.dialogs}>
-            <div className={s.dialogsItems}>
-                {props.chats.map((d, index) =>
-                    <DialogItem name={d.title}
-                           key={d._id}
-                           id={d._id}
-                           photo={d.photo}
-                           currentDialog={props.currentChat}
-                           setCurrentChat={props.setCurrentChat}
-                           defaultChecked={index === 0 && props.currentChat === 'all'}
-                        /*hasNewMessage={d.hasNewMessages}
-                        newMessagesCount={d.newMessagesCount}*/
-                    />
-                )}
+            <div className={classNames(s.dialogsItems, {[s.openDialogsItems]: isMessagesOpen})}>
+                {!props.chats.length
+                    ? <div className={s.noChats}>No chats</div>
+                    : props.chats.map((d, index) =>
+                        <DialogItem name={d.title}
+                                    key={d._id}
+                                    id={d._id}
+                                    photo={d.photo}
+                                    currentDialog={props.currentChat}
+                                    setCurrentChat={setCurrentChat}
+                        />)
+                }
             </div>
 
             {props.isLoading
                 ? <Preloader/>
-                : <div className={s.messages}>
+                : <div className={classNames(s.messages, {[s.openMessages]: isMessagesOpen})}>
+                    <div className={s.topBlock}>
+                        <img className={s.topBlockArrow} src={leftIco} alt="" onClick={() => setIsMessagesOpen(false)}/>
+                        {currentUser &&
+                        <div className={s.topBlockUser}>
+                            <div className={s.topBlockName}>{currentUser.title}</div>
+                            <img className={s.topBlockPhoto} src={currentUser.photo || userPhoto} alt={''}/>
+                        </div>}
+                    </div>
                     <ul className={s.messagesBlock}>
-                        {messagesElements.length ? messagesElements : <div className={s.noMessages}>No messages</div>}
+                        {messages === 'no choose' ? <div className={s.noMessages}>Please choose chat</div>
+                            : messagesElements && messagesElements.length
+                                ? messagesElements
+                                : <div className={s.noMessages}>No messages</div>
+                        }
                     </ul>
                     <AddMessageForm
                         sendMessage={(messageText: string) => props.sendMessage(props.currentChat, messageText)}/>

@@ -1,5 +1,5 @@
 import React, {FC} from 'react'
-import s from './ProfileInfo/style.module.scss'
+import s from './style.module.scss'
 import ProfileInfo from './ProfileInfo'
 import {ProfileType} from '../../types/types'
 import PostsContainer from './Posts'

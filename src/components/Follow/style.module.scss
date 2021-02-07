@@ -6,6 +6,9 @@
 .friends {
     display: flex;
     flex-wrap: wrap;
+    @media screen and (max-width: 678px) {
+        justify-content: space-around;
+    }
 }
 
 .friend {
@@ -18,11 +21,20 @@
     align-items: center;
     margin-bottom: 15px;
     margin-right: 16px;
+    @media screen and (max-width: 678px) {
+        width: 49%;
+        height: 230px;
+        margin: 0 0 6px 0;
+    }
 }
 
 .pag {
     height: 50px;
     margin-top: 20px;
+    @media screen and (max-width: 678px) {
+        height: 70px;
+        margin-left: 15%;
+    }
 }
 
 .photo {
@@ -53,32 +65,4 @@
 
 .unfollow {
     margin-left: 8px;
-}
-
-@media screen and (max-width: 900px) {
-    .friends {
-        justify-content: left;
-    }
-
-    .friend {
-        width: 31%;
-        margin: 0 10px 10px 0;
-    }
-}
-
-@media screen and (max-width: 700px) {
-    .friends {
-        justify-content: space-around;
-    }
-
-    .friend {
-        width: 49%;
-        height: 230px;
-        margin: 0 0 6px 0;
-    }
-
-    .pag {
-        height: 70px;
-        margin-left: 15%;
-    }
 }

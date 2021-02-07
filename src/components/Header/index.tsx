@@ -22,8 +22,10 @@ export type PropsType = {
     toggleDynamicBackground: (theme: boolean) => void
 }
 
-const Header: React.FC<PropsType> = ({ isAuth, userData, logout, isBlackThemeActivated,
-                                         toggleBlackTheme, isDynamicBackgroundActivated, toggleDynamicBackground }) => {
+const Header: React.FC<PropsType> = ({
+                                         isAuth, userData, logout, isBlackThemeActivated,
+                                         toggleBlackTheme, isDynamicBackgroundActivated, toggleDynamicBackground
+                                     }) => {
     let [showMenu, setShowMenu] = useState(false)
 
     const showUserMenu = () => {
@@ -49,10 +51,8 @@ const Header: React.FC<PropsType> = ({ isAuth, userData, logout, isBlackThemeAct
                     {isAuth
                         ? <span className={s.isAuthUserBlock}>
                         <span className={s.userLogName}>{`${userData.name} ${userData.surname}`}</span>
-                        <img className={s.userPhoto}
-                             src={userData.photo ? userData.photo : userPhoto} alt=""/>
+                        <img className={s.userPhoto} src={userData.photo || userPhoto} alt=""/>
                         <img className={s.function} src={userLogIcon} alt="" onClick={showUserMenu}/>
-
                     </span>
                         : <NavLink to={'/login'} className={s.login}>Log in</NavLink>}
                 </div>
@@ -63,12 +63,12 @@ const Header: React.FC<PropsType> = ({ isAuth, userData, logout, isBlackThemeAct
                         <div className={s.theme}>
                             <span className={s.label}>Night theme</span>
                             <span onClick={() => toggleBlackTheme(isBlackThemeActivated)}
-                                  className={cn({ [s.switchOn]: isBlackThemeActivated }, s.button)}> </span>
+                                  className={cn({[s.switchOn]: isBlackThemeActivated}, s.button)}/>
                         </div>
                         <div className={s.theme}>
                             <span className={s.label}>Dynamic background</span>
                             <span onClick={() => toggleDynamicBackground(isDynamicBackgroundActivated)}
-                                  className={cn({ [s.switchOn]: isDynamicBackgroundActivated }, s.button)}> </span>
+                                  className={cn({[s.switchOn]: isDynamicBackgroundActivated}, s.button)}/>
                         </div>
                         <div className={s.exit} onClick={handleLogoutClick}>Exit from account</div>
                     </div>
@@ -85,4 +85,4 @@ const mapStateToProps = (state: AppStateType) => ({
     isDynamicBackgroundActivated: state.settings.isDynamicBackgroundActivated
 })
 
-export default connect(mapStateToProps, { getUserProfile, logout, toggleBlackTheme, toggleDynamicBackground })(Header)
+export default connect(mapStateToProps, {getUserProfile, logout, toggleBlackTheme, toggleDynamicBackground})(Header)

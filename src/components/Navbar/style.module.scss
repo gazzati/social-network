@@ -1,87 +1,84 @@
 .navbar {
-    height: fit-content;
-    border-radius: 10px;
-    background-color: var(--wrap-bg-color);
-    width: 280px;
-    margin-right: 20px;
-    padding: 0 40px 40px;
+  height: fit-content;
+  border-radius: 10px;
+  background-color: var(--wrap-bg-color);
+  width: 280px;
+  margin-right: 20px;
+  padding: 0 40px 40px;
+  @media screen and (max-width: 678px) {
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    height: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+    width: 100vw;
+    background-color: var(--head-bg-color);
+    border-top: 1px var(--mininav-border-color) solid;
+    position: fixed;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    align-items: center;
+  }
 }
 
 .link {
-    display: flex;
-    margin-top: 40px;
-    align-items: center;
-    min-width: 100px;
+  display: flex;
+  margin-top: 40px;
+  align-items: center;
+  min-width: 100px;
+  @media screen and (max-width: 678px) {
+    min-width: 20px;
+    margin-top: 0;
+  }
 }
 
 .link svg {
-    width: 18px;
-    margin-right: 5px;
-    fill: #9d9aa8;
+  width: 18px;
+  margin-right: 5px;
+  fill: #9d9aa8;
 }
 
 .item {
-    max-width: 150px;
-    height: 18px;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.29;
-    text-align: left;
-    color: #9d9aa8;
+  max-width: 150px;
+  height: 18px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.29;
+  text-align: left;
+  color: #9d9aa8;
+  @media screen and (max-width: 678px) {
+    display: none;
+  }
 }
 
 .link:hover .item,
 .activeItem .item {
-    color: var(--secondary-color)
+  color: var(--secondary-color)
 }
 
 .link:hover svg,
 .activeItem svg {
-    fill: var(--secondary-color)
+  fill: var(--secondary-color)
 }
 
 .itemLogout svg,
 .itemLogout .item {
-    cursor: pointer;
-    fill: #f81c1c;
-    color: #f81c1c;
+  cursor: pointer;
+  fill: #f81c1c;
+  color: #f81c1c;
 }
 
 .activeLi svg {
-    fill: var(--secondary-color)
+  fill: var(--secondary-color)
 }
 
-@media screen and (max-width: 900px) {
-    .navbar {
-        margin-right: 10px;
-    }
+
+.hideOnMobile {
+  @media screen and (max-width: 678px) {
+    display: none;
+  }
 }
 
-@media screen and (max-width: 600px) {
-    .navbar {
-        border-radius: 0;
-        margin: 0;
-        padding: 10px 0 0;
-        height: 51px;
-        bottom: 0;
-        z-index: 5;
-        width: 100vw;
-        background-color: var(--head-bg-color);
-        border-top: 1px var(--mininav-border-color) solid;
-        position: fixed;
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-around;
-        align-items: center;
-    }
-
-    .link {
-        min-width: 20px;
-        margin-top: 0;
-    }
-
-    .hideOnMobile,
-    .item {
-        display: none;
-    }
-}

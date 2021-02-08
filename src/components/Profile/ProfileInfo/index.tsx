@@ -44,7 +44,7 @@ const ProfileInfo: React.FC<PropsType> = ({ profile, updateStatus, isOwner, goTo
             {profile &&
             <div className={s.mainInfo}>
                 <label id="user-color" className={s.colorBlock} onClick={() => setColorMode(!colorMode)}/>
-                <img src={profile && profile.photo ? profile.photo : userPhoto} className={s.mainPhoto} alt={''}/>
+                <img src={profile && profile.photo?.url ? profile.photo?.url : userPhoto} className={s.mainPhoto} alt={''}/>
                 <div className={s.name}>
                     {`${profile.info.name} ${profile.info.surname}`}
                 </div>

@@ -17,7 +17,7 @@ let FollowItem: FC<PropsType> = ({ user, unfollow, unfollowingInProgress, onSend
         <div className={s.friend}>
             <div>
                 <NavLink to={'profile/' + user._id}>
-                    <img src={user.photo ? user.photo : userPhoto}
+                    <img src={user.photo?.url ? user.photo?.url : userPhoto}
                          className={s.photo} alt={''}/>
                 </NavLink>
             </div>

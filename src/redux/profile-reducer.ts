@@ -32,7 +32,7 @@ const profileReducer = (state = initialState, action: ActionsType): InitialState
             return { ...state, profile: action.profile }
         }
         case 'profile/SAVE_PHOTO_SUCCESS': {
-            return { ...state, profile: { ...state.profile, photo: action.photo } as ProfileType }
+            return { ...state, profile: { ...state.profile, photo: {...state.profile.photo, url: action.photo} } as ProfileType }
         }
         case 'profile/REFRESH_POSTS': {
             return {

@@ -17,7 +17,7 @@ const User: FC<PropsType> = ({ user, currentUserId, followingInProgress, unfollo
         <div className={s.userContainer}>
             <div className={s.user}>
                 <NavLink to={'profile/' + user._id}>
-                    <img src={user.photo ? user.photo : userPhoto}
+                    <img src={user.photo?.url ? user.photo?.url : userPhoto}
                          className={s.photo} alt={''}/>
                 </NavLink>
                 <div className={s.descriptionUser}>

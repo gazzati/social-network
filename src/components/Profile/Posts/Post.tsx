@@ -23,7 +23,7 @@ const Post: React.FC<PropsType> = (props) => {
             <div className={s.user}>
                 <div className={s.userInfo}>
                     <img className={s.userPhoto}
-                         src={props.profile && props.profile.photo ? props.profile.photo : userPhoto} alt={''}/>
+                         src={props.profile && props.profile.photo?.url ? props.profile.photo.url: userPhoto} alt={''}/>
                     <div className={s.userDescription}>
                         <div className={s.name}>{`${props.profile.info.name} ${props.profile.info.surname}`}</div>
                         <div className={s.date}>{formatDate(props.date).getDate}</div>

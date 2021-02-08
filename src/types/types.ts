@@ -9,7 +9,9 @@ export type ProfileType = {
     _id: string
     info: ProfileInfoType
     status: string
-    photo?: string
+    photo?: {
+        url: string
+    }
     posts: PostType[] | []
     following: string[]
     followers: string[]

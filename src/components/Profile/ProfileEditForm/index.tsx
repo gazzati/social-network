@@ -37,8 +37,8 @@ const ProfileEditForm: React.FC<PropsType> = ({ profile, onSubmit, savePhoto, ex
                         <input id="upl" type={'file'} onChange={onMainPhotoSelected}/>
                         <label htmlFor="upl" className={`button button--primary ${s.uploadBtn}`}>Upload</label>
                         <div className={s.photos}>
-                            <img src={profile.photo || userPhoto} className={s.largePhoto} alt={''}/>
-                            <img src={profile.photo || userPhoto} className={s.smallPhoto} alt={''}/>
+                            <img src={profile.photo?.url || userPhoto} className={s.largePhoto} alt={''}/>
+                            <img src={profile.photo?.url || userPhoto} className={s.smallPhoto} alt={''}/>
                         </div>
                     </div>}
                     <div className={s.name_surname}>

@@ -1,6 +1,9 @@
 .header {
     background: var(--head-bg-color);
     padding: 15px 0;
+    @media screen and (max-width: 1440px) {
+        padding: 8px 0;
+    }
 }
 
 .headerWrap {
@@ -9,6 +12,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media screen and (max-width: 1440px) {
+        margin: 0 10px;
+    }
 }
 
 .mainIcon {
@@ -23,6 +29,10 @@
 .logo {
     width: 60px;
     margin-right: 10px;
+    @media screen and (max-width: 1440px) {
+        width: 45px;
+        height: 45px;
+    }
 }
 
 .title {
@@ -32,6 +42,9 @@
     line-height: 1.06;
     color: #ffffff;
     text-align: left;
+    @media screen and (max-width: 1440px) {
+        display: none;
+    }
 }
 
 .isAuthUserBlock {
@@ -47,12 +60,19 @@
     text-align: right;
     color: #ffffff;
     margin-right: 10px;
+    @media screen and (max-width: 1440px) {
+        display: none;
+    }
 }
 
 .userPhoto {
     width: 48px;
     border-radius: 24px;
     border: solid 2px #61dafb;
+    @media screen and (max-width: 1440px) {
+        width: 45px;
+        height: 45px;
+    }
 }
 
 .function {
@@ -60,6 +80,9 @@
     width: 16px;
     cursor: pointer;
     margin-left: 5px;
+    @media screen and (max-width: 1440px) {
+        display: block;
+    }
 }
 
 .overlay {
@@ -147,32 +170,4 @@
 
 .login:hover {
     color: var(--secondary-color);
-}
-
-@media screen and (max-width: 1440px) {
-    .headerWrap {
-        margin: 0 10px;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .header {
-        padding: 8px 0;
-    }
-
-    .logo {
-        width: 45px;
-    }
-
-    .userLogName, .title {
-        display: none;
-    }
-
-    .userPhoto {
-        width: 45px;
-    }
-
-    .function {
-        display: block;
-    }
 }

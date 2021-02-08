@@ -22,10 +22,8 @@ export type PropsType = {
     toggleDynamicBackground: (theme: boolean) => void
 }
 
-const Header: React.FC<PropsType> = ({
-                                         isAuth, userData, logout, isBlackThemeActivated,
-                                         toggleBlackTheme, isDynamicBackgroundActivated, toggleDynamicBackground
-                                     }) => {
+const Header: React.FC<PropsType> = ({ isAuth, userData, logout, isBlackThemeActivated,
+                                         toggleBlackTheme, isDynamicBackgroundActivated, toggleDynamicBackground }) => {
     let [showMenu, setShowMenu] = useState(false)
 
     const showUserMenu = () => {

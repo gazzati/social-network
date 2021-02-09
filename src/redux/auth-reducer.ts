@@ -22,6 +22,15 @@ const authReducer = (state = initialState, action: ActionsType): initialStateTyp
                 ...action.payload
             }
         }
+        case 'auth/SET_USER_PHOTO': {
+            return {
+                ...state,
+                userData: {
+                    ...state.userData,
+                    photo: action.photo
+                }
+            }
+        }
         case 'auth/TOGGLE_IS_FETCHING': {
             return { ...state, isFetching: action.isFetching }
         }
@@ -30,56 +39,57 @@ const authReducer = (state = initialState, action: ActionsType): initialStateTyp
     }
 }
 
-export const actions = {
+export const authActions = {
     setAuthUserData: (userData: UserDataType, isAuth: boolean) =>
         ({ type: 'auth/SET_USER_DATA', payload: { userData, isAuth } } as const),
+    setAuthPhoto: (photo: string) => ({ type: 'auth/SET_USER_PHOTO', photo } as const),
     toggleIsFetching: (isFetching: boolean) => ({ type: 'auth/TOGGLE_IS_FETCHING', isFetching } as const)
 }
 
 export const getAuthUserData = (): ThunkType => async (dispatch) => {
-    dispatch(actions.toggleIsFetching(true))
+    dispatch(authActions.toggleIsFetching(true))
     let res = await authAPI.me()
     if (res.resultCode === ResultCodeEnum.Error) {
-        dispatch(actions.toggleIsFetching(false))
+        dispatch(authActions.toggleIsFetching(false))
     }
     if (res.resultCode === ResultCodeEnum.Success) {
-        dispatch(actions.setAuthUserData(res.data, true))
-        dispatch(actions.toggleIsFetching(false))
+        dispatch(authActions.setAuthUserData(res.data, true))
+        dispatch(authActions.toggleIsFetching(false))
     }
 }
 
 export const login = (email: string, password: string): ThunkType =>
     async (dispatch: any) => {
-        dispatch(actions.toggleIsFetching(true))
+        dispatch(authActions.toggleIsFetching(true))
         let res = await authAPI.login(email, password)
         if (res.resultCode === ResultCodeEnum.Success) {
             localStorage.setItem('authToken', res.data.authToken)
-            dispatch(actions.setAuthUserData(res.data.userData, true))
-            dispatch(actions.toggleIsFetching(false))
+            dispatch(authActions.setAuthUserData(res.data.userData, true))
+            dispatch(authActions.toggleIsFetching(false))
         }
     }
 
 export const registration = (name: string, surname: string, email: string, password: string): ThunkType =>
     async (dispatch: any) => {
-        dispatch(actions.toggleIsFetching(true))
+        dispatch(authActions.toggleIsFetching(true))
         let res = await authAPI.registration(name, surname, email, password)
         if (res.resultCode === ResultCodeEnum.Success) {
             localStorage.setItem('authToken', res.data.authToken)
-            dispatch(actions.setAuthUserData(res.data.userData, true))
+            dispatch(authActions.setAuthUserData(res.data.userData, true))
         }
-        dispatch(actions.toggleIsFetching(false))
+        dispatch(authActions.toggleIsFetching(false))
     }
 
 export const logout = (): ThunkType => async (dispatch) => {
     let response = await authAPI.logout()
     if (response.data.resultCode === 0) {
         localStorage.removeItem('authToken')
-        dispatch(actions.setAuthUserData({ id: null, name: null, surname: null, photo: null }, false))
+        dispatch(authActions.setAuthUserData({ id: null, name: null, surname: null, photo: null }, false))
     }
 }
 
 export default authReducer
 
 type initialStateType = typeof initialState
-type ActionsType = InferActionsTypes<typeof actions>
+type ActionsType = InferActionsTypes<typeof authActions>
 type ThunkType = BaseThunkType<ActionsType>

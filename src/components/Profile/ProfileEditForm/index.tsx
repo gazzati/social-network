@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import s from './style.module.scss'
 import userPhoto from '../../../assets/images/user.png'
 import {ProfileInfoType, ProfileType} from '../../../types/types'
+import Preloader from '../../common/Preloader'
 
 type PropsType = {
     profile: ProfileType
@@ -9,9 +10,10 @@ type PropsType = {
     savePhoto: (photo: File) => void
     exitOfEditMode: () => void
     isOwner: boolean
+    isLoading: boolean
 }
 
-const ProfileEditForm: React.FC<PropsType> = ({ profile, onSubmit, savePhoto, exitOfEditMode, isOwner }) => {
+const ProfileEditForm: React.FC<PropsType> = ({ profile, onSubmit, savePhoto, exitOfEditMode, isOwner, isLoading }) => {
     const [infoData, setInfoData] = useState<ProfileInfoType>(profile.info)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,6 +25,12 @@ const ProfileEditForm: React.FC<PropsType> = ({ profile, onSubmit, savePhoto, ex
         if (e.target.files && e.target.files.length) {
             savePhoto(e.target.files[0])
         }
+    }
+
+    console.log(isLoading)
+
+    if(isLoading) {
+        return <Preloader />
     }
 
     return (

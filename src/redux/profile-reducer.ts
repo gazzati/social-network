@@ -1,6 +1,7 @@
 import {PostType, ProfileType} from '../types/types'
 import {profileAPI} from '../api/profile-api'
 import {BaseThunkType, InferActionsTypes} from './'
+import {authActions} from './auth-reducer'
 
 let initialState = {
     profile: {
@@ -32,7 +33,10 @@ const profileReducer = (state = initialState, action: ActionsType): InitialState
             return { ...state, profile: action.profile }
         }
         case 'profile/SAVE_PHOTO_SUCCESS': {
-            return { ...state, profile: { ...state.profile, photo: {...state.profile.photo, url: action.photo} } as ProfileType }
+            return {
+                ...state,
+                profile: { ...state.profile, photo: { ...state.profile.photo, url: action.photo } } as ProfileType
+            }
         }
         case 'profile/REFRESH_POSTS': {
             return {
@@ -83,8 +87,12 @@ export const updateStatus = (status: string): ThunkType => async (dispatch) => {
 }
 
 export const savePhoto = (file: File): ThunkType => async (dispatch) => {
+    dispatch(actions.toggleIsFetching(true))
     let data = await profileAPI.savePhoto(file)
     dispatch(actions.savePhotoSuccess(data.data.photo))
+    // @ts-ignore
+    dispatch(authActions.setAuthPhoto(data.data.photo))
+    dispatch(actions.toggleIsFetching(false))
 }
 
 export const saveProfile = (profile: ProfileType): ThunkType => async (dispatch) => {

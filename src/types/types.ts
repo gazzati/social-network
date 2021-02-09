@@ -11,6 +11,7 @@ export type ProfileType = {
     status: string
     photo?: {
         url: string
+        urlOriginal: string
     }
     posts: PostType[] | []
     following: string[]

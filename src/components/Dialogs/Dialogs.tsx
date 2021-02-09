@@ -11,7 +11,7 @@ import {ChatType} from '../../types/types'
 import Preloader from '../common/Preloader'
 import leftIco from '../../assets/images/left-arrow.svg'
 import classNames from 'classnames'
-import userPhoto from "../../assets/images/user.png";
+import userPhoto from '../../assets/images/user.png'
 
 type PropsType = {
     chats: ChatType[]
@@ -54,9 +54,14 @@ const Dialogs: React.FC<PropsType> = (props) => {
         lastMessage && lastMessage.scrollIntoView()
     })
 
+
+    if(props.isLoading) {
+        return <Preloader/>
+    }
+
     return (
         <div className={s.dialogs}>
-            <div className={classNames(s.dialogsItems, {[s.openDialogsItems]: isMessagesOpen})}>
+            <div className={classNames(s.dialogsItems, { [s.openDialogsItems]: isMessagesOpen })}>
                 {!props.chats.length
                     ? <div className={s.noChats}>No chats</div>
                     : props.chats.map((d, index) =>
@@ -70,28 +75,26 @@ const Dialogs: React.FC<PropsType> = (props) => {
                 }
             </div>
 
-            {props.isLoading
-                ? <Preloader/>
-                : <div className={classNames(s.messages, {[s.openMessages]: isMessagesOpen})}>
-                    <div className={s.topBlock}>
-                        <img className={s.topBlockArrow} src={leftIco} alt="" onClick={() => setIsMessagesOpen(false)}/>
-                        {currentUser &&
-                        <div className={s.topBlockUser}>
-                            <div className={s.topBlockName}>{currentUser.title}</div>
-                            <img className={s.topBlockPhoto} src={currentUser.photo || userPhoto} alt={''}/>
-                        </div>}
-                    </div>
-                    <ul className={s.messagesBlock}>
-                        {messages === 'no choose' ? <div className={s.noMessages}>Please choose chat</div>
-                            : messagesElements && messagesElements.length
-                                ? messagesElements
-                                : <div className={s.noMessages}>No messages</div>
-                        }
-                    </ul>
-                    <AddMessageForm
-                        sendMessage={(messageText: string) => props.sendMessage(props.currentChat, messageText)}/>
+
+            <div className={classNames(s.messages, { [s.openMessages]: isMessagesOpen })}>
+                <div className={s.topBlock}>
+                    <img className={s.topBlockArrow} src={leftIco} alt="" onClick={() => setIsMessagesOpen(false)}/>
+                    {currentUser &&
+                    <div className={s.topBlockUser}>
+                        <div className={s.topBlockName}>{currentUser.title}</div>
+                        <img className={s.topBlockPhoto} src={currentUser.photo || userPhoto} alt={''}/>
+                    </div>}
                 </div>
-            }
+                <ul className={s.messagesBlock}>
+                    {messages === 'no choose' ? <div className={s.noMessages}>Please choose chat</div>
+                        : messagesElements && messagesElements.length
+                            ? messagesElements
+                            : <div className={s.noMessages}>No messages</div>
+                    }
+                </ul>
+                <AddMessageForm
+                    sendMessage={(messageText: string) => props.sendMessage(props.currentChat, messageText)}/>
+            </div>
         </div>
     )
 }

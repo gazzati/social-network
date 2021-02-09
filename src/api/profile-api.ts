@@ -14,7 +14,8 @@ type PostId = {
 }
 
 export const profileAPI = {
-    getProfile(userId: string) {
+    async getProfile(userId: string) {
+        await setTimeout(() => {}, 100)
         return instance.get<APIResponseType<ProfileType>>(`profile/` + userId).then(res => res.data.data)
     },
     updateStatus(status: string) {

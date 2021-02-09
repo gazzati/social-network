@@ -63,14 +63,16 @@ const ProfileContainer: React.FC<PropsType> = (props) => {
 
     return (
         <div>
-            {props.isFetching && <Preloader/>}
+            {props.isLoading && <Preloader/>}
             {editMode ?
                 <ProfileEditForm
                     profile={props.profile as ProfileType}
                     onSubmit={onSubmit}
                     savePhoto={props.savePhoto}
                     exitOfEditMode={exitOfEditMode}
-                    isOwner={isOwner}/>
+                    isOwner={isOwner}
+                    isLoading={props.isLoading}
+                />
                 : <Profile
                     savePhoto={props.savePhoto}
                     isOwner={isOwner}
@@ -87,7 +89,7 @@ const mapStateToProps = (state: AppStateType) => ({
     profile: state.profilePage.profile,
     authorizedUserId: state.auth.userData.id,
     authId: state.auth.userData.id,
-    isFetching: state.profilePage.isFetching
+    isLoading: state.profilePage.isFetching
 })
 
 export default compose<React.ComponentType>(

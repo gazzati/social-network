@@ -1,4 +1,4 @@
-import {ResultCodeEnum} from '../api'
+import {instance, ResultCodeEnum} from '../api'
 import {authAPI} from '../api/auth-api'
 import {BaseThunkType, InferActionsTypes} from './'
 import {UserDataType} from '../types/types'
@@ -49,13 +49,14 @@ export const authActions = {
 export const getAuthUserData = (): ThunkType => async (dispatch) => {
     dispatch(authActions.toggleIsFetching(true))
     let res = await authAPI.me()
-    if (res.resultCode === ResultCodeEnum.Error) {
-        dispatch(authActions.toggleIsFetching(false))
-    }
     if (res.resultCode === ResultCodeEnum.Success) {
         dispatch(authActions.setAuthUserData(res.data, true))
-        dispatch(authActions.toggleIsFetching(false))
     }
+    dispatch(authActions.toggleIsFetching(false))
+    setTimeout(() => {
+        return res.resultCode === ResultCodeEnum.Success
+    }, 2000)
+
 }
 
 export const login = (email: string, password: string): ThunkType =>
@@ -63,6 +64,7 @@ export const login = (email: string, password: string): ThunkType =>
         dispatch(authActions.toggleIsFetching(true))
         let res = await authAPI.login(email, password)
         if (res.resultCode === ResultCodeEnum.Success) {
+            instance.defaults.headers.authToken = res.data.authToken
             localStorage.setItem('authToken', res.data.authToken)
             dispatch(authActions.setAuthUserData(res.data.userData, true))
             dispatch(authActions.toggleIsFetching(false))
@@ -74,6 +76,7 @@ export const registration = (name: string, surname: string, email: string, passw
         dispatch(authActions.toggleIsFetching(true))
         let res = await authAPI.registration(name, surname, email, password)
         if (res.resultCode === ResultCodeEnum.Success) {
+            instance.defaults.headers.authToken = res.data.authToken
             localStorage.setItem('authToken', res.data.authToken)
             dispatch(authActions.setAuthUserData(res.data.userData, true))
         }
@@ -83,8 +86,10 @@ export const registration = (name: string, surname: string, email: string, passw
 export const logout = (): ThunkType => async (dispatch) => {
     let response = await authAPI.logout()
     if (response.data.resultCode === 0) {
+        instance.defaults.headers.authToken = ''
         localStorage.removeItem('authToken')
         dispatch(authActions.setAuthUserData({ id: null, name: null, surname: null, photo: null }, false))
+        window.location.reload()
     }
 }
 
@@ -92,4 +97,4 @@ export default authReducer
 
 type initialStateType = typeof initialState
 type ActionsType = InferActionsTypes<typeof authActions>
-type ThunkType = BaseThunkType<ActionsType>
+type ThunkType = BaseThunkType<ActionsType, Promise<void | boolean>>

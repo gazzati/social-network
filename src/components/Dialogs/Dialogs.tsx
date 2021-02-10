@@ -71,6 +71,7 @@ const Dialogs: React.FC<PropsType> = (props) => {
                                     photo={d.photo}
                                     currentDialog={props.currentChat}
                                     setCurrentChat={setCurrentChat}
+                                    defaultChecked={props.currentChat === 'all' && index === 0}
                         />)
                 }
             </div>

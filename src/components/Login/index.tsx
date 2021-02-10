@@ -32,16 +32,11 @@ export type RegistrationFormValuesType = {
 }
 
 const Login: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
-    const onSubmitLogin = (formData: LoginFormValuesType) => {
-        props.login(formData.email, formData.password)
-    }
+    const onSubmitLogin = (formData: LoginFormValuesType) => props.login(formData.email, formData.password)
+    const onSubmitRegistration = (formData: RegistrationFormValuesType) => props.registration(formData.name, formData.surname, formData.email, formData.password)
 
-    const onSubmitRegistration = (formData: RegistrationFormValuesType) => {
-        props.registration(formData.name, formData.surname, formData.email, formData.password)
-    }
-
-    if (props.isAuth) {
-        return <Redirect to={'/profile'}/>
+    if(props.isAuth) {
+        return <Redirect to={'profile'}/>
     }
 
     return (

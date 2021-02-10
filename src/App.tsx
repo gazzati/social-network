@@ -21,7 +21,7 @@ import './styles/index.scss'
 
 type PropsType = {
     isDynamicBackgroundActivated: boolean
-    getAuthUserData: () => void
+    getAuthUserData: () => boolean
     toggleBlackTheme: (theme: boolean) => void
     toggleDynamicBackground: (theme: boolean) => void
 }

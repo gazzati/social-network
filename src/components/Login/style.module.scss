@@ -52,4 +52,15 @@
     .name, .surname, .mail, .password {
         margin-top: 10px;
     }
+
+    .passwordField {
+        position: relative;
+        .showPassword {
+            position: absolute;
+            cursor: pointer;
+            width: 20px;
+            right: 10px;
+            top: 9px;
+        }
+    }
 }

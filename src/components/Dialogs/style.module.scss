@@ -208,11 +208,13 @@
         background-color: #9d9aa8;
 
         margin-bottom: 24px;
-        width: max-content;
+        width: fit-content;
+        max-width: 650px;
         position: relative;
         border-radius: 40px;
         padding: 10px 20px;
         text-align: center;
+        z-index: 3;
         @media screen and (max-width: 678px) {
             font-size: 14px;
             font-weight: 400;
@@ -224,12 +226,16 @@
             width: 0;
             height: 0;
             position: absolute;
+            z-index: -1;
 
-            border-left: 27px solid #9d9aa8;
-            border-right: 12px solid transparent;
-            border-bottom: 15px solid transparent;
+            border-left: 35px solid #9d9aa8;
+            border-bottom: 20px solid transparent;
             left: 5px;
-            bottom: -3px;
+            bottom: -1px;
+        }
+
+        .messageText {
+            z-index: 3;
         }
 
         .messageDate {
@@ -260,8 +266,8 @@
 
         &:before {
             border-left: none;
-            border-right: 16px solid #816bff;
-            border-bottom: 11px solid transparent;
+            border-right: 35px solid #816bff;
+            border-bottom: 20px solid transparent;
             left: initial;
             right: 4px;
         }

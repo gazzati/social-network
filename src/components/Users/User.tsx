@@ -24,7 +24,7 @@ const User: FC<PropsType> = ({ user, currentUserId, followingInProgress, unfollo
                     <div className={s.name}>{user.info.name}</div>
                     <div>{user.status}</div>
                 </div>
-                {currentUserId &&
+                {currentUserId && currentUserId !== user._id &&
                 <div className={s.fol}>
                     {currentUserId && user.followers.includes(currentUserId)
                         ? <button /*disabled={followingInProgress.some(id => id === user.userId)}*/

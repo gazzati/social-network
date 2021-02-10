@@ -44,7 +44,7 @@ export const getAllDialogs = (chatId: string): ThunkType => {
     return async (dispatch) => {
         dispatch(actions.toggleIsFetching(true))
         const res = await dialogsAPI.getAllDialogs(chatId)
-        dispatch(actions.setData(res.data))
+        res.data?.chats && dispatch(actions.setData(res.data))
         dispatch(actions.toggleIsFetching(false))
     }
 }

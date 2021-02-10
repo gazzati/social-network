@@ -2,7 +2,7 @@
   "name": "social-network",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://gazzati.github.io/sc-front",
+  "homepage": "https://gazzati.github.io/social-network",
   "dependencies": {
     "@types/classnames": "^2.2.10",
     "@types/jest": "^25.2.1",

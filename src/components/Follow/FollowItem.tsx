@@ -14,7 +14,7 @@ type PropsType = {
 
 let FollowItem: FC<PropsType> = ({ user, unfollow, unfollowingInProgress, onSendMessage , type}) => {
     return (
-        <div className={s.friend}>
+        <div className={s.followItem}>
             <div>
                 <NavLink to={'profile/' + user._id}>
                     <img src={user.photo?.url ? user.photo?.url : userPhoto}
@@ -26,7 +26,7 @@ let FollowItem: FC<PropsType> = ({ user, unfollow, unfollowingInProgress, onSend
                 <div>{user.status}</div>
             </div>
             <span className={s.buttons}>
-                <div className="button button--primary" onClick={() => onSendMessage(user._id)}>Chat</div>
+                <div className={`button button--primary ${s.chat}`} onClick={() => onSendMessage(user._id)}>Chat</div>
                 {type === 'following' &&
                 <button className={`button button--secondary ${s.unfollow}`}
                         onClick={() => unfollow(user._id)}

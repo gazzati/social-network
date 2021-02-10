@@ -47,9 +47,10 @@ const Follow: React.FC<PropsType> = (props) => {
     }
 
     return (
-        <div className={s.friendsBlock}>
+        <div className={s.followBlock}>
             {props.isLoading ? <Preloader/> : null}
-            <div className={s.friends}>
+            <div className={s.followTitle}>{props.type === 'followers' ? 'Followers' : 'Following'}</div>
+            <div className={s.follow}>
                 {users?.map(user =>
                     <FollowItem user={user}
                                 key={user._id}

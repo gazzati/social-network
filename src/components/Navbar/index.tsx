@@ -6,7 +6,8 @@ import {logout} from '../../redux/auth-reducer'
 import {AppStateType} from '../../redux'
 import {ProfileIco} from './Icons'
 import {DialogsIco} from './Icons'
-import {FollowIco} from './Icons'
+import {FollowingIco} from './Icons'
+import {FollowersIco} from './Icons'
 import {NewsIco} from './Icons'
 import {SettingsIco} from './Icons'
 import {SignOut} from './Icons'
@@ -39,17 +40,17 @@ const Navbar: React.FC<PropsType> = ({ isAuth, logout }) => {
                 <span className={s.item}>Users</span>
             </NavLink>
 
-            <NavLink to="/following" className={`${s.link} ${s.hideOnMobile}`} activeClassName={s.activeItem}>
-                <FollowIco/>
-                <span className={s.item}>Following</span>
-            </NavLink>
-
             <NavLink to="/followers" className={s.link} activeClassName={s.activeItem}>
-                <FollowIco/>
+                <FollowersIco/>
                 <span className={s.item}>Followers</span>
             </NavLink>
 
-            <NavLink to="/news" className={s.link} activeClassName={s.activeItem}>
+            <NavLink to="/following" className={s.link} activeClassName={s.activeItem}>
+                <FollowingIco/>
+                <span className={s.item}>Following</span>
+            </NavLink>
+
+            <NavLink to="/news" className={`${s.link} ${s.hideOnMobile}`} activeClassName={s.activeItem}>
                 <NewsIco/>
                 <span className={s.item}>News</span>
             </NavLink>

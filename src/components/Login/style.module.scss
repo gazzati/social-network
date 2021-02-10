@@ -55,6 +55,9 @@
 
     .passwordField {
         position: relative;
+        input {
+            width: 100%;
+        }
         .showPassword {
             position: absolute;
             cursor: pointer;

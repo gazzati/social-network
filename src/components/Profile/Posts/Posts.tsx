@@ -38,6 +38,7 @@ const Posts: React.FC<MapPropsType & DispatchPropsType & OwnProps> = (props => {
                       profile={props.profile}
                       addLikes={props.addLikes}
                       deletePost={props.deletePost}
+                      isOwner={props.isOwner}
                 />
             )
 
@@ -49,7 +50,8 @@ const Posts: React.FC<MapPropsType & DispatchPropsType & OwnProps> = (props => {
                        type="text"
                        placeholder="Enter your post..."
                        value={newPostText}
-                       onChange={e => setNewPostText(e.target.value)}/>
+                       onChange={e => setNewPostText(e.target.value)}
+                />
                 <button className="button button--primary form--primary-button">Add post</button>
             </form>}
             <div className={s.posts}>

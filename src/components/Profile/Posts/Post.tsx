@@ -14,6 +14,7 @@ type PropsType = {
     profile: ProfileType | null
     addLikes: (postId: string) => void
     deletePost: (postId: string) => void
+    isOwner: boolean
 }
 
 const Post: React.FC<PropsType> = (props) => {
@@ -29,9 +30,8 @@ const Post: React.FC<PropsType> = (props) => {
                         <div className={s.date}>{formatDate(props.date).getDate}</div>
                     </div>
                 </div>
-                <img className={s.removePost} onClick={() => props.deletePost(props.id)} src={removePost} alt=""/>
-            </div>
-            }
+                <img className={s.removePost} onClick={() => props.isOwner && props.deletePost(props.id)} src={removePost} alt=""/>
+            </div>}
             <div className={s.bottomBlock}>
                 <div className={s.text}>
                     {props.message && props.message}

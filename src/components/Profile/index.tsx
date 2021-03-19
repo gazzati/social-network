@@ -5,7 +5,6 @@ import {connect} from 'react-redux'
 import {getUserProfile, savePhoto, saveProfile, updateStatus} from '../../redux/profile-reducer'
 import {compose} from 'redux'
 import {withRouter, RouteComponentProps} from 'react-router-dom'
-import {withAuthRedirect} from '../../hoc/withAuthRedirect'
 import {AppStateType} from '../../redux'
 import {ProfileType, ProfileInfoType} from '../../types/types'
 import Preloader from '../common/Preloader'
@@ -94,6 +93,4 @@ const mapStateToProps = (state: AppStateType) => ({
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, { getUserProfile, updateStatus, savePhoto, saveProfile }),
-    withRouter,
-    withAuthRedirect)
-(ProfileContainer)
+    withRouter)(ProfileContainer) as React.FC

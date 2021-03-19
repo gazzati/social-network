@@ -53,10 +53,6 @@ export const getAuthUserData = (): ThunkType => async (dispatch) => {
         dispatch(authActions.setAuthUserData(res.data, true))
     }
     dispatch(authActions.toggleIsFetching(false))
-    setTimeout(() => {
-        return res.resultCode === ResultCodeEnum.Success
-    }, 2000)
-
 }
 
 export const login = (email: string, password: string): ThunkType =>
@@ -97,4 +93,4 @@ export default authReducer
 
 type initialStateType = typeof initialState
 type ActionsType = InferActionsTypes<typeof authActions>
-type ThunkType = BaseThunkType<ActionsType, Promise<void | boolean>>
+type ThunkType = BaseThunkType<ActionsType>

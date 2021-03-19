@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react'
 import Dialogs from './Dialogs'
 import {sendMessage, getAllDialogs} from '../../redux/dialogs-reducer'
 import {connect} from 'react-redux'
-import {withAuthRedirect} from '../../hoc/withAuthRedirect'
 import {compose} from 'redux'
 import {AppStateType} from '../../redux'
 import {RouteComponentProps, withRouter} from 'react-router-dom'
@@ -62,4 +61,4 @@ const mapStateToProps = (state: AppStateType) => {
 }
 
 export default compose(connect(mapStateToProps, { sendMessage, getAllDialogs }),
-    withRouter, withAuthRedirect)(DialogsContainer) as React.ComponentType
+    withRouter)(DialogsContainer) as React.ComponentType

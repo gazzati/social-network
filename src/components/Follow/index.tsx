@@ -6,7 +6,6 @@ import {useHistory} from 'react-router-dom'
 import {getFollow, unfollow} from '../../redux/follow-reducer'
 import s from './style.module.scss'
 import {AppStateType} from '../../redux'
-import {withAuthRedirect} from '../../hoc/withAuthRedirect'
 import {getAllDialogs, startChat} from '../../redux/dialogs-reducer'
 import Preloader from '../common/Preloader'
 import FollowItem from './FollowItem'
@@ -81,5 +80,4 @@ const mapStateToProps = (state: AppStateType) => {
 }
 
 export default compose<React.FC<OwnPropsType>>(
-    connect(mapStateToProps, { getFollow, unfollow, startChat, getAllDialogs }),
-    withAuthRedirect)(Follow)
+    connect(mapStateToProps, { getFollow, unfollow, startChat, getAllDialogs }))(Follow)

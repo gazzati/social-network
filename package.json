@@ -30,7 +30,6 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "eject": "react-scripts eject",
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"

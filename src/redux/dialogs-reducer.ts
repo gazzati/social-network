@@ -2,7 +2,7 @@ import {BaseThunkType, InferActionsTypes} from './'
 import {dialogsAPI} from '../api/dialogs-api'
 import {ChatType, MessageType, ChatsAndMessagesType} from '../types/types'
 
-let initialState = {
+const initialState = {
     chats: [] as ChatType[],
     messages: [] as MessageType[] | 'no choose',
     isFetching: false

@@ -1,3 +1,15 @@
+export type LoginFormValuesType = {
+    email: string
+    password: string
+}
+
+export type RegistrationFormValuesType = {
+    email: string
+    name: string
+    surname: string
+    password: string
+}
+
 export type UserDataType = {
     id: string | null
     name: string | null

@@ -8,7 +8,7 @@ import newsReducer from './news-reducer'
 import settingsReducer from './settings-reducer'
 import followReducer from './follow-reducer'
 
-let rootReducer = combineReducers({
+const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     usersPage: usersReducer,

@@ -49,8 +49,8 @@ const News: FC<PropsType> = ({
 
             {isFetching ? <Preloader/> : null}
             <div className={s.newsList}>
+                {!news.length && !isFetching && <div>Sorry, only available with localhost</div>}
                 {news.map(n => <NewsItem key={n.publishedAt.toString()} newsItem={n}/>)}
-
             </div>
         </div>
     )

@@ -28,7 +28,7 @@ type OwnPropsType = {}
 type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType
 
 const UsersContainer: React.FC<PropsType> = (props) => {
-    let [searchRequest, setSearchRequest] = useState('')
+    const [searchRequest, setSearchRequest] = useState('')
 
     useEffect(() => {
         const { currentPage, pageSize } = props
@@ -62,7 +62,7 @@ const UsersContainer: React.FC<PropsType> = (props) => {
     </>
 }
 
-let mapStateToProps = (state: AppStateType): MapStatePropsType => {
+const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,

@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
-import {compose} from 'redux'
 import {useHistory} from 'react-router-dom'
 
 import {getFollow, unfollow} from '../../redux/follow-reducer'
@@ -79,5 +78,4 @@ const mapStateToProps = (state: AppStateType) => {
     }
 }
 
-export default compose<React.FC<OwnPropsType>>(
-    connect(mapStateToProps, { getFollow, unfollow, startChat, getAllDialogs }))(Follow)
+export default connect(mapStateToProps, { getFollow, unfollow, startChat, getAllDialogs })(Follow as React.FC<OwnPropsType>)

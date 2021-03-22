@@ -1,12 +1,11 @@
 import React from 'react'
-import s from './style.module.scss'
+import s from "./style.module.scss"
 import cn from 'classnames'
 import {connect} from 'react-redux'
 import {toggleBlackTheme, toggleDynamicBackground} from '../../redux/settings-reducer'
-import {compose} from 'redux'
 import {AppStateType} from '../../redux'
 
-let mapStateToProps = (state: AppStateType) => ({
+const mapStateToProps = (state: AppStateType) => ({
     isBlackThemeActivated: state.settings.isBlackThemeActivated,
     isDynamicBackgroundActivated: state.settings.isDynamicBackgroundActivated
 })
@@ -38,4 +37,4 @@ const Settings: React.FC<PropsType> = ({ isBlackThemeActivated, isDynamicBackgro
     )
 }
 
-export default compose(connect(mapStateToProps, { toggleBlackTheme, toggleDynamicBackground }))(Settings)
+export default connect(mapStateToProps, { toggleBlackTheme, toggleDynamicBackground })(Settings)

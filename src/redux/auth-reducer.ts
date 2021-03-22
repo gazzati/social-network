@@ -1,9 +1,9 @@
 import {instance, ResultCodeEnum} from '../api'
 import {authAPI} from '../api/auth-api'
 import {BaseThunkType, InferActionsTypes} from './'
-import {UserDataType} from '../types/types'
+import {LoginFormValuesType, RegistrationFormValuesType, UserDataType} from '../types/types'
 
-let initialState = {
+const initialState = {
     userData: {
         id: null,
         name: null,
@@ -48,17 +48,17 @@ export const authActions = {
 
 export const getAuthUserData = (): ThunkType => async (dispatch) => {
     dispatch(authActions.toggleIsFetching(true))
-    let res = await authAPI.me()
+    const res = await authAPI.me()
     if (res.resultCode === ResultCodeEnum.Success) {
         dispatch(authActions.setAuthUserData(res.data, true))
     }
     dispatch(authActions.toggleIsFetching(false))
 }
 
-export const login = (email: string, password: string): ThunkType =>
-    async (dispatch: any) => {
+export const login = (data: LoginFormValuesType): ThunkType =>
+    async (dispatch) => {
         dispatch(authActions.toggleIsFetching(true))
-        let res = await authAPI.login(email, password)
+        const res = await authAPI.login(data)
         if (res.resultCode === ResultCodeEnum.Success) {
             instance.defaults.headers.authToken = res.data.authToken
             localStorage.setItem('authToken', res.data.authToken)
@@ -67,10 +67,10 @@ export const login = (email: string, password: string): ThunkType =>
         }
     }
 
-export const registration = (name: string, surname: string, email: string, password: string): ThunkType =>
-    async (dispatch: any) => {
+export const registration = (data: RegistrationFormValuesType): ThunkType =>
+    async (dispatch) => {
         dispatch(authActions.toggleIsFetching(true))
-        let res = await authAPI.registration(name, surname, email, password)
+        const res = await authAPI.registration(data)
         if (res.resultCode === ResultCodeEnum.Success) {
             instance.defaults.headers.authToken = res.data.authToken
             localStorage.setItem('authToken', res.data.authToken)
@@ -80,7 +80,7 @@ export const registration = (name: string, surname: string, email: string, passw
     }
 
 export const logout = (): ThunkType => async (dispatch) => {
-    let response = await authAPI.logout()
+    const response = await authAPI.logout()
     if (response.data.resultCode === 0) {
         instance.defaults.headers.authToken = ''
         localStorage.removeItem('authToken')

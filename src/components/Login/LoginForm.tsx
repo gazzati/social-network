@@ -1,14 +1,14 @@
 import React, {useState} from 'react'
 import s from './style.module.scss'
-import {LoginFormValuesType, RegistrationFormValuesType} from './'
 import viewIco from '../../assets/images/view.svg'
+import {LoginFormValuesType} from "../../types/types"
 
 type PropsType = {
-    onSubmit: (formData: LoginFormValuesType) => void
+    onSubmit: (data: LoginFormValuesType) => void
 }
 
 const LoginForm: React.FC<PropsType> = ({ onSubmit }) => {
-    const [data, setData] = useState<RegistrationFormValuesType>({ email: '', name: '', surname: '', password: '' })
+    const [data, setData] = useState<LoginFormValuesType>({ email: '', password: ''})
     const [showPassword, setShowPassword] = useState(false)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

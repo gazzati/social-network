@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
-import {compose} from 'redux'
 import {NewsType} from '../../types/types'
 import {AppStateType} from '../../redux'
 import News from './News'
@@ -51,7 +50,7 @@ const NewsContainer: React.FC<PropsType> = ({
     )
 }
 
-let mapStateToProps = (state: AppStateType): MapStatePropsType => {
+const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         news: state.news.news,
         isFetching: state.news.isFetching,
@@ -62,4 +61,4 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 }
 
-export default compose(connect(mapStateToProps, { getNews: getNews }))(NewsContainer)
+export default connect(mapStateToProps, { getNews: getNews })(NewsContainer)

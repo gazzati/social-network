@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import s from './style.module.scss'
-import {RegistrationFormValuesType} from './'
 import viewIco from '../../assets/images/view.svg'
+import { RegistrationFormValuesType } from '../../types/types'
 
 type PropsType = {
-    onSubmit: (formData: RegistrationFormValuesType) => void
+    onSubmit: (data: RegistrationFormValuesType) => void
 }
 
 const RegistrationForm: React.FC<PropsType> = ({ onSubmit }) => {

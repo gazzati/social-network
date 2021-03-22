@@ -24,7 +24,7 @@ export type PropsType = {
 
 const Header: React.FC<PropsType> = ({ isAuth, userData, logout, isBlackThemeActivated,
                                          toggleBlackTheme, isDynamicBackgroundActivated, toggleDynamicBackground }) => {
-    let [showMenu, setShowMenu] = useState(false)
+    const [showMenu, setShowMenu] = useState(false)
 
     const showUserMenu = () => {
         setShowMenu(!showMenu)

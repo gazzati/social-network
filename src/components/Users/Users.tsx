@@ -19,7 +19,7 @@ type PropsType = {
     currentUserId: string | null
 }
 
-let Users: FC<PropsType> = (props) => {
+const Users: FC<PropsType> = (props) => {
     const [searchTerm, setSearchTerm] = useState('')
 
     const onSearch = (e: React.FormEvent<HTMLFormElement>) => {
@@ -58,7 +58,7 @@ let Users: FC<PropsType> = (props) => {
             )}
         </div>
         <Paginator currentPage={props.currentPage} onPageChanged={props.onPageChanged}
-               totalItemsCount={props.totalUsersCount} pageSize={props.pageSize}/>
+                   totalItemsCount={props.totalUsersCount} pageSize={props.pageSize}/>
     </div>
 }
 

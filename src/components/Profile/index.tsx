@@ -18,47 +18,21 @@ type DispatchPropsType = {
     saveProfile: (profile: ProfileInfoType) => Promise<any>
 }
 
-type PathParamsType = {
-    userId: string
-}
-
-type PropsType = MapPropsType & DispatchPropsType & RouteComponentProps<PathParamsType>
+type PropsType = MapPropsType & DispatchPropsType & RouteComponentProps<{userId: string}>
 
 const ProfileContainer: React.FC<PropsType> = (props) => {
     const [editMode, setEditMode] = useState(false)
-    const isOwner = props.authId === props.match.params.userId || !props.match.params.userId
+    const userId = props.match.params.userId
+    const isOwner = props.authorizedUserId === userId
 
-    const exitOfEditMode = () => {
+    const onSubmit = async (formData: ProfileInfoType) => {
+        await props.saveProfile(formData)
         setEditMode(false)
     }
 
-    const goToEditMode = () => {
-        setEditMode(true)
-    }
-
-    const onSubmit = (formData: ProfileInfoType) => {
-        // TODO: remove then
-        props.saveProfile(formData).then(
-            () => exitOfEditMode()
-        )
-    }
-
     useEffect(() => {
-        let userId: string | null = props.match.params.userId
-        if (!userId) {
-            userId = props.authorizedUserId
-            if (!userId) {
-                props.history.push('/login')
-            }
-        }
-
-        if (!userId) {
-            console.error('ID should exists in URI params or in state (\'authorizedUserId\')')
-        } else {
-            props.getUserProfile(userId)
-        }
-        // eslint-disable-next-line
-    }, [])
+        props.getUserProfile(userId)
+    }, [userId])
 
     return (
         <div>
@@ -68,7 +42,7 @@ const ProfileContainer: React.FC<PropsType> = (props) => {
                     profile={props.profile as ProfileType}
                     onSubmit={onSubmit}
                     savePhoto={props.savePhoto}
-                    exitOfEditMode={exitOfEditMode}
+                    exitOfEditMode={() => setEditMode(false)}
                     isOwner={isOwner}
                     isLoading={props.isLoading}
                 />
@@ -77,7 +51,7 @@ const ProfileContainer: React.FC<PropsType> = (props) => {
                     isOwner={isOwner}
                     profile={props.profile}
                     updateStatus={props.updateStatus}
-                    goToEditMode={goToEditMode}
+                    goToEditMode={() => setEditMode(true)}
                 />
             }
         </div>
@@ -87,10 +61,9 @@ const ProfileContainer: React.FC<PropsType> = (props) => {
 const mapStateToProps = (state: AppStateType) => ({
     profile: state.profilePage.profile,
     authorizedUserId: state.auth.userData.id,
-    authId: state.auth.userData.id,
     isLoading: state.profilePage.isFetching
 })
 
-export default compose<React.ComponentType>(
+export default compose<React.FC>(
     connect(mapStateToProps, { getUserProfile, updateStatus, savePhoto, saveProfile }),
-    withRouter)(ProfileContainer) as React.FC
+    withRouter)(ProfileContainer)

@@ -1,10 +1,10 @@
 import {ProfileType} from '../types/types'
-import {BaseThunkType, InferActionsTypes} from './'
+import {BaseThunkType, InferActionsTypes} from '.'
 import {followApi} from '../api/follow-api'
 import {usersAPI} from '../api/users-api'
 import { ResultCodeEnum } from '../api'
 
-let initialState = {
+const initialState = {
     following: [] as ProfileType[],
     followers: [] as ProfileType[],
     pageSize: 8,
@@ -97,7 +97,7 @@ export const requestFollowers = (page: number, pageSize: number): ThunkType => {
         dispatch(actions.toggleIsFetching(true))
         dispatch(actions.setCurrentPage(page))
 
-        let res = await followApi.getFollowers()
+        const res = await followApi.getFollowers()
         dispatch(actions.toggleIsFetching(false))
         dispatch(actions.setFollowers(res.data))
         //dispatch(actions.setTotalFriendsCount(data.totalCount))
@@ -107,7 +107,7 @@ export const requestFollowers = (page: number, pageSize: number): ThunkType => {
 export const unfollow = (userId: string): ThunkType => {
     return async (dispatch, getState) => {
         dispatch(actions.toggleIsFetching(true))
-        let res = await usersAPI.unFollow(userId)
+        const res = await usersAPI.unFollow(userId)
         if(res.resultCode === ResultCodeEnum.Success) {
             dispatch(actions.unfollowSuccess(userId))
         }

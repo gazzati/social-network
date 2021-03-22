@@ -6,7 +6,7 @@ type PropsType = {
     newsItem: NewsType
 }
 
-let NewsItem: FC<PropsType> = ({ newsItem }) => {
+const NewsItem: FC<PropsType> = ({ newsItem }) => {
     const date = newsItem.publishedAt
     const formattedDate = `${date.slice(8, 10)}.${date.slice(5, 7)}.${date.slice(0, 4)} - ${date.slice(11, 13)}:${date.slice(14, 16)}`
 

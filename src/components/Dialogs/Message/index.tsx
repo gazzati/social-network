@@ -1,7 +1,8 @@
 import React from 'react'
-import s from '../style.module.scss'
 import {MessageType} from '../../../types/types'
 import formatDate from '../../../helpers/formatDate'
+
+import s from '../style.module.scss'
 
 type PropsType = {
     message: MessageType
@@ -10,7 +11,7 @@ type PropsType = {
 }
 
 const Messaage: React.FC<PropsType> = ({ message, isItMe, isFirstToday }) => {
-    let className = isItMe ? `${s.message} ${s.myMessage}` : s.message
+    const className = isItMe ? `${s.message} ${s.myMessage}` : s.message
 
     return (
         <>

@@ -1,7 +1,7 @@
 const TOGGLE_BLACK_THEME = 'settings/TOGGLE_BLACK_THEME'
 const TOGGLE_DYNAMIC_BACKGROUND = 'settings/TOGGLE_DYNAMIC_BACKGROUND'
 
-let initialState = {
+const initialState = {
     isBlackThemeActivated: false,
     isDynamicBackgroundActivated: false
 }

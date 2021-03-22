@@ -60,5 +60,6 @@ const mapStateToProps = (state: AppStateType) => {
     }
 }
 
-export default compose(connect(mapStateToProps, { sendMessage, getAllDialogs }),
-    withRouter)(DialogsContainer) as React.ComponentType
+export default compose<React.FC>(
+    connect(mapStateToProps, { sendMessage, getAllDialogs }),
+    withRouter)(DialogsContainer)

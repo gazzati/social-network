@@ -19,7 +19,7 @@ type PropsType = {
 }
 
 const ProfileInfo: React.FC<PropsType> = ({ profile, updateStatus, isOwner, goToEditMode }) => {
-    let [colorMode, setColorMode] = useState(false)
+    const [colorMode, setColorMode] = useState(false)
 
     useEffect(() => {
         document.getElementById('user-color')?.setAttribute('style',

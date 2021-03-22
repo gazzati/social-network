@@ -3,7 +3,7 @@ import {AppStateType, InferActionsTypes} from './'
 import {ThunkAction} from 'redux-thunk'
 import {getNewsData} from '../api/news-api'
 
-let initialState = {
+const initialState = {
     news: [] as Array<NewsType>,
     isFetching: true as boolean,
     pageSize: 5 as number,
@@ -56,7 +56,7 @@ export const getNews = (page: number, pageSize: number, category: string): Thunk
         dispatch(actions.setCurrentPage(page))
         dispatch(actions.setCategory(category))
 
-        let data = await getNewsData(page, pageSize, category)
+        const data = await getNewsData(page, pageSize, category)
         dispatch(actions.setTotalNewsCount(data.totalResults))
         dispatch(actions.setNews(data.articles))
         dispatch(actions.toggleIsFetching(false))

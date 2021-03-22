@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {/*BrowserRouter,*/ HashRouter, Route, Switch, withRouter} from 'react-router-dom'
+import {/*BrowserRouter,*/ HashRouter, Route, Switch, withRouter, Redirect} from 'react-router-dom'
 import {connect, Provider} from 'react-redux'
 import {compose} from 'redux'
 import store, {AppStateType} from './redux'
@@ -18,17 +18,17 @@ import FollowContainer from './components/Follow'
 import BackgroundEffect from './components/BackgroundEffect'
 
 import './styles/index.scss'
-import Login from "./components/Login";
 
 type PropsType = {
     isAuth: boolean
     isDynamicBackgroundActivated: boolean
+    authorizedUserId: string
     getAuthUserData: () => boolean
     toggleBlackTheme: (theme: boolean) => void
     toggleDynamicBackground: (theme: boolean) => void
 }
 
-const App: React.FC<PropsType> = ({ isAuth, isDynamicBackgroundActivated, getAuthUserData, toggleBlackTheme, toggleDynamicBackground}) => {
+const App: React.FC<PropsType> = ({ isAuth, isDynamicBackgroundActivated, authorizedUserId, getAuthUserData, toggleBlackTheme, toggleDynamicBackground}) => {
     useEffect(() => {
         getAuthUserData()
         toggleBlackTheme(localStorage.getItem('black-theme') === 'light')
@@ -45,34 +45,26 @@ const App: React.FC<PropsType> = ({ isAuth, isDynamicBackgroundActivated, getAut
                 <div className="wrapper">
                     <Switch>
 
-                        <Route path='/users'
-                               render={() => <UsersContainer/>}/>
+                        <Route path='/users' render={() => <UsersContainer/>}/>
 
-                        <Route exact path='/settings'
-                               render={() => <Settings/>}/>
+                        <Route exact path='/settings' render={() => <Settings/>}/>
 
-                        <Route path='/news'
-                               render={() => <NewsContainer/>}/>
+                        <Route path='/news' render={() => <NewsContainer/>}/>
 
                         {!isAuth
-                            ? <Login/>
+                            ? <LoginPage/>
                             : <>
-                                <Route path='/profile/:userId?'
-                                       render={() => <ProfileContainer/>}/>
+                                <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
 
-                                <Route path='/dialogs/:chatId?'
-                                       render={() => <DialogsContainer/>}/>
+                                <Route path='/dialogs/:chatId?' render={() => <DialogsContainer/>}/>
 
-                                <Route path='/following'
-                                       render={() => <FollowContainer type='following'/>}/>
+                                <Route path='/following' render={() => <FollowContainer type='following'/>}/>
 
-                                <Route path='/followers'
-                                       render={() => <FollowContainer type='followers'/>}/>
+                                <Route path='/followers' render={() => <FollowContainer type='followers'/>}/>
+
+                                <Route exact path="/"><Redirect to={`/profile/${authorizedUserId}`} /></Route>
                             </>
                         }
-
-                        <Route exact path='/login'
-                               render={() => <LoginPage/>}/>
 
                     </Switch>
                 </div>
@@ -81,9 +73,10 @@ const App: React.FC<PropsType> = ({ isAuth, isDynamicBackgroundActivated, getAut
     )
 }
 
-let mapStateToProps = (state: AppStateType) => ({
+const mapStateToProps = (state: AppStateType) => ({
     isDynamicBackgroundActivated: state.settings.isDynamicBackgroundActivated,
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    authorizedUserId: state.auth.userData.id
 })
 
 const AppContainer = compose<React.FC>(withRouter, connect(

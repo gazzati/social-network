@@ -12,7 +12,7 @@ type PropsType = {
     type: 'followers' | 'following'
 }
 
-let FollowItem: FC<PropsType> = ({ user, unfollow, unfollowingInProgress, onSendMessage , type}) => {
+const FollowItem: FC<PropsType> = ({ user, unfollow, unfollowingInProgress, onSendMessage , type}) => {
     return (
         <div className={s.followItem}>
             <div>

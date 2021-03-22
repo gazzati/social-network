@@ -1,4 +1,5 @@
 import {instance, APIResponseType} from './'
+import {LoginFormValuesType, RegistrationFormValuesType} from "../types/types";
 
 type MeResponseDataType = {
     id: string
@@ -16,13 +17,13 @@ export const authAPI = {
     me() {
         return instance.get<APIResponseType<MeResponseDataType>>(`auth/me`).then(res => res.data)
     },
-    login(email: string, password: string) {
+    login(data: LoginFormValuesType) {
         return instance.post<APIResponseType<LoginRegistrationResponseDataType>>
-        (`auth/login`, { email, password }).then(res => res.data)
+        (`auth/login`, data).then(res => res.data)
     },
-    registration(name: string, surname: string, email: string, password: string) {
+    registration(data: RegistrationFormValuesType) {
         return instance.post<APIResponseType<LoginRegistrationResponseDataType>>
-        (`auth/registration`, { name, surname, email, password }).then(res => res.data)
+        (`auth/registration`, data).then(res => res.data)
     },
     logout() {
         return instance.delete(`auth/logout`)

@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
-import styles from './Paginator.module.scss'
 import cn from 'classnames'
-import leftArrowIcon from '../../../assets/images/leftArrowIcon.svg'
+import leftArrowIcon from '../../../assets/images/exit.png'
 import rightArrowIcon from '../../../assets/images/rightArrowIcon.svg'
+
+import styles from './Paginator.module.scss'
 
 type PropsType = {
     totalItemsCount: number
@@ -12,25 +13,24 @@ type PropsType = {
     portionSize?: number
 }
 
-let Paginator: React.FC<PropsType> = ({
+const Paginator: React.FC<PropsType> = ({
                                           totalItemsCount, pageSize,
                                           currentPage = 1,
-                                          onPageChanged = () => {
-                                          },
+                                          onPageChanged,
                                           portionSize = 5
                                       }) => {
 
-    let pagesCount = Math.ceil(totalItemsCount / pageSize)
+    const pagesCount = Math.ceil(totalItemsCount / pageSize)
 
-    let pages: Array<number> = []
+    const pages: Array<number> = []
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
 
-    let portionCount = Math.ceil(pagesCount / portionSize)
-    let [portionNumber, setPortionNumber] = useState(1)
-    let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
-    let rightPortionPageNumber = portionNumber * portionSize
+    const portionCount = Math.ceil(pagesCount / portionSize)
+    const [portionNumber, setPortionNumber] = useState(1)
+    const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
+    const rightPortionPageNumber = portionNumber * portionSize
 
 
     return <div className={cn(styles.paginator)}>
@@ -45,7 +45,7 @@ let Paginator: React.FC<PropsType> = ({
                     return <div className={cn({ [styles.selectedPage]: currentPage === p }, styles.pageNumber)}
                                 key={p}
                                 onClick={(e) => {
-                                    onPageChanged(p)
+                                    onPageChanged && onPageChanged(p)
                                 }}>
                         {p}
                     </div>

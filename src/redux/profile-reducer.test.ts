@@ -1,7 +1,7 @@
 import profileReducer, {actions} from './profile-reducer'
 import {PostType, ProfileType} from '../types/types'
 
-let state = {
+const state = {
     posts: [
         { id: 1, message: 'Hi, how are you?', likesCount: 12 },
         { id: 2, message: 'Hi, how', likesCount: 1 },
@@ -19,26 +19,26 @@ let state = {
 }
 
 it('length of posts should be incremented', () => {
-    let action = actions.addPostActionCreator('it-it')
-    let newState = profileReducer(state, action)
+    const action = actions.addPostActionCreator('it-it')
+    const newState = profileReducer(state, action)
     expect(newState.posts.length).toBe(10)
 })
 
 it('message of post should be correct', () => {
-    let action = actions.addPostActionCreator('it-it')
-    let newState = profileReducer(state, action)
+    const action = actions.addPostActionCreator('it-it')
+    const newState = profileReducer(state, action)
     expect(newState.posts[9].message).toBe('it-it')
 })
 
 it('after deleting length of messages should be decrement', () => {
-    let action = actions.deletePost(1)
-    let newState = profileReducer(state, action)
+    const action = actions.deletePost(1)
+    const newState = profileReducer(state, action)
     expect(newState.posts.length).toBe(8)
 })
 
 it('after deleting length shouldn`t be decrement if id is incorrect', () => {
-    let action = actions.deletePost(1000)
-    let newState = profileReducer(state, action)
+    const action = actions.deletePost(1000)
+    const newState = profileReducer(state, action)
     expect(newState.posts.length).toBe(9)
 })
 

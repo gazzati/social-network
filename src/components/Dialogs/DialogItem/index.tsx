@@ -15,7 +15,7 @@ type PropsType = {
 }
 
 const DialogItem: React.FC<PropsType> = (props) => {
-    let className = props.currentDialog === props.id ? `${s.item} ${s.activeDialogItem}` :
+    const className = props.currentDialog === props.id ? `${s.item} ${s.activeDialogItem}` :
         props.defaultChecked ? `${s.item} ${s.activeDialogItem}` : s.item
     return (
         <NavLink to={'/dialogs/' + props.id} className={className} onClick={() => props.setCurrentChat(props.id)}>

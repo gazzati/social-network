@@ -2,7 +2,7 @@ import {ProfileType} from '../types/types'
 import {BaseThunkType, InferActionsTypes} from './'
 import {usersAPI} from '../api/users-api'
 
-let initialState = {
+const initialState = {
     users: [] as Array<ProfileType>,
     pageSize: 10,
     totalUsersCount: 0,
@@ -92,11 +92,11 @@ export const actions = {
 // }
 
 export const requestUsers = (page: number, pageSize: number, term: string): ThunkType => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         dispatch(actions.toggleIsFetching(true))
         dispatch(actions.setCurrentPage(page))
 
-        let res = await usersAPI.getUsers(term)
+        const res = await usersAPI.getUsers(term)
         dispatch(actions.toggleIsFetching(false))
         dispatch(actions.setUsers(res.data))
         //dispatch(actions.setTotalUsersCount(data.totalCount))
@@ -104,18 +104,18 @@ export const requestUsers = (page: number, pageSize: number, term: string): Thun
 }
 
 export const follow = (userId: string): ThunkType => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         dispatch(actions.toggleIsFetching(true))
-        let res = await usersAPI.follow(userId)
+        const res = await usersAPI.follow(userId)
         dispatch(actions.toggleIsFetching(false))
         dispatch(actions.setUsers(res.data))
     }
 }
 
 export const unfollow = (userId: string): ThunkType => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         dispatch(actions.toggleIsFetching(true))
-        let res = await usersAPI.unFollow(userId)
+        const res = await usersAPI.unFollow(userId)
         dispatch(actions.toggleIsFetching(false))
         dispatch(actions.setUsers(res.data))
     }

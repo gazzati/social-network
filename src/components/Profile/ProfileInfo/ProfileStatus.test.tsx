@@ -12,7 +12,7 @@ describe('ProfileStatus component', () => {
     test('After creation <span> should be displayed', () => {
         const component = create(<ProfileStatus status="MY STATUS"/>)
         const root = component.root
-        let span = root.findByType('span')
+        const span = root.findByType('span')
         expect(span).not.toBeNull()
     })
 
@@ -20,23 +20,23 @@ describe('ProfileStatus component', () => {
         const component = create(<ProfileStatus status="MY STATUS"/>)
         const root = component.root
         expect(() => {
-            let input = root.findByType('input')
+            const input = root.findByType('input')
         }).toThrow()
     })
 
     test('After creation <span> should contains correct sttrus', () => {
         const component = create(<ProfileStatus status="MY STATUS"/>)
         const root = component.root
-        let span = root.findByType('span')
+        const span = root.findByType('span')
         expect(span.children[0]).toBe('MY STATUS')
     })
 
     test('input should be displayed in editMode instead of span', () => {
         const component = create(<ProfileStatus status="MY STATUS"/>)
         const root = component.root
-        let span = root.findByType('span')
+        const span = root.findByType('span')
         span.props.onDoubleClick()
-        let input = root.findByType('input')
+        const input = root.findByType('input')
         expect(input.props.value).toBe('MY STATUS')
     })
 

@@ -1,55 +1,56 @@
 .settings {
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    padding-left: 3.5%;
-    padding-top: 20px;
-    background-color: var(--wrap-bg-color);
-    margin-bottom: 50px;
-    .settingsItem {
-        display: flex;
-        align-items: center;
-        margin-top: 28px;
-    }
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  padding-left: 3.5%;
+  padding-top: 20px;
+  background-color: var(--wrap-bg-color);
+  margin-bottom: 50px;
+
+  .settingsItem {
+    display: flex;
+    align-items: center;
+    margin-top: 28px;
+  }
 }
 
 .label {
-    line-height: 1.29;
-    color: var(--b-w-text-color);
-    margin-right: 8px;
+  line-height: 1.29;
+  color: var(--b-w-text-color);
+  margin-right: 8px;
 }
 
 .button {
-    display: inline-block;
-    width: 45px; /* ширина */
-    height: 24px; /* высота */
-    border-radius: 19px; /* радиус скругления */
-    background: #bfbfbf; /* цвет фона */
-    z-index: 0;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    transition-duration: 300ms; /* анимация */
+  display: inline-block;
+  width: 45px; /* ширина */
+  height: 24px; /* высота */
+  border-radius: 19px; /* радиус скругления */
+  background: #bfbfbf; /* цвет фона */
+  z-index: 0;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition-duration: 300ms; /* анимация */
 
 }
 
 .button::after {
-    content: "";
-    height: 20px; /* высота кнопки */
-    width: 20px; /* ширина кнопки */
-    border-radius: 17px;
-    background: #fff; /* цвет кнопки */
-    top: 2px; /* положение кнопки по вертикали относительно основы */
-    left: 3px; /* положение кнопки по горизонтали относительно основы */
-    transition-duration: 300ms; /* анимация */
-    position: absolute;
-    z-index: 1;
+  content: "";
+  height: 20px; /* высота кнопки */
+  width: 20px; /* ширина кнопки */
+  border-radius: 17px;
+  background: #fff; /* цвет кнопки */
+  top: 2px; /* положение кнопки по вертикали относительно основы */
+  left: 3px; /* положение кнопки по горизонтали относительно основы */
+  transition-duration: 300ms; /* анимация */
+  position: absolute;
+  z-index: 1;
 }
 
 .switchOn {
-    background: var(--secondary-color);
+  background: var(--secondary-color);
 }
 
 .switchOn::after {
-    left: 23px;
+  left: 23px;
 }

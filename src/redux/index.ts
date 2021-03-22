@@ -1,24 +1,24 @@
-import {Action, applyMiddleware, combineReducers, compose, createStore} from 'redux'
+import { Action, applyMiddleware, combineReducers, compose, createStore } from 'redux'
+import thunkMiddleware, { ThunkAction } from 'redux-thunk'
 import profileReducer from './profile-reducer'
 import dialogsReducer from './dialogs-reducer'
 import usersReducer from './users-reducer'
 import authReducer from './auth-reducer'
-import thunkMiddleware, {ThunkAction} from 'redux-thunk'
 import newsReducer from './news-reducer'
 import settingsReducer from './settings-reducer'
 import followReducer from './follow-reducer'
 
 const rootReducer = combineReducers({
-    profilePage: profileReducer,
-    dialogsPage: dialogsReducer,
-    usersPage: usersReducer,
-    auth: authReducer,
-    news: newsReducer,
-    settings: settingsReducer,
-    follow: followReducer
+  profilePage: profileReducer,
+  dialogsPage: dialogsReducer,
+  usersPage: usersReducer,
+  auth: authReducer,
+  news: newsReducer,
+  settings: settingsReducer,
+  follow: followReducer
 })
 
-type RootReducerType = typeof rootReducer; // (globalstate: AppStateType) => AppStateType
+type RootReducerType = typeof rootReducer // (globalstate: AppStateType) => AppStateType
 export type AppStateType = ReturnType<RootReducerType>
 
 export type InferActionsTypes<T> = T extends { [key: string]: (...args: any[]) => infer U } ? U : never

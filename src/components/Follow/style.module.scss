@@ -1,92 +1,95 @@
 .followBlock {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .followTitle {
-    display: none;
-    @media screen and (max-width: 678px) {
-        display: block;
-        color: var(--b-w-text-color);
-        margin: 16px auto;
-        text-align: center;
-        font-size: 18px;
-    }
+  display: none;
+  @media screen and (max-width: 678px) {
+    display: block;
+    color: var(--b-w-text-color);
+    margin: 16px auto;
+    text-align: center;
+    font-size: 18px;
+  }
 }
 
 .follow {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .followItem {
-    background: linear-gradient(to top, var(--wrap-bg-color) 72%, var(--color-block) 28%);
-    border-radius: 10px;
-    width: calc(25% - 12px);
+  background: linear-gradient(to top, var(--wrap-bg-color) 72%, var(--color-block) 28%);
+  border-radius: 10px;
+  width: calc(25% - 12px);
+  height: 230px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 15px 15px 0;
+
+  &:nth-child(4n) {
+    margin-right: 0;
+  }
+
+  @media screen and (max-width: 678px) {
+    width: calc(50% - 3px);
     height: 230px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 15px 15px 0;
+    margin: 0 6px 6px 0;
+    &:nth-child(2n) {
+      margin-right: 0;
+    }
     &:nth-child(4n) {
-        margin-right: 0;
+      margin-right: 0;
     }
-    @media screen and (max-width: 678px) {
-        width: calc(50% - 3px);
-        height: 230px;
-        margin: 0 6px 6px 0;
-        &:nth-child(2n) {
-            margin-right: 0;
-        }
-        &:nth-child(4n) {
-            margin-right: 0;
-        }
-    }
+  }
 }
 
 .pag {
-    height: 50px;
-    margin-top: 20px;
-    @media screen and (max-width: 678px) {
-        height: 70px;
-        margin-left: 15%;
-    }
+  height: 50px;
+  margin-top: 20px;
+  @media screen and (max-width: 678px) {
+    height: 70px;
+    margin-left: 15%;
+  }
 }
 
 .photo {
-    width: 70px;
-    height: 70px;
-    margin-top: 28px;
-    border: solid 2px #61dafb;
-    border-radius: 40px;
-    background-color: var(--b-w-text-color);
+  width: 70px;
+  height: 70px;
+  margin-top: 28px;
+  border: solid 2px #61dafb;
+  border-radius: 40px;
+  background-color: var(--b-w-text-color);
 }
 
 .name {
-    font-size: 20px;
-    font-weight: bold;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .descriptionUser {
-    text-align: center;
-    cursor: default;
-    color: var(--b-w-text-color);
-    height: 70px;
+  text-align: center;
+  cursor: default;
+  color: var(--b-w-text-color);
+  height: 70px;
 }
 
 .buttons {
-    display: flex;
-    justify-content: space-between;
-    .chat, .unfollow {
-        @media screen and (max-width: 678px) {
-            padding: 8px 12px;
-        }
+  display: flex;
+  justify-content: space-between;
+
+  .chat, .unfollow {
+    @media screen and (max-width: 678px) {
+      padding: 8px 12px;
     }
+  }
 }
 
 .unfollow {
-    margin-left: 8px;
-    @media screen and (max-width: 678px) {
-        margin-left: 4px;
-    }
+  margin-left: 8px;
+  @media screen and (max-width: 678px) {
+    margin-left: 4px;
+  }
 }

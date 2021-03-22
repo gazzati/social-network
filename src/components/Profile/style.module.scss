@@ -1,168 +1,169 @@
 .profile {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .infoBlock {
-    margin-bottom: 20px;
-    display: flex;
-    height: 300px;
-    @media screen and (max-width: 678px) {
-        flex-direction: column;
-        height: auto;
-        margin-bottom: 5px;
-    }
+  margin-bottom: 20px;
+  display: flex;
+  height: 300px;
+  @media screen and (max-width: 678px) {
+    flex-direction: column;
+    height: auto;
+    margin-bottom: 5px;
+  }
 }
 
 .mainInfo {
-    width: 28%;
-    border-radius: 10px;
-    padding: 40px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(to top, var(--wrap-bg-color) 73%, var(--color-block) 27%);
+  width: 28%;
+  border-radius: 10px;
+  padding: 40px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to top, var(--wrap-bg-color) 73%, var(--color-block) 27%);
+  @media screen and (max-width: 678px) {
+    width: 100%;
+    padding: 18px;
+  }
+
+  .colorBlock {
+    position: absolute;
+    height: 27%;
+    width: 100%;
+    background-color: rgba(255, 0, 0, 0);
+    cursor: pointer;
+
+    z-index: 1;
+    left: 0;
+    top: 0;
+    border-radius: 10px 10px 0 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .chooserColor {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 180px;
+    left: 35%;
+    z-index: 3;
+  }
+
+  .mainPhoto {
+    border-radius: 40px;
+    width: 80px;
+    height: 80px;
+    border: #61dafb 2px solid;
+    background-color: white;
+    z-index: 2;
+  }
+
+  .mainInfo input {
+    display: none;
+  }
+
+  .name {
+    margin-top: 10px;
+    color: var(--b-w-text-color);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: left;
+  }
+
+  .status {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.29;
+    text-align: left;
+    color: var(--dark-blue-w-text-color);
+    overflow: hidden;
+    height: calc(100% - 150px);
     @media screen and (max-width: 678px) {
-        width: 100%;
-        padding: 18px;
+      margin-bottom: 8px;
     }
+  }
 
-    .colorBlock {
-        position: absolute;
-        height: 27%;
-        width: 100%;
-        background-color: rgba(255, 0, 0, 0);
-        cursor: pointer;
-
-        z-index: 1;
-        left: 0;
-        top: 0;
-        border-radius: 10px 10px 0 0;
-        -webkit-tap-highlight-color: transparent;
-    }
-
-    .chooserColor {
-        height: 100px;
-        width: 100px;
-        position: absolute;
-        top: 180px;
-        left: 35%;
-        z-index: 3;
-    }
-
-    .mainPhoto {
-        border-radius: 40px;
-        width: 80px;
-        height: 80px;
-        border: #61dafb 2px solid;
-        background-color: white;
-        z-index: 2;
-    }
-
-    .mainInfo input {
-        display: none;
-    }
-
-    .name {
-        margin-top: 10px;
-        color: var(--b-w-text-color);
-        font-size: 20px;
-        font-weight: 600;
-        line-height: 1.2;
-        text-align: left;
-    }
-
-    .status {
-        margin-top: 10px;
-        font-size: 14px;
-        line-height: 1.29;
-        text-align: left;
-        color: var(--dark-blue-w-text-color);
-        overflow: hidden;
-        height: calc(100% - 150px);
-        @media screen and (max-width: 678px) {
-            margin-bottom: 8px;
-        }
-    }
-
-    .statusEdit input {
-        display: block;
-        border: 1px #d8d6dc solid;
-        width: 100%;
-        height: 38px;
-        font-size: 16px;
-        cursor: pointer;
-        color: var(--gray-w-text-color);
-    }
+  .statusEdit input {
+    display: block;
+    border: 1px #d8d6dc solid;
+    width: 100%;
+    height: 38px;
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--gray-w-text-color);
+  }
 }
 
 
 .description {
-    width: calc(72% - 20px);
-    margin-left: 20px;
-    border-radius: 10px;
-    background-color: var(--wrap-bg-color);
-    padding: 40px;
+  width: calc(72% - 20px);
+  margin-left: 20px;
+  border-radius: 10px;
+  background-color: var(--wrap-bg-color);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (max-width: 678px) {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 5px;
+    padding: 18px;
+  }
+
+  .aboutMe, .skills {
+    height: 82px;
+  }
+
+  p {
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1.25;
+    text-align: left;
+    color: var(--secondary-color);
+  }
+
+  span {
+    font-size: 14px;
+    line-height: 1.29;
+    text-align: left;
+    color: var(--dark-blue-w-text-color);
+  }
+
+  .contactsList {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 600px;
+  }
 
-    @media screen and (max-width: 678px) {
-        width: 100%;
-        margin-left: 0;
-        margin-top: 5px;
-        padding: 18px;
-    }
+  .contacts a {
+    display: flex;
+    width: 160px;
+    margin: 20px 20px 0 0;
+    align-items: center;
 
-    .aboutMe, .skills {
-        height: 82px;
+    img {
+      margin-right: 5px;
     }
 
     p {
-        font-size: 12px;
-        font-weight: bold;
-        line-height: 1.25;
-        text-align: left;
+      color: var(--gray-w-text-color);
+      font-size: 8px;
+
+      &:hover {
         color: var(--secondary-color);
+      }
     }
+  }
 
-    span {
-        font-size: 14px;
-        line-height: 1.29;
-        text-align: left;
-        color: var(--dark-blue-w-text-color);
-    }
+  .gitHubIcon {
+    border-radius: 5px;
+  }
 
-    .contactsList {
-        display: flex;
-        flex-wrap: wrap;
-        max-width: 600px;
-    }
-
-    .contacts a {
-        display: flex;
-        width: 160px;
-        margin: 20px 20px 0 0;
-        align-items: center;
-
-        img {
-            margin-right: 5px;
-        }
-
-        p {
-            color: var(--gray-w-text-color);
-            font-size: 8px;
-            &:hover {
-                color: var(--secondary-color);
-            }
-        }
-    }
-
-    .gitHubIcon {
-        border-radius: 5px;
-    }
-
-    .vkIcon {
-        border-radius: 5px;
-    }
+  .vkIcon {
+    border-radius: 5px;
+  }
 }

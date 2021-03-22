@@ -1,13 +1,11 @@
+import { connect } from 'react-redux'
 import MyPosts from './Posts'
-import {addPost, addLikes, deletePost} from '../../../redux/profile-reducer'
-import {connect} from 'react-redux'
-import {AppStateType} from '../../../redux'
+import { addLikes, addPost, deletePost } from '../../../redux/profile-reducer'
+import { AppStateType } from '../../../redux'
 
-const mapStateToProps = (state: AppStateType) => {
-    return {
-        profile: state.profilePage.profile
-    }
-}
+const mapStateToProps = (state: AppStateType) => ({
+  profile: state.profilePage.profile
+})
 
 const PostsContainer = connect(mapStateToProps, { addPost, addLikes, deletePost })(MyPosts)
 

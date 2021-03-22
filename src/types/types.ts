@@ -71,7 +71,7 @@ export type ChatType = {
     participants: string[]
     title: string
     photo: string
-    //isGroup: boolean
+    // isGroup: boolean
     messages: MessageType[]
 }
 export type MessageType = {

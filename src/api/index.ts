@@ -1,32 +1,32 @@
 import axios from 'axios'
 
 export const instance = axios.create({
-    withCredentials: true,
-    //baseURL: 'http://localhost:4000/api',
-    baseURL: 'https://gazzati-sc-backend.herokuapp.com/api',
-    headers: {
-        'Content-Type': 'application/json',
-        'authToken': localStorage.getItem('authToken')
-    }
+  withCredentials: true,
+  // baseURL: 'http://localhost:4000/api',
+  baseURL: 'https://gazzati-sc-backend.herokuapp.com/api',
+  headers: {
+    'Content-Type': 'application/json',
+    authToken: localStorage.getItem('authToken')
+  }
 })
 
 export enum ResultCodeEnum {
-    Success = 0,
-    Error = 1,
+  Success = 0,
+  Error = 1
 }
 
 export enum ResultCodeForCaptchaEnum {
-    CaptchaIsRequired = 10,
+  CaptchaIsRequired = 10
 }
 
 export type GetItemsType<I> = {
-    items: Array<I>
-    totalCount: number
-    error: string | null
+  items: Array<I>
+  totalCount: number
+  error: string | null
 }
 
 export type APIResponseType<D = {}, RC = ResultCodeEnum> = {
-    data: D
-    messages: Array<string>
-    resultCode: RC
+  data: D
+  messages: Array<string>
+  resultCode: RC
 }

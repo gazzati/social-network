@@ -15,7 +15,7 @@ type PropsType = {
 const FollowItem: FC<PropsType> = ({ user, unfollow, unfollowingInProgress, onSendMessage, type }) => (
   <div className={s.followItem}>
     <div>
-      <NavLink to={`profile/${user._id}`}>
+      <NavLink to={`profile:${user._id}`}>
         <img src={user.photo?.url ? user.photo?.url : userPhoto} className={s.photo} alt="" />
       </NavLink>
     </div>

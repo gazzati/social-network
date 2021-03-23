@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { HashRouter, Redirect, Route, Switch, withRouter } from 'react-router-dom'
 import { connect, Provider } from 'react-redux'
 import { compose } from 'redux'
+
 import store, { AppStateType } from './redux'
 import { toggleBlackTheme, toggleDynamicBackground } from './redux/settings-reducer'
 import { getAuthUserData } from './redux/auth-reducer'
@@ -60,7 +61,7 @@ const App: React.FC<PropsType> = ({
               <LoginPage />
             ) : (
               <>
-                <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
+                <Route path="/profile::userId?" render={() => <ProfileContainer />} />
 
                 <Route path="/dialogs/:chatId?" render={() => <DialogsContainer />} />
 
@@ -69,7 +70,7 @@ const App: React.FC<PropsType> = ({
                 <Route path="/followers" render={() => <FollowContainer type="followers" />} />
 
                 <Route exact path="/">
-                  <Redirect to={`/profile/${authorizedUserId}`} />
+                  <Redirect to={`/profile:${authorizedUserId}`} />
                 </Route>
               </>
             )}

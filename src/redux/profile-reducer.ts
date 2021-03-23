@@ -73,6 +73,7 @@ export const actions = {
 }
 
 export const getUserProfile = (userId: string): ThunkType => async (dispatch) => {
+  dispatch(actions.toggleIsFetching(true))
   const data = await profileAPI.getProfile(userId)
   dispatch(actions.setUserProfile(data))
   dispatch(actions.toggleIsFetching(false))
@@ -95,13 +96,12 @@ export const savePhoto = (file: File): ThunkType => async (dispatch) => {
 }
 
 export const saveProfile = (profile: ProfileType): ThunkType => async (dispatch) => {
+  dispatch(actions.toggleIsFetching(true))
   const res = await profileAPI.saveProfile(profile)
   if (res.resultCode === 0) {
     dispatch(actions.setUserProfile(res.data))
+    dispatch(actions.toggleIsFetching(false))
   }
-  // else {
-  //   return Promise.reject(res.messages[0])
-  // }
 }
 
 export const addPost = (text: string): ThunkType => async (dispatch) => {

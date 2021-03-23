@@ -15,7 +15,7 @@ type PropsType = {
 const User: FC<PropsType> = ({ user, currentUserId, unfollow, follow }) => (
   <div className={s.userContainer}>
     <div className={s.user}>
-      <NavLink to={`profile/${user._id}`}>
+      <NavLink to={`profile:${user._id}`}>
         <img src={user.photo?.url ? user.photo?.url : userPhoto} className={s.photo} alt="" />
       </NavLink>
       <div className={s.descriptionUser}>

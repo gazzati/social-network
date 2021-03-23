@@ -1,12 +1,14 @@
 import React from 'react'
 import { NavLink, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
-import s from './style.module.scss'
+
 import { logout } from '../../redux/auth-reducer'
 import { AppStateType } from '../../redux'
+import { getUserProfile } from '../../redux/profile-reducer'
+
 import { DialogsIco, FollowersIco, FollowingIco, NewsIco, ProfileIco, SettingsIco, SignOut, UsersIco } from './Icons'
 
-import { getUserProfile } from '../../redux/profile-reducer'
+import s from './style.module.scss'
 
 const mapStateToProps = (state: AppStateType) => ({
   isAuth: state.auth.isAuth,
@@ -31,7 +33,7 @@ const Navbar: React.FC<PropsType> = ({ isAuth, authorizedUserId, currentUserId, 
 
   return (
     <div className={s.navbar}>
-      <NavLink exact to={`/profile/${authorizedUserId}`} className={s.link} activeClassName={s.activeItem}>
+      <NavLink exact to={`/profile:${authorizedUserId}`} className={s.link} activeClassName={s.activeItem}>
         <ProfileIco />
         <span className={s.item}>My Profile</span>
       </NavLink>

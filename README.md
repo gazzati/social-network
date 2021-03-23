@@ -8,6 +8,8 @@
 
   -Backend реализован с помощью express на NodeJs. API для приложения задеплоено на Heroku и доступно по адресу https://gazzati-sc-backend.herokuapp.com/api.
   
+  -В качесте базы данных используется кластер mongoDB Atlas cloud.mongodb.com/v2/5fa6c735a5a8404a1960f36a#metrics/replicaSet/5fddcde27c065e6dae3eabaf/explorer/social-network
+
   -Эндпоинты логически разбиты на роуты(users, profile, auth, chats) и вынесены в разные файлы. 
 
   -Новостная лента составлена на основе данных с API(https://newsapi.org/docs/endpoints/top-headlines)

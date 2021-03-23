@@ -17,7 +17,7 @@ type MapStatePropsType = {
 }
 
 type MapDispatchPropsType = {
-  getUsers: (currentPage: number, pageSize: number, term: string) => void
+  getUsers: (currentPage: number, term: string) => void
   unfollow: (userId: string) => void
   follow: (userId: string) => void
   resetCurrentPage: () => void
@@ -31,13 +31,12 @@ const UsersContainer: React.FC<PropsType> = (props) => {
   const [searchRequest, setSearchRequest] = useState('')
 
   useEffect(() => {
-    const { currentPage, pageSize } = props
-    props.getUsers(currentPage, pageSize, searchRequest)
+    const { currentPage } = props
+    props.getUsers(currentPage, searchRequest)
   }, [searchRequest])
 
   const onPageChanged = (pageNumber: number) => {
-    const { pageSize } = props
-    props.getUsers(pageNumber, pageSize, searchRequest)
+    props.getUsers(pageNumber, searchRequest)
   }
 
   const searchUsers = (newSearchRequest: string) => {

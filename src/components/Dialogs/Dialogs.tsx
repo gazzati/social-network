@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react'
-
 import classNames from 'classnames'
-import formatDate from '../../helpers/formatDate'
 
-import s from './style.module.scss'
+import formatDate from '../../helpers/formatDate'
 import DialogItem from './DialogItem'
 import Message from './Message'
 import AddMessageForm from './AddMessageForm'
 import { ChatType, MessageType } from '../../types/types'
-
 import Preloader from '../common/Preloader'
 import leftIco from '../../assets/images/left-arrow.svg'
 import userPhoto from '../../assets/images/user.png'
+
+import s from './style.module.scss'
 
 type PropsType = {
   chats: ChatType[]
@@ -54,10 +53,6 @@ const Dialogs: React.FC<PropsType> = (props) => {
     lastMessage && lastMessage.scrollIntoView()
   })
 
-  if (props.isLoading) {
-    return <Preloader />
-  }
-
   return (
     <div className={s.dialogs}>
       <div className={classNames(s.dialogsItems, { [s.openDialogsItems]: isMessagesOpen })}>
@@ -89,6 +84,8 @@ const Dialogs: React.FC<PropsType> = (props) => {
           )}
         </div>
         <ul className={s.messagesBlock}>
+          {props.isLoading && <Preloader />}
+
           {messages === 'no choose' ? (
             <div className={s.noMessages}>Please choose chat</div>
           ) : messagesElements && messagesElements.length ? (
@@ -97,7 +94,11 @@ const Dialogs: React.FC<PropsType> = (props) => {
             <div className={s.noMessages}>No messages</div>
           )}
         </ul>
-        <AddMessageForm sendMessage={(messageText: string) => props.sendMessage(props.currentChat, messageText)} />
+        <AddMessageForm
+          sendMessage={(messageText: string) =>
+            props.sendMessage(props.currentChat !== 'all' ? props.currentChat : props.chats[0]._id, messageText)
+          }
+        />
       </div>
     </div>
   )

@@ -30,7 +30,6 @@ const Follow: React.FC<PropsType> = (props) => {
 
   useEffect(() => {
     props.getFollow(props.type)
-    // eslint-disable-next-line
   }, [props.type])
 
   const onSendMessage = async (userId: string) => {

@@ -40,7 +40,6 @@ const App: React.FC<PropsType> = ({
     getAuthUserData()
     toggleBlackTheme(localStorage.getItem('black-theme') === 'light')
     toggleDynamicBackground(localStorage.getItem('dynamic-bg') === 'false')
-    // eslint-disable-next-line
   }, [])
 
   return (

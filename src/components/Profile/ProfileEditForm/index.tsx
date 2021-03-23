@@ -27,8 +27,6 @@ const ProfileEditForm: React.FC<PropsType> = ({ profile, onSubmit, savePhoto, ex
     }
   }
 
-  console.log(isLoading)
-
   if (isLoading) {
     return <Preloader />
   }

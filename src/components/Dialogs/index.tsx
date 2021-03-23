@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
+
 import Dialogs from './Dialogs'
 import { getAllDialogs, sendMessage } from '../../redux/dialogs-reducer'
 import { AppStateType } from '../../redux'
@@ -13,11 +14,7 @@ type DispatchPropsType = {
   getAllDialogs: (chatId?: string) => void
 }
 
-type PathParamsType = {
-  chatId: string
-}
-
-type PropsType = MapPropsType & DispatchPropsType & RouteComponentProps<PathParamsType>
+type PropsType = MapPropsType & DispatchPropsType & RouteComponentProps<{ chatId: string }>
 
 const DialogsContainer: React.FC<PropsType> = (props) => {
   const currentChat = props.match.params.chatId || 'all'
@@ -25,7 +22,6 @@ const DialogsContainer: React.FC<PropsType> = (props) => {
 
   useEffect(() => {
     !props.chats.length && props.getAllDialogs(currentChat)
-    // eslint-disable-next-line
   }, [])
 
   const setCurrentChat = (chatId: string) => {

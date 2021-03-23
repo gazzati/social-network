@@ -11,10 +11,6 @@
     height: calc(100vh - 128px);
     padding: 0;
   }
-
-  .dialogs span { //preloader
-    position: absolute;
-  }
 }
 
 .dialogsItems {
@@ -170,6 +166,10 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+
+  & > span { //preloader
+    position: absolute;
+  }
 
   &::-webkit-scrollbar {
     width: 0;

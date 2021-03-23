@@ -31,7 +31,6 @@ const NewsContainer: React.FC<PropsType> = ({
 }) => {
   useEffect(() => {
     getNews(currentPage, pageSize, '')
-    // eslint-disable-next-line
   }, [])
 
   const onPageChanged = (pageNumber: number) => {

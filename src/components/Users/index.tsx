@@ -33,7 +33,6 @@ const UsersContainer: React.FC<PropsType> = (props) => {
   useEffect(() => {
     const { currentPage, pageSize } = props
     props.getUsers(currentPage, pageSize, searchRequest)
-    // eslint-disable-next-line
   }, [searchRequest])
 
   const onPageChanged = (pageNumber: number) => {

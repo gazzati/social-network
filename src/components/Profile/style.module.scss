@@ -69,15 +69,11 @@
     color: var(--b-w-text-color);
     font-size: 20px;
     font-weight: 600;
-    line-height: 1.2;
-    text-align: left;
   }
 
   .status {
     margin-top: 10px;
     font-size: 14px;
-    line-height: 1.29;
-    text-align: left;
     color: var(--dark-blue-w-text-color);
     overflow: hidden;
     height: calc(100% - 150px);
@@ -121,15 +117,11 @@
   p {
     font-size: 12px;
     font-weight: bold;
-    line-height: 1.25;
-    text-align: left;
     color: var(--secondary-color);
   }
 
   span {
     font-size: 14px;
-    line-height: 1.29;
-    text-align: left;
     color: var(--dark-blue-w-text-color);
   }
 
@@ -142,7 +134,7 @@
   .contacts a {
     display: flex;
     width: 160px;
-    margin: 20px 20px 0 0;
+    margin: 8px 20px 6px 0;
     align-items: center;
 
     img {
@@ -152,6 +144,7 @@
     p {
       color: var(--gray-w-text-color);
       font-size: 8px;
+      font-weight: normal;
 
       &:hover {
         color: var(--secondary-color);

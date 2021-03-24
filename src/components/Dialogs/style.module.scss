@@ -63,7 +63,6 @@
     div {
       font-size: 14px;
       font-weight: 600;
-      line-height: 1.29;
       color: var(--b-w-text-color);
       outline: none;
     }
@@ -211,7 +210,6 @@
   .message {
     font-size: 18px;
     font-weight: 500;
-    line-height: 1.29;
     color: var(--b-w-text-color);
     outline: none;
     background-color: #9d9aa8;
@@ -251,7 +249,6 @@
     .messageDate {
       width: max-content;
       position: absolute;
-      text-align: left;
       left: 12px;
       bottom: -13px;
 

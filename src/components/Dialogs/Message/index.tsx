@@ -10,7 +10,7 @@ type PropsType = {
   isFirstToday: boolean
 }
 
-const Messaage: React.FC<PropsType> = ({ message, isItMe, isFirstToday }) => {
+const Message: React.FC<PropsType> = ({ message, isItMe, isFirstToday }) => {
   const className = isItMe ? `${s.message} ${s.myMessage}` : s.message
 
   return (
@@ -31,4 +31,4 @@ const Messaage: React.FC<PropsType> = ({ message, isItMe, isFirstToday }) => {
   )
 }
 
-export default Messaage
+export default Message

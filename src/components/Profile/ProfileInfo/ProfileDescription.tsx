@@ -23,6 +23,7 @@ const ProfileDescription: React.FC<ProfileDescriptionType> = ({ info }) => (
       </div>
     )}
 
+    <p>My contacts</p>
     <div className={s.contactsList}>
       {info.contacts &&
         Object.keys(info.contacts).map((key) => (

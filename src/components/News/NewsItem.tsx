@@ -14,8 +14,8 @@ const NewsItem: FC<PropsType> = ({ newsItem }) => {
   )}:${date.slice(14, 16)}`
 
   return (
-    <div className={s.newsContainer}>
-      <div className={s.newItem}>
+    <div className={s.newsItem}>
+      <div className={s.itemWrapper}>
         <a href={newsItem.url} target="_blank" rel="noopener noreferrer" className={s.title}>
           <b>{newsItem.title}</b>
         </a>

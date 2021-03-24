@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+
 import { NewsType } from '../../types/types'
 import { AppStateType } from '../../redux'
-import News from './News'
 import { getNews } from '../../redux/news-reducer'
+
+import News from './News'
 
 type MapStatePropsType = {
   isFetching: boolean

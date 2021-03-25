@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-
 import { NavLink } from 'react-router-dom'
 import cn from 'classnames'
 
@@ -19,10 +18,6 @@ const Header: React.FC = () => {
   const { isAuth, userData } = useSelector((state: StateType) => state.auth)
   const { isBlackThemeActivated, isDynamicBackgroundActivated } = useSelector((state: StateType) => state.settings)
   const dispatch = useDispatch()
-
-  const showUserMenu = () => {
-    setShowMenu(!showMenu)
-  }
 
   const handleLogoutClick = () => {
     dispatch(logout())
@@ -47,7 +42,7 @@ const Header: React.FC = () => {
               <span className={s.isAuthUserBlock}>
                 <span className={s.userLogName}>{`${userData.name} ${userData.surname}`}</span>
                 <img className={s.userPhoto} src={userData.photo || userPhoto} alt="" />
-                <img className={s.function} src={userLogIcon} alt="" onClick={showUserMenu} />
+                <img className={s.function} src={userLogIcon} alt="" onClick={() => setShowMenu(!showMenu)} />
               </span>
             ) : (
               <NavLink to="/login" className={s.login}>
@@ -58,7 +53,7 @@ const Header: React.FC = () => {
         )}
         {showMenu && (
           <>
-            <div className={s.overlay} onClick={showUserMenu} />
+            <div className={s.overlay} onClick={() => setShowMenu(!showMenu)} />
             <div className={s.content}>
               <div className={s.theme}>
                 <span className={s.label}>Night theme</span>

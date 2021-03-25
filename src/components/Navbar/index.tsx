@@ -58,7 +58,7 @@ const Navbar: React.FC = () => {
       </NavLink>
 
       {isAuth && (
-        <div className={`${s.link} ${s.hideOnMobile} ${s.itemLogout}`} onClick={dispatch(logout)}>
+        <div className={`${s.link} ${s.hideOnMobile} ${s.itemLogout}`} onClick={() => dispatch(logout())}>
           <SignOut />
           <span className={s.item}>Exit from account</span>
         </div>

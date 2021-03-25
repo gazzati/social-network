@@ -41,15 +41,19 @@ const Follow: React.FC<PropsType> = ({ type }) => {
       {isFetching ? <Preloader /> : null}
       <div className={s.followTitle}>{type === 'followers' ? 'Followers' : 'Following'}</div>
       <div className={s.follow}>
-        {users?.map((user) => (
-          <FollowItem
-            user={user}
-            key={user._id}
-            type={type}
-            unfollowingInProgress={unfollowingInProgress}
-            onSendMessage={onSendMessage}
-          />
-        ))}
+        {users.length ? (
+          users.map((user) => (
+            <FollowItem
+              user={user}
+              key={user._id}
+              type={type}
+              unfollowingInProgress={unfollowingInProgress}
+              onSendMessage={onSendMessage}
+            />
+          ))
+        ) : (
+          <div className={s.usersBlock}>Not found users</div>
+        )}
       </div>
       {/* <Paginator currentPage={props.currentPage} onPageChanged={props.onPageChanged}
                totalItemsCount={props.totalFriendsCount} pageSize={props.pageSize}/> */}

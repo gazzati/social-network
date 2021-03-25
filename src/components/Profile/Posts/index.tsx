@@ -2,17 +2,13 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { StateType } from '../../../redux'
-import { addPost } from '../../../redux/profile-reducer'
+import { addPost, addLikes, deletePost } from '../../../redux/profile-reducer'
 
 import Post from './Post'
 
 import s from './style.module.scss'
 
-type PropsType = {
-  isOwner: boolean
-}
-
-const Posts: React.FC<PropsType> = ({ isOwner }) => {
+const Posts: React.FC<{ isOwner: boolean }> = ({ isOwner }) => {
   const { profile } = useSelector((state: StateType) => state.profile)
   const dispatch = useDispatch()
 
@@ -35,6 +31,8 @@ const Posts: React.FC<PropsType> = ({ isOwner }) => {
         date={p.date}
         profile={profile}
         isOwner={isOwner}
+        addLikes={(postId) => dispatch(addLikes(postId))}
+        deletePost={(postId) => dispatch(deletePost(postId))}
       />
     ))
 

@@ -9,7 +9,7 @@ const initialState = {
   pageSize: 7,
   totalUsersCount: 0,
   isFetching: true,
-  followingInProgress: [] as Array<number> // array of users ids
+  followingInProgress: [] as Array<string>
 }
 
 const usersReducer = (state = initialState, action: ActionsTypes): InitialState => {
@@ -85,7 +85,7 @@ export const actions = {
       count: totalUsersCount
     } as const),
   toggleIsFetching: (isFetching: boolean) => ({ type: 'users/TOGGLE_IS_FETCHING', isFetching } as const),
-  toggleFollowingProgress: (isFetching: boolean, userId: number) =>
+  toggleFollowingProgress: (isFetching: boolean, userId: string) =>
     ({
       type: 'users/TOGGLE_IS_FOLLOWING_PROGRESS',
       isFetching,
@@ -99,23 +99,33 @@ export const requestUsers = (page: number, term: string): ThunkType => async (di
   dispatch(actions.setCurrentPage(page))
 
   const res = await usersAPI.getUsers(page, initialState.pageSize, term)
-  dispatch(actions.toggleIsFetching(false))
   dispatch(actions.setUsers(res.data.users))
   dispatch(actions.setTotalUsersCount(res.data.total))
+  dispatch(actions.toggleIsFetching(false))
 }
 
 export const follow = (userId: string): ThunkType => async (dispatch) => {
   dispatch(actions.toggleIsFetching(true))
+  dispatch(actions.toggleFollowingProgress(true, userId))
+
   const res = await usersAPI.follow(userId)
-  dispatch(actions.toggleIsFetching(false))
   dispatch(actions.updateUsers(res.data))
+  dispatch(actions.toggleIsFetching(false))
+  dispatch(actions.toggleFollowingProgress(false, userId))
 }
 
 export const unfollow = (userId: string): ThunkType => async (dispatch) => {
   dispatch(actions.toggleIsFetching(true))
+  dispatch(actions.toggleFollowingProgress(true, userId))
+
   const res = await usersAPI.unFollow(userId)
-  dispatch(actions.toggleIsFetching(false))
   dispatch(actions.updateUsers(res.data))
+  dispatch(actions.toggleIsFetching(false))
+  dispatch(actions.toggleFollowingProgress(false, userId))
+}
+
+export const resetCurrentPage = (): ThunkType => async (dispatch) => {
+  dispatch(actions.resetCurrentPage())
 }
 
 export default usersReducer

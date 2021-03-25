@@ -1,23 +1,22 @@
 import React, { FC } from 'react'
-import { useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import cn from 'classnames'
 
 import { ProfileType } from '../../types/types'
-import { unfollow, follow } from '../../redux/users-reducer'
-
 import userPhoto from '../../assets/images/user.png'
 
 import s from './style.module.scss'
 
 type PropsType = {
   user: ProfileType
-  followingInProgress: Array<number>
+  followingInProgress: Array<string>
   currentUserId: string | null
+  follow: (userId: string) => void
+  unfollow: (userId: string) => void
 }
 
-const User: FC<PropsType> = ({ user, currentUserId }) => {
-  const dispatch = useDispatch()
-
+const User: FC<PropsType> = ({ user, currentUserId, followingInProgress, follow, unfollow }) => {
+  const isDisabled = followingInProgress.includes(user._id)
   return (
     <div className={s.userContainer}>
       <div className={s.user}>
@@ -31,20 +30,18 @@ const User: FC<PropsType> = ({ user, currentUserId }) => {
         {currentUserId && currentUserId !== user._id && (
           <div className={s.fol}>
             {currentUserId && user.followers.includes(currentUserId) ? (
-              <button /* disabled={followingInProgress.some(id => id === user.userId)} */
-                className="button button--secondary"
-                onClick={() => {
-                  dispatch(unfollow(user._id))
-                }}
+              <button
+                disabled={isDisabled}
+                className={cn('button button--secondary', { 'button--disabled': isDisabled })}
+                onClick={() => unfollow(user._id)}
               >
                 Unfollow
               </button>
             ) : (
-              <button /* disabled={followingInProgress.some(id => id === user.userId)} */
-                className="button button--primary"
-                onClick={() => {
-                  dispatch(follow(user._id))
-                }}
+              <button
+                disabled={isDisabled}
+                className={cn('button button--primary', { 'button--disabled': isDisabled })}
+                onClick={() => follow(user._id)}
               >
                 Follow
               </button>

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { requestUsers } from '../../redux/users-reducer'
-
+import { requestUsers, resetCurrentPage, follow, unfollow } from '../../redux/users-reducer'
 import { StateType } from '../../redux'
-import s from './style.module.scss'
+
 import Preloader from '../common/Preloader'
 import User from './User'
 import Paginator from '../common/Paginator'
+
+import s from './style.module.scss'
 
 const Users: React.FC = () => {
   const { userData } = useSelector((state: StateType) => state.auth)
@@ -29,12 +30,12 @@ const Users: React.FC = () => {
   const onSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setSearchTerm(searchTerm)
-    // dispatch(re) // TODO - reset page
+    dispatch(resetCurrentPage)
   }
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value)
-    // dispatch(re) // TODO - reset page
+    dispatch(resetCurrentPage)
   }
 
   return (
@@ -54,9 +55,20 @@ const Users: React.FC = () => {
         </form>
       </div>
       <div className={s.usersBlock}>
-        {users.map((u) => (
-          <User user={u} followingInProgress={followingInProgress} key={u._id} currentUserId={userData.id} />
-        ))}
+        {users.length ? (
+          users.map((u) => (
+            <User
+              user={u}
+              followingInProgress={followingInProgress}
+              key={u._id}
+              currentUserId={userData.id}
+              follow={(userId) => dispatch(follow(userId))}
+              unfollow={(userId) => dispatch(unfollow(userId))}
+            />
+          ))
+        ) : (
+          <div className={s.notFound}>Not found users</div>
+        )}
       </div>
       <div className={s.paginator}>
         <Paginator

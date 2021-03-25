@@ -28,6 +28,10 @@
       background-color: var(--secondary-color);
     }
   }
+
+  &--disabled {
+    opacity: 0.5;
+  }
 }
 
 input {

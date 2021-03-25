@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { RegistrationFormValuesType } from '../../types/types'
-import { login } from '../../redux/auth-reducer'
+import { registration } from '../../redux/auth-reducer'
 
 import viewIco from '../../assets/images/view.svg'
 
@@ -20,7 +20,7 @@ const RegistrationForm: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch(login(data))
+    dispatch(registration(data))
   }
 
   return (

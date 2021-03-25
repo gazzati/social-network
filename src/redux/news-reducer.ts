@@ -1,6 +1,6 @@
 import { ThunkAction } from 'redux-thunk'
 import { NewsType } from '../types/types'
-import { AppStateType, InferActionsTypes } from '.'
+import { StateType, InferActionsTypes } from '.'
 import { getNewsData } from '../api/news-api'
 
 const initialState = {
@@ -48,7 +48,7 @@ export const actions = {
   setCategory: (category: string) => ({ type: 'SET_CATEGORY', category } as const)
 }
 
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
+type ThunkType = ThunkAction<Promise<void>, StateType, unknown, ActionsTypes>
 
 export const getNews = (page: number, pageSize: number, category: string): ThunkType => async (dispatch) => {
   dispatch(actions.toggleIsFetching(true))

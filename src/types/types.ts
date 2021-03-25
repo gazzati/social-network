@@ -1,87 +1,88 @@
 export type LoginFormValuesType = {
-    email: string
-    password: string
+  email: string
+  password: string
 }
 
 export type RegistrationFormValuesType = {
-    email: string
-    name: string
-    surname: string
-    password: string
+  email: string
+  name: string
+  surname: string
+  password: string
 }
 
 export type UserDataType = {
-    id: string | null
-    name: string | null
-    surname: string | null
-    photo: string | null
+  id: string | null
+  name: string | null
+  surname: string | null
+  photo: string | null
 }
 
 export type ProfileType = {
-    _id: string
-    info: ProfileInfoType
-    status: string
-    photo?: {
-        url: string
-        urlOriginal: string
-    }
-    posts: PostType[] | []
-    following: string[]
-    followers: string[]
+  _id: string
+  info: ProfileInfoType
+  status: string
+  photo?: {
+    url: string
+    urlOriginal: string
+  }
+  posts: PostType[] | []
+  following: string[]
+  followers: string[]
 }
 
 export type ProfileInfoType = {
-    name: string
-    surname: string
-    aboutMe?: string
-    lookingForAJob?: boolean
-    lookingForAJobDescription?: string
-    contacts: ContactsType
+  name: string
+  surname: string
+  aboutMe?: string
+  lookingForAJob?: boolean
+  lookingForAJobDescription?: string
+  contacts: ContactsType
 }
 
 export type ContactsType = {
-    github?: string
-    vk?: string
-    facebook?: string
-    instagram?: string
-    twitter?: string
-    youtube?: string
+  github?: string
+  vk?: string
+  facebook?: string
+  instagram?: string
+  twitter?: string
+  youtube?: string
 }
 
 export type PostType = {
-    _id: string
-    date: string
-    message: string
-    likesCount: number
+  _id: string
+  date: string
+  message: string
+  likesCount: number
 }
 
 export type NewsType = {
-    title: string
-    description: string
-    url: string
-    urlToImage: string
-    publishedAt: string
-    source: {
-        name: string
-    }
+  title: string
+  description: string
+  url: string
+  urlToImage: string
+  publishedAt: string
+  source: {
+    name: string
+  }
 }
 
 export type ChatType = {
-    _id: string
-    participants: string[]
-    title: string
-    photo: string
-    // isGroup: boolean
-    messages: MessageType[]
+  _id: string
+  participants: string[]
+  title: string
+  photo: string
+  // isGroup: boolean
+  messages: MessageType[]
 }
 export type MessageType = {
-    _id: string
-    text: string
-    senderId: string
-    date: string
+  _id: string
+  text: string
+  senderId: string
+  date: string
 }
 
 export type ChatsAndMessagesType = {
-    chats: ChatType[],
-    messages: MessageType[] | 'no choose'
+  chats: ChatType[]
+  messages: MessageType[] | 'no choose'
+  newChatId?: string
 }

@@ -1,39 +1,28 @@
 import React from 'react'
 import { NavLink, useHistory } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { logout } from '../../redux/auth-reducer'
-import { AppStateType } from '../../redux'
-import { getUserProfile } from '../../redux/profile-reducer'
+import { StateType } from '../../redux'
 
 import { DialogsIco, FollowersIco, FollowingIco, NewsIco, ProfileIco, SettingsIco, SignOut, UsersIco } from './Icons'
 
 import s from './style.module.scss'
 
-const mapStateToProps = (state: AppStateType) => ({
-  isAuth: state.auth.isAuth,
-  authorizedUserId: state.auth.userData.id,
-  currentUserId: state.profilePage.profile._id
-})
-
-type PropsType = {
-  isAuth: boolean
-  authorizedUserId: string | null
-  currentUserId: string | null
-  logout: () => void
-}
-
-const Navbar: React.FC<PropsType> = ({ isAuth, authorizedUserId, currentUserId, logout }) => {
+const Navbar: React.FC = () => {
+  const { isAuth, userData } = useSelector((state: StateType) => state.auth)
+  const { profile } = useSelector((state: StateType) => state.profile)
+  const dispatch = useDispatch()
   const history = useHistory()
 
   const getIsActive = () => {
     const url = history.location.pathname
-    return url.includes('user') || (url.includes('profile') && authorizedUserId !== currentUserId)
+    return url.includes('user') || (url.includes('profile') && profile._id !== userData.id)
   }
 
   return (
     <div className={s.navbar}>
-      <NavLink exact to={`/profile:${authorizedUserId}`} className={s.link} activeClassName={s.activeItem}>
+      <NavLink exact to={`/profile:${userData.id}`} className={s.link} activeClassName={s.activeItem}>
         <ProfileIco />
         <span className={s.item}>My Profile</span>
       </NavLink>
@@ -69,7 +58,7 @@ const Navbar: React.FC<PropsType> = ({ isAuth, authorizedUserId, currentUserId, 
       </NavLink>
 
       {isAuth && (
-        <div className={`${s.link} ${s.hideOnMobile} ${s.itemLogout}`} onClick={logout}>
+        <div className={`${s.link} ${s.hideOnMobile} ${s.itemLogout}`} onClick={dispatch(logout)}>
           <SignOut />
           <span className={s.item}>Exit from account</span>
         </div>
@@ -78,4 +67,4 @@ const Navbar: React.FC<PropsType> = ({ isAuth, authorizedUserId, currentUserId, 
   )
 }
 
-export default connect(mapStateToProps, { logout, getUserProfile })(Navbar)
+export default Navbar

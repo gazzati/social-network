@@ -9,21 +9,21 @@ import settingsReducer from './settings-reducer'
 import followReducer from './follow-reducer'
 
 const rootReducer = combineReducers({
-  profilePage: profileReducer,
-  dialogsPage: dialogsReducer,
-  usersPage: usersReducer,
+  profile: profileReducer,
+  dialogs: dialogsReducer,
+  users: usersReducer,
   auth: authReducer,
   news: newsReducer,
   settings: settingsReducer,
   follow: followReducer
 })
 
-type RootReducerType = typeof rootReducer // (globalstate: AppStateType) => AppStateType
-export type AppStateType = ReturnType<RootReducerType>
+type RootReducerType = typeof rootReducer // (globalstate: StateType) => AppStateType
+export type StateType = ReturnType<RootReducerType>
 
 export type InferActionsTypes<T> = T extends { [key: string]: (...args: any[]) => infer U } ? U : never
 
-export type BaseThunkType<A extends Action, R = Promise<void>> = ThunkAction<R, AppStateType, unknown, A>
+export type BaseThunkType<A extends Action, R = Promise<void>> = ThunkAction<R, StateType, unknown, A>
 
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

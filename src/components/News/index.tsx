@@ -1,69 +1,63 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { NewsType } from '../../types/types'
-import { AppStateType } from '../../redux'
+import { StateType } from '../../redux'
 import { getNews } from '../../redux/news-reducer'
 
-import News from './News'
+import Paginator from '../common/Paginator'
+import Preloader from '../common/Preloader'
+import NewsItem from './NewsItem'
 
-type MapStatePropsType = {
-  isFetching: boolean
-  news: Array<NewsType>
-  currentPage: number
-  totalNewsCount: number
-  pageSize: number
-  category: string
-}
+import s from './style.module.scss'
 
-type MapDispatchPropsType = {
-  getNews: (currentPage: number, pageSize: number, category: string) => void
-}
+const News: React.FC = () => {
+  const { news, isFetching, totalNewsCount, pageSize, currentPage, category } = useSelector(
+    (state: StateType) => state.news
+  )
+  const dispatch = useDispatch()
 
-type PropsType = MapStatePropsType & MapDispatchPropsType
-
-const NewsContainer: React.FC<PropsType> = ({
-  isFetching,
-  news,
-  currentPage,
-  totalNewsCount,
-  pageSize,
-  category,
-  getNews
-}) => {
   useEffect(() => {
-    getNews(currentPage, pageSize, '')
+    dispatch(getNews(currentPage, pageSize, ''))
   }, [])
 
   const onPageChanged = (pageNumber: number) => {
-    getNews(pageNumber, pageSize, '')
+    dispatch(getNews(pageNumber, pageSize, ''))
   }
 
-  const onCategoryChanged = (category: string) => {
-    getNews(currentPage, pageSize, category)
+  const onCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(getNews(currentPage, pageSize, e.target.value))
   }
 
   return (
-    <News
-      onPageChanged={onPageChanged}
-      onCategoryChanged={onCategoryChanged}
-      news={news}
-      isFetching={isFetching}
-      totalNewsCount={totalNewsCount}
-      pageSize={pageSize}
-      currentPage={currentPage}
-      category={category}
-    />
+    <div className={s.news}>
+      <div className={s.topBlock}>
+        <Paginator
+          currentPage={currentPage}
+          onPageChanged={onPageChanged}
+          totalItemsCount={totalNewsCount}
+          pageSize={pageSize}
+        />
+
+        <select className={s.select} defaultValue={category} onChange={(e) => onCategoryChange(e)}>
+          <option value="business">Business</option>
+          <option value="entertainment">Entertainment</option>
+          <option value="general">General</option>
+          <option value="health">Health</option>
+          <option value="science">Science</option>
+          <option value="sports">Sports</option>
+          <option value="technology">Technology</option>
+        </select>
+      </div>
+
+      {isFetching ? <Preloader /> : null}
+      <div className={s.newsList}>
+        {!news.length && !isFetching && <div>Sorry, only available with localhost</div>}
+        {news.map((n) => (
+          <NewsItem key={n.publishedAt.toString()} newsItem={n} />
+        ))}
+      </div>
+    </div>
   )
 }
 
-const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
-  news: state.news.news,
-  isFetching: state.news.isFetching,
-  pageSize: state.news.pageSize,
-  totalNewsCount: state.news.totalNewsCount,
-  currentPage: state.news.currentPage,
-  category: state.news.category
-})
-
-export default connect(mapStateToProps, { getNews })(NewsContainer)
+export default News

@@ -1,83 +1,73 @@
-import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
-import { compose } from 'redux'
-import { actions, follow, requestUsers, unfollow } from '../../redux/users-reducer'
-import Users from './Users'
-import { ProfileType } from '../../types/types'
-import { AppStateType } from '../../redux'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-type MapStatePropsType = {
-  currentPage: number
-  pageSize: number
-  isFetching: boolean
-  totalUsersCount: number
-  users: Array<ProfileType>
-  followingInProgress: Array<number>
-  currentUserId: string | null
-}
+import { requestUsers } from '../../redux/users-reducer'
 
-type MapDispatchPropsType = {
-  getUsers: (currentPage: number, term: string) => void
-  unfollow: (userId: string) => void
-  follow: (userId: string) => void
-  resetCurrentPage: () => void
-}
+import { StateType } from '../../redux'
+import s from './style.module.scss'
+import Preloader from '../common/Preloader'
+import User from './User'
+import Paginator from '../common/Paginator'
 
-type OwnPropsType = {}
+const Users: React.FC = () => {
+  const { userData } = useSelector((state: StateType) => state.auth)
+  const { users, totalUsersCount, pageSize, currentPage, isFetching, followingInProgress } = useSelector(
+    (state: StateType) => state.users
+  )
+  const dispatch = useDispatch()
 
-type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType
-
-const UsersContainer: React.FC<PropsType> = (props) => {
-  const [searchRequest, setSearchRequest] = useState('')
+  const [searchTerm, setSearchTerm] = useState('')
 
   useEffect(() => {
-    const { currentPage } = props
-    props.getUsers(currentPage, searchRequest)
-  }, [searchRequest])
+    dispatch(requestUsers(currentPage, searchTerm))
+  }, [searchTerm])
 
   const onPageChanged = (pageNumber: number) => {
-    props.getUsers(pageNumber, searchRequest)
+    dispatch(requestUsers(pageNumber, searchTerm))
   }
 
-  const searchUsers = (newSearchRequest: string) => {
-    setSearchRequest(newSearchRequest)
-    props.resetCurrentPage()
+  const onSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setSearchTerm(searchTerm)
+    // dispatch(re) // TODO - reset page
+  }
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value)
+    // dispatch(re) // TODO - reset page
   }
 
   return (
-    <>
-      <Users
-        totalUsersCount={props.totalUsersCount}
-        pageSize={props.pageSize}
-        currentPage={props.currentPage}
-        onPageChanged={onPageChanged}
-        users={props.users}
-        unfollow={props.unfollow}
-        follow={props.follow}
-        followingInProgress={props.followingInProgress}
-        isFetching={props.isFetching}
-        searchUsers={searchUsers}
-        currentUserId={props.currentUserId}
-      />
-    </>
+    <div className={s.users}>
+      {isFetching && <Preloader />}
+      <div className={s.search}>
+        <h3>Find other users</h3>
+        <form className="form--primary" onSubmit={onSearch}>
+          <input
+            className="form--primary-input"
+            type="text"
+            placeholder="Enter your request..."
+            value={searchTerm}
+            onChange={(e) => onChange(e)}
+          />
+          <button className="button button--primary form--primary-button">Search</button>
+        </form>
+      </div>
+      <div className={s.usersBlock}>
+        {users.map((u) => (
+          <User user={u} followingInProgress={followingInProgress} key={u._id} currentUserId={userData.id} />
+        ))}
+      </div>
+      <div className={s.paginator}>
+        <Paginator
+          currentPage={currentPage}
+          onPageChanged={onPageChanged}
+          totalItemsCount={totalUsersCount}
+          pageSize={pageSize}
+        />
+      </div>
+    </div>
   )
 }
 
-const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
-  users: state.usersPage.users,
-  pageSize: state.usersPage.pageSize,
-  totalUsersCount: state.usersPage.totalUsersCount,
-  currentPage: state.usersPage.currentPage,
-  isFetching: state.usersPage.isFetching,
-  followingInProgress: state.usersPage.followingInProgress,
-  currentUserId: state.auth.userData.id
-})
-
-export default compose(
-  connect(mapStateToProps, {
-    follow,
-    unfollow,
-    getUsers: requestUsers,
-    resetCurrentPage: actions.resetCurrentPage
-  })
-)(UsersContainer)
+export default Users

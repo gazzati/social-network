@@ -1,57 +1,51 @@
 import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { compose } from 'redux'
 import { RouteComponentProps, useHistory, withRouter } from 'react-router-dom'
 
 import { getAllDialogs, startChat } from '../../redux/dialogs-reducer'
 import { getUserProfile, savePhoto, saveProfile, updateStatus } from '../../redux/profile-reducer'
-import { AppStateType } from '../../redux'
+import { StateType } from '../../redux'
 import { ProfileInfoType, ProfileType } from '../../types/types'
 
 import Preloader from '../common/Preloader'
 import ProfileEditForm from './ProfileEditForm'
 import ProfileInfo from './ProfileInfo'
-import PostsContainer from './Posts'
+import Posts from './Posts'
 
 import s from './style.module.scss'
 
-type MapPropsType = ReturnType<typeof mapStateToProps>
+type PropsType = RouteComponentProps<{ userId: string }>
 
-type DispatchPropsType = {
-  getUserProfile: (userId: string) => void
-  updateStatus: (status: string) => void
-  savePhoto: (photo: File) => void
-  saveProfile: (profile: ProfileInfoType) => Promise<any>
-  startChat: (chatId?: string) => string
-  getAllDialogs: (chatId?: string) => void
-}
+const Profile: React.FC<PropsType> = ({ match }) => {
+  const { userData } = useSelector((state: StateType) => state.auth)
+  const { profile, isFetching } = useSelector((state: StateType) => state.profile)
+  const { chats, newChatId } = useSelector((state: StateType) => state.dialogs)
+  const dispatch = useDispatch()
 
-type PropsType = MapPropsType & DispatchPropsType & RouteComponentProps<{ userId: string }>
-
-const ProfileContainer: React.FC<PropsType> = (props) => {
   const history = useHistory()
   const [editMode, setEditMode] = useState(false)
-  const { userId } = props.match.params
-  const isOwner = props.authorizedUserId === userId
+  const { userId } = match.params
+  const isOwner = userData.id === userId
 
   useEffect(() => {
-    props.getUserProfile(userId)
+    dispatch(getUserProfile(userId))
   }, [userId])
 
   const onSubmit = async (formData: ProfileInfoType) => {
-    await props.saveProfile(formData)
+    await dispatch(saveProfile(formData))
     setEditMode(false)
   }
 
   const onSendMessage = async () => {
-    let chatId = props.chats.filter(
-      (chat) => chat.participants.includes(props.profile._id) && chat.participants.length === 2
-    )[0]?._id
+    let chatId = chats.filter((chat) => chat.participants.includes(profile._id) && chat.participants.length === 2)[0]
+      ?._id
 
     if (!chatId) {
-      chatId = await props.startChat(props.profile._id)
+      await startChat(profile._id)
+      chatId = newChatId
     } else {
-      props.getAllDialogs(chatId)
+      getAllDialogs(chatId)
     }
 
     history.push(`dialogs/${chatId}`)
@@ -59,28 +53,28 @@ const ProfileContainer: React.FC<PropsType> = (props) => {
 
   return (
     <div>
-      {props.isLoading && <Preloader />}
+      {isFetching && <Preloader />}
       {editMode ? (
         <ProfileEditForm
-          profile={props.profile as ProfileType}
+          profile={profile as ProfileType}
           onSubmit={onSubmit}
-          savePhoto={props.savePhoto}
+          savePhoto={savePhoto}
           exitOfEditMode={() => setEditMode(false)}
           isOwner={isOwner}
-          isLoading={props.isLoading}
+          isLoading={isFetching}
         />
       ) : (
         <div className={s.profile}>
-          {props.profile && (
+          {profile && (
             <>
               <ProfileInfo
                 isOwner={isOwner}
-                profile={props.profile}
-                updateStatus={props.updateStatus}
+                profile={profile}
+                updateStatus={updateStatus}
                 goToEditMode={() => setEditMode(true)}
                 onSendMessage={onSendMessage}
               />
-              <PostsContainer isOwner={isOwner} />
+              <Posts isOwner={isOwner} />
             </>
           )}
         </div>
@@ -89,21 +83,4 @@ const ProfileContainer: React.FC<PropsType> = (props) => {
   )
 }
 
-const mapStateToProps = (state: AppStateType) => ({
-  profile: state.profilePage.profile,
-  authorizedUserId: state.auth.userData.id,
-  isLoading: state.profilePage.isFetching,
-  chats: state.dialogsPage.chats
-})
-
-export default compose<React.FC>(
-  connect(mapStateToProps, {
-    getUserProfile,
-    updateStatus,
-    savePhoto,
-    saveProfile,
-    startChat,
-    getAllDialogs
-  }),
-  withRouter
-)(ProfileContainer)
+export default compose(withRouter)(Profile)

@@ -1,44 +1,31 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+
 import { NavLink } from 'react-router-dom'
 import cn from 'classnames'
-import { getUserProfile } from '../../redux/profile-reducer'
+
 import { logout } from '../../redux/auth-reducer'
 import { toggleBlackTheme, toggleDynamicBackground } from '../../redux/settings-reducer'
-import { AppStateType } from '../../redux'
-import { UserDataType } from '../../types/types'
-import s from './style.module.scss'
+import { StateType } from '../../redux'
+
 import reactIcon from '../../assets/images/reactIcon.png'
 import userPhoto from '../../assets/images/user.png'
 import userLogIcon from '../../assets/images/userLogIcon.png'
 
-export type PropsType = {
-  isAuth: boolean
-  userData: UserDataType
-  logout: () => void
-  isBlackThemeActivated: boolean
-  isDynamicBackgroundActivated: boolean
-  toggleBlackTheme: (theme: boolean) => void
-  toggleDynamicBackground: (theme: boolean) => void
-}
+import s from './style.module.scss'
 
-const Header: React.FC<PropsType> = ({
-  isAuth,
-  userData,
-  isBlackThemeActivated,
-  isDynamicBackgroundActivated,
-  logout,
-  toggleBlackTheme,
-  toggleDynamicBackground
-}) => {
+const Header: React.FC = () => {
   const [showMenu, setShowMenu] = useState(false)
+  const { isAuth, userData } = useSelector((state: StateType) => state.auth)
+  const { isBlackThemeActivated, isDynamicBackgroundActivated } = useSelector((state: StateType) => state.settings)
+  const dispatch = useDispatch()
 
   const showUserMenu = () => {
     setShowMenu(!showMenu)
   }
 
   const handleLogoutClick = () => {
-    logout()
+    dispatch(logout())
     setShowMenu(false)
   }
 
@@ -76,14 +63,14 @@ const Header: React.FC<PropsType> = ({
               <div className={s.theme}>
                 <span className={s.label}>Night theme</span>
                 <span
-                  onClick={() => toggleBlackTheme(isBlackThemeActivated)}
+                  onClick={() => dispatch(toggleBlackTheme(isBlackThemeActivated))}
                   className={cn({ [s.switchOn]: isBlackThemeActivated }, s.button)}
                 />
               </div>
               <div className={s.theme}>
                 <span className={s.label}>Dynamic background</span>
                 <span
-                  onClick={() => toggleDynamicBackground(isDynamicBackgroundActivated)}
+                  onClick={() => dispatch(toggleDynamicBackground(isDynamicBackgroundActivated))}
                   className={cn({ [s.switchOn]: isDynamicBackgroundActivated }, s.button)}
                 />
               </div>
@@ -98,16 +85,4 @@ const Header: React.FC<PropsType> = ({
   )
 }
 
-const mapStateToProps = (state: AppStateType) => ({
-  isAuth: state.auth.isAuth,
-  userData: state.auth.userData,
-  isBlackThemeActivated: state.settings.isBlackThemeActivated,
-  isDynamicBackgroundActivated: state.settings.isDynamicBackgroundActivated
-})
-
-export default connect(mapStateToProps, {
-  getUserProfile,
-  logout,
-  toggleBlackTheme,
-  toggleDynamicBackground
-})(Header)
+export default Header

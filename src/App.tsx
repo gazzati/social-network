@@ -1,46 +1,34 @@
 import React, { useEffect } from 'react'
 import { HashRouter, Redirect, Route, Switch, withRouter } from 'react-router-dom'
-import { connect, Provider } from 'react-redux'
+import { Provider, useDispatch, useSelector } from 'react-redux'
 import { compose } from 'redux'
 
-import store, { AppStateType } from './redux'
+import store, { StateType } from './redux'
 import { toggleBlackTheme, toggleDynamicBackground } from './redux/settings-reducer'
 import { getAuthUserData } from './redux/auth-reducer'
 
-import UsersContainer from './components/Users'
+import Users from './components/Users'
 import Navbar from './components/Navbar'
-import ProfileContainer from './components/Profile'
-import DialogsContainer from './components/Dialogs'
+import Profile from './components/Profile'
+import Dialogs from './components/Dialogs'
 import Header from './components/Header'
 import LoginPage from './components/Login'
 import Settings from './components/Settings'
-import NewsContainer from './components/News'
-import FollowContainer from './components/Follow'
+import News from './components/News'
+import Follow from './components/Follow'
 import BackgroundEffect from './components/BackgroundEffect'
 
 import './styles/index.scss'
 
-type PropsType = {
-  isAuth: boolean
-  isDynamicBackgroundActivated: boolean
-  authorizedUserId: string
-  getAuthUserData: () => boolean
-  toggleBlackTheme: (theme: boolean) => void
-  toggleDynamicBackground: (theme: boolean) => void
-}
+const App: React.FC = () => {
+  const { isAuth, userData } = useSelector((state: StateType) => state.auth)
+  const { isDynamicBackgroundActivated } = useSelector((state: StateType) => state.settings)
+  const dispatch = useDispatch()
 
-const App: React.FC<PropsType> = ({
-  isAuth,
-  isDynamicBackgroundActivated,
-  authorizedUserId,
-  getAuthUserData,
-  toggleBlackTheme,
-  toggleDynamicBackground
-}) => {
   useEffect(() => {
-    getAuthUserData()
-    toggleBlackTheme(localStorage.getItem('black-theme') === 'light')
-    toggleDynamicBackground(localStorage.getItem('dynamic-bg') === 'false')
+    dispatch(getAuthUserData())
+    dispatch(toggleBlackTheme(localStorage.getItem('black-theme') === 'light'))
+    dispatch(toggleDynamicBackground(localStorage.getItem('dynamic-bg') === 'false'))
   }, [])
 
   return (
@@ -51,26 +39,26 @@ const App: React.FC<PropsType> = ({
         <Navbar />
         <div className="wrapper">
           <Switch>
-            <Route path="/users" render={() => <UsersContainer />} />
+            <Route path="/users" render={() => <Users />} />
 
             <Route exact path="/settings" render={() => <Settings />} />
 
-            <Route path="/news" render={() => <NewsContainer />} />
+            <Route path="/news" render={() => <News />} />
 
             {!isAuth ? (
               <LoginPage />
             ) : (
               <>
-                <Route path="/profile::userId?" render={() => <ProfileContainer />} />
+                <Route path="/profile::userId?" render={() => <Profile />} />
 
-                <Route path="/dialogs/:chatId?" render={() => <DialogsContainer />} />
+                <Route path="/dialogs/:chatId?" render={() => <Dialogs />} />
 
-                <Route path="/following" render={() => <FollowContainer type="following" />} />
+                <Route path="/following" render={() => <Follow type="following" />} />
 
-                <Route path="/followers" render={() => <FollowContainer type="followers" />} />
+                <Route path="/followers" render={() => <Follow type="followers" />} />
 
                 <Route exact path="/">
-                  <Redirect to={`/profile:${authorizedUserId}`} />
+                  <Redirect to={`/profile:${userData.id}`} />
                 </Route>
               </>
             )}
@@ -81,16 +69,7 @@ const App: React.FC<PropsType> = ({
   )
 }
 
-const mapStateToProps = (state: AppStateType) => ({
-  isDynamicBackgroundActivated: state.settings.isDynamicBackgroundActivated,
-  isAuth: state.auth.isAuth,
-  authorizedUserId: state.auth.userData.id
-})
-
-const AppContainer = compose<React.FC>(
-  withRouter,
-  connect(mapStateToProps, { getAuthUserData, toggleBlackTheme, toggleDynamicBackground })
-)(App)
+const AppContainer = compose<React.FC>(withRouter)(App)
 
 const MainApp: React.FC = () => (
   <HashRouter>

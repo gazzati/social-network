@@ -1,19 +1,21 @@
 import React, { useState } from 'react'
-import s from './style.module.scss'
-import viewIco from '../../assets/images/view.svg'
+import { useDispatch } from 'react-redux'
+
+import { login } from '../../redux/auth-reducer'
 import { LoginFormValuesType } from '../../types/types'
 
-type PropsType = {
-  onSubmit: (data: LoginFormValuesType) => void
-}
+import viewIco from '../../assets/images/view.svg'
 
-const LoginForm: React.FC<PropsType> = ({ onSubmit }) => {
+import s from './style.module.scss'
+
+const LoginForm: React.FC = () => {
   const [data, setData] = useState<LoginFormValuesType>({ email: '', password: '' })
   const [showPassword, setShowPassword] = useState(false)
+  const dispatch = useDispatch()
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    onSubmit(data)
+    dispatch(login(data))
   }
 
   return (

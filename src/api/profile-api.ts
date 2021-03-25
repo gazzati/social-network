@@ -1,4 +1,4 @@
-import { PostType, ProfileType } from '../types/types'
+import { PostType, ProfileInfoType, ProfileType } from '../types/types'
 import { APIResponseType, instance } from '.'
 
 type SavePhotoResponseDataType = {
@@ -33,7 +33,7 @@ export const profileAPI = {
       })
       .then((res) => res.data)
   },
-  saveProfile(profile: ProfileType) {
+  saveProfile(profile: ProfileInfoType) {
     return instance.put<APIResponseType<ProfileType>>('profile', profile).then((res) => res.data)
   },
   addPost(text: string) {

@@ -1,24 +1,26 @@
 import React, { useState } from 'react'
-import s from './style.module.scss'
-import viewIco from '../../assets/images/view.svg'
+import { useDispatch } from 'react-redux'
+
 import { RegistrationFormValuesType } from '../../types/types'
+import { login } from '../../redux/auth-reducer'
 
-type PropsType = {
-  onSubmit: (data: RegistrationFormValuesType) => void
-}
+import viewIco from '../../assets/images/view.svg'
 
-const RegistrationForm: React.FC<PropsType> = ({ onSubmit }) => {
+import s from './style.module.scss'
+
+const RegistrationForm: React.FC = () => {
   const [data, setData] = useState<RegistrationFormValuesType>({
     email: '',
     name: '',
     surname: '',
     password: ''
   })
+  const dispatch = useDispatch()
   const [showPassword, setShowPassword] = useState(false)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    onSubmit(data)
+    dispatch(login(data))
   }
 
   return (

@@ -66,18 +66,6 @@ export const actions = {
     } as const)
 }
 
-// export const requestFriends = (page: number, pageSize: number): ThunkType => {
-//     return async (dispatch, getState) => {
-//         dispatch(actions.toggleIsFetching(true));   //???
-//         dispatch(actions.setCurrentPage(page))
-
-//         let data = await followApi.getFriends(page, pageSize)
-//         dispatch(actions.toggleIsFetching(false));
-//         dispatch(actions.setFriends(data.items));
-//         dispatch(actions.setTotalFriendsCount(data.totalCount))
-//     }
-// }
-
 export const getFollow = (type: 'followers' | 'following'): ThunkType => async (dispatch) => {
   dispatch(actions.toggleIsFetching(true))
   // dispatch(actions.setCurrentPage(page))

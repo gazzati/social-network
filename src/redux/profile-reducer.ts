@@ -1,5 +1,5 @@
 import { BaseThunkType, InferActionsTypes } from '.'
-import { PostType, ProfileType } from '../types/types'
+import { PostType, ProfileInfoType, ProfileType } from '../types/types'
 import { profileAPI } from '../api/profile-api'
 import { authActions } from './auth-reducer'
 
@@ -95,7 +95,7 @@ export const savePhoto = (file: File): ThunkType => async (dispatch) => {
   dispatch(actions.toggleIsFetching(false))
 }
 
-export const saveProfile = (profile: ProfileType): ThunkType => async (dispatch) => {
+export const saveProfile = (profile: ProfileInfoType): ThunkType => async (dispatch) => {
   dispatch(actions.toggleIsFetching(true))
   const res = await profileAPI.saveProfile(profile)
   if (res.resultCode === 0) {

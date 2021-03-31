@@ -11,6 +11,7 @@
     "@types/react-dom": "^16.9.6",
     "@types/react-redux": "^7.1.7",
     "@types/react-router-dom": "^5.1.5",
+    "@types/socket.io-client": "^1.4.36",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "gh-pages": "^2.2.0",
@@ -25,6 +26,7 @@
     "react-scripts": "4.0.3",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "socket.io-client": "^4.0.0",
     "typescript": "^3.8.3"
   },
   "scripts": {

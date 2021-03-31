@@ -13,6 +13,10 @@
   }
 }
 
+.disableClicking {
+  pointer-events: none;
+}
+
 .dialogsItems {
   min-width: 180px;
   overflow-x: hidden;
@@ -20,6 +24,13 @@
     width: 100%;
     padding: 8px 12px 8px 8px;
     scroll-margin-right: 5px;
+  }
+
+  & > span { //preloader
+    display: none;
+    @media screen and (max-width: 678px) {
+      display: block;
+    }
   }
 
   &::-webkit-scrollbar-track {
@@ -52,6 +63,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    position: relative;
     @media screen and (max-width: 678px) {
       width: 100%;
     }
@@ -74,6 +86,21 @@
       border-radius: 25px;
       margin-left: 5px;
     }
+  }
+
+  .unreadTicket {
+    display: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 20px;
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    background-color: #f81c1c;
+  }
+
+  .activeTicket {
+    display: block;
   }
 
   .activeDialogItem {

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { compose } from 'redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
-import classNames from 'classnames'
+import cn from 'classnames'
 
-import { getAllDialogs, sendMessage } from '../../redux/dialogs-reducer'
 import { StateType } from '../../redux'
+import { disconnect, sendMessage, connect, getChatsData } from '../../redux/dialogs-reducer'
 import formatDate from '../../helpers/formatDate'
 
 import leftIco from '../../assets/images/left-arrow.svg'
@@ -16,26 +16,34 @@ import AddMessageForm from './AddMessageForm'
 import Message from './Message'
 
 import s from './style.module.scss'
+import { MessageType } from '../../types/types'
 
-type PropsType = RouteComponentProps<{ chatId: string }>
+type PropsType = RouteComponentProps<{ chatId?: string }>
 
 const Dialogs: React.FC<PropsType> = ({ match }) => {
+  const { chatId } = match.params
   const { userData } = useSelector((state: StateType) => state.auth)
   const { chats, messages, isFetching } = useSelector((state: StateType) => state.dialogs)
+
   const dispatch = useDispatch()
 
-  const currentChat = match.params.chatId || 'all'
-  const [isCurrentChatChanged, setIsCurrentChatChanged] = useState(false)
+  const [isMessagesOpen, setIsMessagesOpen] = useState<boolean | null>(null)
 
-  const [isMessagesOpen, setIsMessagesOpen] = useState(currentChat !== 'all')
-  const currentUser = chats.filter((user) => user._id === currentChat)[0]
-  let haveTodayMessage = false
-
-  const authorizedUserId = userData.id || ''
+  const authorizedUserId = userData.id
+  const currentUser = chats.filter((chat) => chat._id === chatId)[0]
+  let hasTodayMessage = false
 
   useEffect(() => {
-    !chats.length && dispatch(getAllDialogs(currentChat))
+    dispatch(connect())
+
+    return () => {
+      dispatch(disconnect())
+    }
   }, [])
+
+  useEffect(() => {
+    dispatch(getChatsData(chatId))
+  }, [chatId])
 
   useEffect(() => {
     const lastMessage =
@@ -43,48 +51,44 @@ const Dialogs: React.FC<PropsType> = ({ match }) => {
     lastMessage && lastMessage.scrollIntoView()
   })
 
-  const setCurrentChat = (chatId: string) => {
-    if (!isCurrentChatChanged) {
-      setIsCurrentChatChanged(true)
-    }
-    if (chatId !== currentChat) {
-      dispatch(getAllDialogs(chatId))
-    }
-    setIsMessagesOpen(true)
-  }
-
   const messagesElements =
     Array.isArray(messages) &&
-    messages.map((m) => {
+    messages.map((message: MessageType) => {
       let isFirstToday = false
-      if (formatDate(m.date).isToday) {
-        isFirstToday = !haveTodayMessage
-        haveTodayMessage = true
+      if (formatDate(message.date).isToday) {
+        isFirstToday = !hasTodayMessage
+        hasTodayMessage = true
       }
-      return <Message key={m._id} message={m} isItMe={authorizedUserId === m.senderId} isFirstToday={isFirstToday} />
+      return (
+        <Message
+          key={message._id}
+          message={message}
+          isItMe={authorizedUserId === message.senderId}
+          isFirstToday={isFirstToday}
+        />
+      )
     })
 
   return (
-    <div className={s.dialogs}>
-      <div className={classNames(s.dialogsItems, { [s.openDialogsItems]: isMessagesOpen })}>
-        {!chats.length ? (
+    <div className={cn(s.dialogs, { [s.disableClicking]: isFetching })}>
+      <div className={cn(s.dialogsItems, { [s.openDialogsItems]: isMessagesOpen })}>
+        {isFetching && <Preloader />}
+        {!isFetching && !chats.length ? (
           <div className={s.noChats}>No chats</div>
         ) : (
-          chats.map((d, index) => (
+          chats.map((chat) => (
             <DialogItem
-              name={d.title}
-              key={d._id}
-              id={d._id}
-              photo={d.photo}
-              currentDialog={currentChat}
-              setCurrentChat={setCurrentChat}
-              defaultChecked={currentChat === 'all' && index === 0}
+              key={chat._id}
+              chat={chat}
+              currentDialog={chatId}
+              changeChat={() => setIsMessagesOpen(true)}
+              isUnread={!!userData.id && !!chat.isUnreadFor.length && chat.isUnreadFor.includes(userData.id)}
             />
           ))
         )}
       </div>
 
-      <div className={classNames(s.messages, { [s.openMessages]: isMessagesOpen })}>
+      <div className={cn(s.messages, { [s.openMessages]: isMessagesOpen })}>
         <div className={s.topBlock}>
           <img className={s.topBlockArrow} src={leftIco} alt="" onClick={() => setIsMessagesOpen(false)} />
           {currentUser && (
@@ -105,11 +109,9 @@ const Dialogs: React.FC<PropsType> = ({ match }) => {
             <div className={s.noMessages}>No messages</div>
           )}
         </ul>
-        <AddMessageForm
-          sendMessage={(messageText: string) =>
-            dispatch(sendMessage(currentChat !== 'all' ? currentChat : chats[0]._id, messageText))
-          }
-        />
+        {!isFetching && (
+          <AddMessageForm sendMessage={(messageText) => chatId && dispatch(sendMessage(chatId, messageText))} />
+        )}
       </div>
     </div>
   )

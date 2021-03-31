@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom'
 import { getFollow } from '../../redux/follow-reducer'
 import s from './style.module.scss'
 import { StateType } from '../../redux'
-import { getAllDialogs, startChat } from '../../redux/dialogs-reducer'
+import { getChatsData, startChat } from '../../redux/dialogs-reducer'
 import Preloader from '../common/Preloader'
 import FollowItem from './FollowItem'
 
@@ -31,7 +31,7 @@ const Follow: React.FC<PropsType> = ({ type }) => {
       await dispatch(startChat(userId))
       chatId = newChatId
     } else {
-      dispatch(getAllDialogs(chatId))
+      dispatch(getChatsData(chatId))
     }
     history.push(`dialogs/${chatId}`)
   }

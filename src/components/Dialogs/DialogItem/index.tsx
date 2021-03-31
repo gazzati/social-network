@@ -1,33 +1,30 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import s from '../style.module.scss'
+import cn from 'classnames'
+
+import { ChatType } from '../../../types/types'
+
 import userPhoto from '../../../assets/images/user.png'
 
+import s from '../style.module.scss'
+
 type PropsType = {
-  id: string
-  name: string
-  photo: string | null
-  currentDialog: string
-  setCurrentChat: (chatId: string) => void
-  defaultChecked?: boolean
-  /* hasNewMessage: boolean
-    newMessagesCount: number */
+  chat: ChatType
+  currentDialog?: string
+  changeChat: () => void
+  isUnread?: boolean
 }
 
-const DialogItem: React.FC<PropsType> = (props) => {
-  const className =
-    props.currentDialog === props.id
-      ? `${s.item} ${s.activeDialogItem}`
-      : props.defaultChecked
-        ? `${s.item} ${s.activeDialogItem}`
-        : s.item
-
-  return (
-    <NavLink to={`/dialogs/${props.id}`} className={className} onClick={() => props.setCurrentChat(props.id)}>
-      <img src={props.photo || userPhoto} alt="" />
-      <div className={s.userName}>{props.name}</div>
-    </NavLink>
-  )
-}
+const DialogItem: React.FC<PropsType> = ({ chat, currentDialog, changeChat, isUnread }) => (
+  <NavLink
+    to={`/dialogs/${chat._id}`}
+    className={cn(s.item, { [s.activeDialogItem]: currentDialog === chat._id })}
+    onClick={changeChat}
+  >
+    <img src={chat.photo || userPhoto} alt="" />
+    <div className={s.userName}>{chat.title}</div>
+    <div className={cn(s.unreadTicket, { [s.activeTicket]: isUnread })} />
+  </NavLink>
+)
 
 export default DialogItem

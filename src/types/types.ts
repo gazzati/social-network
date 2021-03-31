@@ -71,18 +71,13 @@ export type ChatType = {
   participants: string[]
   title: string
   photo: string
-  // isGroup: boolean
   messages: MessageType[]
+  isUnreadFor: string[]
+  updatedAt: string
 }
 export type MessageType = {
   _id: string
   text: string
   senderId: string
   date: string
-}
-
-export type ChatsAndMessagesType = {
-  chats: ChatType[]
-  messages: MessageType[] | 'no choose'
-  newChatId?: string
 }

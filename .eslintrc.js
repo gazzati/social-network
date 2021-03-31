@@ -27,6 +27,7 @@ module.exports = {
         "semi": ["error", "never"],
         "quotes": ["error", "single"],
         'max-len': ["error", { "code": 150 }],
+        "arrow-body-style": "off",
         "react/prop-types": "off",
         "react/destructuring-assignment": "off",
         "react/jsx-filename-extension": [

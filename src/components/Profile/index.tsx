@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { compose } from 'redux'
 import { RouteComponentProps, useHistory, withRouter } from 'react-router-dom'
 
-import { getAllDialogs, startChat } from '../../redux/dialogs-reducer'
+import { getChatsData, startChat } from '../../redux/dialogs-reducer'
 import { getUserProfile, savePhoto, saveProfile, updateStatus } from '../../redux/profile-reducer'
 import { StateType } from '../../redux'
 import { ProfileInfoType, ProfileType } from '../../types/types'
@@ -45,7 +45,7 @@ const Profile: React.FC<PropsType> = ({ match }) => {
       await startChat(profile._id)
       chatId = newChatId
     } else {
-      getAllDialogs(chatId)
+      dispatch(getChatsData(chatId))
     }
 
     history.push(`dialogs/${chatId}`)

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { StateType } from '../../../redux'
-import { addPost, addLikes, deletePost } from '../../../redux/profile-reducer'
+import { StateType } from 'src/redux'
+import { addPost, addLikes, deletePost } from 'src/redux/profile'
 
 import Post from './Post'
 

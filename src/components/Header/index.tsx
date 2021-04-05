@@ -3,13 +3,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import cn from 'classnames'
 
-import { logout } from '../../redux/auth-reducer'
-import { toggleBlackTheme, toggleDynamicBackground } from '../../redux/settings-reducer'
-import { StateType } from '../../redux'
+import { logout } from 'src/redux/auth'
+import { toggleBlackTheme, toggleDynamicBackground } from 'src/redux/settings'
+import { StateType } from 'src/redux'
 
-import reactIcon from '../../assets/images/reactIcon.png'
-import userPhoto from '../../assets/images/user.png'
-import userLogIcon from '../../assets/images/userLogIcon.png'
+import reactIcon from 'src/assets/images/reactIcon.png'
+import userPhoto from 'src/assets/images/user.png'
+import userLogIcon from 'src/assets/images/userLogIcon.png'
 
 import s from './style.module.scss'
 

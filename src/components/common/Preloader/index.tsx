@@ -1,6 +1,6 @@
 import React from 'react'
-import preloader from '../../../assets/images/preloader.svg'
-import preloaderMini from '../../../assets/images/preloaderMini.svg'
+import preloader from 'src/assets/images/preloader.svg'
+import preloaderMini from 'src/assets/images/preloaderMini.svg'
 
 const Preloader: React.FC = () => (
   <span className="preloader">

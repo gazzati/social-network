@@ -2,12 +2,14 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-import { getFollow } from '../../redux/follow-reducer'
-import s from './style.module.scss'
-import { StateType } from '../../redux'
-import { getChatsData, startChat } from '../../redux/dialogs-reducer'
-import Preloader from '../common/Preloader'
+import { getFollow } from 'src/redux/follow'
+import { StateType } from 'src/redux'
+import { getChatsData, startChat } from 'src/redux/dialogs'
+
+import Preloader from 'src/components/common/Preloader'
 import FollowItem from './FollowItem'
+
+import s from './style.module.scss'
 
 type PropsType = {
   type: 'followers' | 'following'

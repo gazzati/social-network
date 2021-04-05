@@ -4,19 +4,20 @@ import { compose } from 'redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import cn from 'classnames'
 
-import { StateType } from '../../redux'
-import { disconnect, sendMessage, connect, getChatsData } from '../../redux/dialogs-reducer'
-import formatDate from '../../helpers/formatDate'
+import { StateType } from 'src/redux'
+import { disconnect, sendMessage, connect, getChatsData } from 'src/redux/dialogs'
+import { MessageType } from 'src/types/types'
+import formatDate from 'src/helpers/formatDate'
 
-import leftIco from '../../assets/images/left-arrow.svg'
-import DialogItem from './DialogItem'
-import userPhoto from '../../assets/images/user.png'
-import Preloader from '../common/Preloader'
+import leftIco from 'src/assets/images/left-arrow.svg'
+
+import userPhoto from 'src/assets/images/user.png'
+import Preloader from 'src/components/common/Preloader'
 import AddMessageForm from './AddMessageForm'
 import Message from './Message'
+import DialogItem from './DialogItem'
 
 import s from './style.module.scss'
-import { MessageType } from '../../types/types'
 
 type PropsType = RouteComponentProps<{ chatId?: string }>
 

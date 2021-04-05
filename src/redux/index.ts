@@ -1,22 +1,16 @@
 import { Action, applyMiddleware, combineReducers, compose, createStore } from 'redux'
 import thunkMiddleware, { ThunkAction } from 'redux-thunk'
-import profileReducer from './profile-reducer'
-import dialogsReducer from './dialogs-reducer'
-import usersReducer from './users-reducer'
-import authReducer from './auth-reducer'
-import newsReducer from './news-reducer'
-import settingsReducer from './settings-reducer'
-import followReducer from './follow-reducer'
 
-const rootReducer = combineReducers({
-  profile: profileReducer,
-  dialogs: dialogsReducer,
-  users: usersReducer,
-  auth: authReducer,
-  news: newsReducer,
-  settings: settingsReducer,
-  follow: followReducer
-})
+import app from './app'
+import profile from './profile'
+import dialogs from './dialogs'
+import users from './users'
+import auth from './auth'
+import news from './news'
+import settings from './settings'
+import follow from './follow'
+
+const rootReducer = combineReducers({ app, profile, dialogs, users, auth, news, settings, follow })
 
 type RootReducerType = typeof rootReducer // (globalstate: StateType) => AppStateType
 export type StateType = ReturnType<RootReducerType>

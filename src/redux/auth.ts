@@ -1,7 +1,8 @@
-import { instance, ResultCodeEnum } from '../api'
-import { authAPI } from '../api/auth-api'
+import { instance, ResultCodeEnum } from 'src/api'
+import { authAPI } from 'src/api/auth-api'
+import { LoginFormValuesType, RegistrationFormValuesType, UserDataType } from 'src/types/types'
 import { BaseThunkType, InferActionsTypes } from '.'
-import { LoginFormValuesType, RegistrationFormValuesType, UserDataType } from '../types/types'
+import { addNotification } from './app'
 
 const initialState = {
   userData: {
@@ -14,7 +15,7 @@ const initialState = {
   isFetching: false as boolean
 }
 
-const authReducer = (state = initialState, action: ActionsType): initialStateType => {
+const auth = (state = initialState, action: ActionsType): initialStateType => {
   switch (action.type) {
     case 'auth/SET_USER_DATA': {
       return {
@@ -65,8 +66,12 @@ export const login = (data: LoginFormValuesType): ThunkType => async (dispatch) 
     instance.defaults.headers.authToken = res.data.authToken
     localStorage.setItem('authToken', res.data.authToken)
     dispatch(authActions.setAuthUserData(res.data.userData, true))
-    dispatch(authActions.toggleIsFetching(false))
+    dispatch(addNotification('success', res.message))
+  } else {
+    dispatch(addNotification('error', res.message))
   }
+
+  dispatch(authActions.toggleIsFetching(false))
 }
 
 export const registration = (data: RegistrationFormValuesType): ThunkType => async (dispatch) => {
@@ -76,13 +81,15 @@ export const registration = (data: RegistrationFormValuesType): ThunkType => asy
     instance.defaults.headers.authToken = res.data.authToken
     localStorage.setItem('authToken', res.data.authToken)
     dispatch(authActions.setAuthUserData(res.data.userData, true))
+    dispatch(addNotification('success', res.message))
   }
+  dispatch(addNotification('error', res.message))
   dispatch(authActions.toggleIsFetching(false))
 }
 
 export const logout = (): ThunkType => async (dispatch) => {
-  const response = await authAPI.logout()
-  if (response.data.resultCode === 0) {
+  const res = await authAPI.logout()
+  if (res.resultCode === ResultCodeEnum.Success) {
     instance.defaults.headers.authToken = ''
     localStorage.removeItem('authToken')
     dispatch(
@@ -96,11 +103,12 @@ export const logout = (): ThunkType => async (dispatch) => {
         false
       )
     )
+    dispatch(addNotification('success', res.message))
     window.location.reload()
   }
 }
 
-export default authReducer
+export default auth
 
 type initialStateType = typeof initialState
 type ActionsType = InferActionsTypes<typeof authActions>

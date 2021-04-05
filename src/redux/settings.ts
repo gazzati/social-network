@@ -6,7 +6,7 @@ const initialState = {
   isDynamicBackgroundActivated: false
 }
 
-const settingsReducer = (state = initialState, action: any): InitialState => {
+const settings = (state = initialState, action: any): InitialState => {
   switch (action.type) {
     case TOGGLE_BLACK_THEME: {
       const theme = action.theme ? 'light' : 'dark'
@@ -40,6 +40,6 @@ export const toggleDynamicBackground = (theme: boolean): ToggleDynamicBackground
   theme
 })
 
-export default settingsReducer
-
 type InitialState = typeof initialState
+
+export default settings

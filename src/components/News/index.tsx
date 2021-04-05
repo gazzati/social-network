@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { StateType } from '../../redux'
-import { getNews } from '../../redux/news-reducer'
+import { StateType } from 'src/redux'
+import { getNews } from 'src/redux/news'
 
-import Paginator from '../common/Paginator'
-import Preloader from '../common/Preloader'
+import Paginator from 'src/components/common/Paginator'
+import Preloader from 'src/components/common/Preloader'
 import NewsItem from './NewsItem'
 
 import s from './style.module.scss'

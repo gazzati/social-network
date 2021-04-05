@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import cn from 'classnames'
-import leftArrowIcon from '../../../assets/images/exit.png'
-import rightArrowIcon from '../../../assets/images/rightArrowIcon.svg'
+import leftArrowIcon from 'src/assets/images/exit.png'
+import rightArrowIcon from 'src/assets/images/rightArrowIcon.svg'
 
-import styles from './Paginator.module.scss'
+import styles from './style.module.scss'
 
 type PropsType = {
   totalItemsCount: number

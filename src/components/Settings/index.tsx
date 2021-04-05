@@ -2,8 +2,8 @@ import React from 'react'
 import cn from 'classnames'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { toggleBlackTheme, toggleDynamicBackground } from '../../redux/settings-reducer'
-import { StateType } from '../../redux'
+import { toggleBlackTheme, toggleDynamicBackground } from 'src/redux/settings'
+import { StateType } from 'src/redux'
 
 import s from './style.module.scss'
 

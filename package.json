@@ -20,6 +20,7 @@
     "react": "^16.6.3",
     "react-color": "^2.18.1",
     "react-dom": "^16.6.3",
+    "react-id-generator": "^3.0.1",
     "react-particles-js": "^3.4.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",

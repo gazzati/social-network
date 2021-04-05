@@ -1,7 +1,8 @@
 import update from 'immutability-helper'
-import { ProfileType } from '../types/types'
+
+import { ProfileType } from 'src/types/types'
+import { usersAPI, FollowUnfollow } from 'src/api/users-api'
 import { BaseThunkType, InferActionsTypes } from '.'
-import { usersAPI, FollowUnfollow } from '../api/users-api'
 
 const initialState = {
   users: [] as Array<ProfileType>,
@@ -12,7 +13,7 @@ const initialState = {
   followingInProgress: [] as Array<string>
 }
 
-const usersReducer = (state = initialState, action: ActionsTypes): InitialState => {
+const users = (state = initialState, action: ActionsTypes): InitialState => {
   switch (action.type) {
     case 'users/SET_USERS': {
       return { ...state, users: action.data }
@@ -128,8 +129,8 @@ export const resetCurrentPage = (): ThunkType => async (dispatch) => {
   dispatch(actions.resetCurrentPage())
 }
 
-export default usersReducer
-
 type InitialState = typeof initialState
 type ThunkType = BaseThunkType<ActionsTypes>
 type ActionsTypes = InferActionsTypes<typeof actions>
+
+export default users

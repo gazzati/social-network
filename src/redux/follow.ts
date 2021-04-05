@@ -1,8 +1,8 @@
-import { ProfileType } from '../types/types'
+import { ProfileType } from 'src/types/types'
+import { followApi } from 'src/api/follow-api'
+import { usersAPI } from 'src/api/users-api'
+import { ResultCodeEnum } from 'src/api'
 import { BaseThunkType, InferActionsTypes } from '.'
-import { followApi } from '../api/follow-api'
-import { usersAPI } from '../api/users-api'
-import { ResultCodeEnum } from '../api'
 
 const initialState = {
   following: [] as ProfileType[],
@@ -14,7 +14,7 @@ const initialState = {
   unfollowingInProgress: [] as Array<string> // array of users ids
 }
 
-const followReducer = (state = initialState, action: ActionsTypes): InitialState => {
+const follow = (state = initialState, action: ActionsTypes): InitialState => {
   switch (action.type) {
     case 'follow/SET_FOLLOWING': {
       return { ...state, following: action.following }
@@ -99,7 +99,7 @@ export const unfollow = (userId: string): ThunkType => async (dispatch) => {
   dispatch(actions.toggleIsFetching(false))
 }
 
-export default followReducer
+export default follow
 
 type InitialState = typeof initialState
 type ThunkType = BaseThunkType<ActionsTypes>

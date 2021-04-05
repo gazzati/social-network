@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { requestUsers, resetCurrentPage, follow, unfollow } from '../../redux/users-reducer'
-import { StateType } from '../../redux'
+import { requestUsers, resetCurrentPage, follow, unfollow } from 'src/redux/users'
+import { StateType } from 'src/redux'
 
-import Preloader from '../common/Preloader'
+import Preloader from 'src/components/common/Preloader'
+import Paginator from 'src/components/common/Paginator'
 import User from './User'
-import Paginator from '../common/Paginator'
 
 import s from './style.module.scss'
 

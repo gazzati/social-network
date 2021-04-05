@@ -48,6 +48,7 @@ module.exports = {
         "import/extensions": "off",
         "import/no-cycle": "off",
         'import/prefer-default-export': 'off',
+        'import/no-unresolved': 'off',
         "no-underscore-dangle": 'off',
         "no-unused-expressions": [
             "error",

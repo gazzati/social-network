@@ -1,3 +1,15 @@
+export type Notification = {
+  id: string
+  type: 'error' | 'success' | 'info'
+  message: string
+}
+
+export enum NotificationType {
+  success = 'success',
+  info = 'info',
+  error = 'error'
+}
+
 export type LoginFormValuesType = {
   email: string
   password: string

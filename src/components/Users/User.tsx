@@ -2,8 +2,8 @@ import React, { FC } from 'react'
 import { NavLink } from 'react-router-dom'
 import cn from 'classnames'
 
-import { ProfileType } from '../../types/types'
-import userPhoto from '../../assets/images/user.png'
+import { ProfileType } from 'src/types/types'
+import userPhoto from 'src/assets/images/user.png'
 
 import s from './style.module.scss'
 

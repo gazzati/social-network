@@ -1,7 +1,8 @@
+import { PostType, ProfileInfoType, ProfileType } from 'src/types/types'
+import { profileAPI } from 'src/api/profile-api'
+import { authActions } from './auth'
+import { addNotification } from './app'
 import { BaseThunkType, InferActionsTypes } from '.'
-import { PostType, ProfileInfoType, ProfileType } from '../types/types'
-import { profileAPI } from '../api/profile-api'
-import { authActions } from './auth-reducer'
 
 const initialState = {
   profile: {
@@ -17,7 +18,7 @@ const initialState = {
   isFetching: true
 }
 
-const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
+const profile = (state = initialState, action: ActionsType): InitialStateType => {
   switch (action.type) {
     case 'profile/SET_STATUS': {
       return {
@@ -100,8 +101,11 @@ export const saveProfile = (profile: ProfileInfoType): ThunkType => async (dispa
   const res = await profileAPI.saveProfile(profile)
   if (res.resultCode === 0) {
     dispatch(actions.setUserProfile(res.data))
-    dispatch(actions.toggleIsFetching(false))
+    dispatch(addNotification('success', res.message))
+  } else {
+    dispatch(addNotification('error', res.message))
   }
+  dispatch(actions.toggleIsFetching(false))
 }
 
 export const addPost = (text: string): ThunkType => async (dispatch) => {
@@ -119,8 +123,8 @@ export const deletePost = (postId: string): ThunkType => async (dispatch) => {
   dispatch(actions.deletePostActionCreator(res.data.postId))
 }
 
-export default profileReducer
-
 export type InitialStateType = typeof initialState
 type ActionsType = InferActionsTypes<typeof actions>
 type ThunkType = BaseThunkType<ActionsType>
+
+export default profile

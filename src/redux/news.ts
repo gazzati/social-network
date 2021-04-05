@@ -1,7 +1,7 @@
 import { ThunkAction } from 'redux-thunk'
-import { NewsType } from '../types/types'
+import { NewsType } from 'src/types/types'
+import { getNewsData } from 'src/api/news-api'
 import { StateType, InferActionsTypes } from '.'
-import { getNewsData } from '../api/news-api'
 
 const initialState = {
   news: [] as Array<NewsType>,
@@ -14,7 +14,7 @@ const initialState = {
 
 type InitialState = typeof initialState
 
-const newsReducer = (state = initialState, action: ActionsTypes): InitialState => {
+const news = (state = initialState, action: ActionsTypes): InitialState => {
   switch (action.type) {
     case 'SET_NEWS':
       return {
@@ -61,4 +61,4 @@ export const getNews = (page: number, pageSize: number, category: string): Thunk
   dispatch(actions.toggleIsFetching(false))
 }
 
-export default newsReducer
+export default news

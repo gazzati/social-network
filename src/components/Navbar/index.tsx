@@ -2,8 +2,8 @@ import React from 'react'
 import { NavLink, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { logout } from '../../redux/auth-reducer'
-import { StateType } from '../../redux'
+import { logout } from 'src/redux/auth'
+import { StateType } from 'src/redux'
 
 import { DialogsIco, FollowersIco, FollowingIco, NewsIco, ProfileIco, SettingsIco, SignOut, UsersIco } from './Icons'
 

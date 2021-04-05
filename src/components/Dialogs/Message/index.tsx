@@ -1,6 +1,6 @@
 import React from 'react'
-import { MessageType } from '../../../types/types'
-import formatDate from '../../../helpers/formatDate'
+import { MessageType } from 'src/types/types'
+import formatDate from 'src/helpers/formatDate'
 
 import s from '../style.module.scss'
 

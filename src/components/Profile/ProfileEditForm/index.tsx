@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
+
+import { ProfileInfoType, ProfileType } from 'src/types/types'
+
+import userPhoto from 'src/assets/images/user.png'
+import Preloader from 'src/components/common/Preloader'
+
 import s from './style.module.scss'
-import userPhoto from '../../../assets/images/user.png'
-import { ProfileInfoType, ProfileType } from '../../../types/types'
-import Preloader from '../../common/Preloader'
 
 type PropsType = {
   profile: ProfileType

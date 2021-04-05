@@ -1,9 +1,10 @@
 import React from 'react'
 
-import { ContactsType, ProfileInfoType } from '../../../types/types'
+import { ContactsType, ProfileInfoType } from 'src/types/types'
+
+import Contact from './Contact'
 
 import s from '../style.module.scss'
-import Contact from './Contact'
 
 type ProfileDescriptionType = {
   info: ProfileInfoType

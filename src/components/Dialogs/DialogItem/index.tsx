@@ -2,9 +2,9 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import cn from 'classnames'
 
-import { ChatType } from '../../../types/types'
+import { ChatType } from 'src/types/types'
 
-import userPhoto from '../../../assets/images/user.png'
+import userPhoto from 'src/assets/images/user.png'
 
 import s from '../style.module.scss'
 

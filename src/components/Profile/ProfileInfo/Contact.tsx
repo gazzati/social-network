@@ -1,12 +1,13 @@
 import React from 'react'
 
+import github from 'src/assets/images/contacts/github.svg'
+import vk from 'src/assets/images/contacts/vk.svg'
+import facebook from 'src/assets/images/contacts/facebook.svg'
+import instagram from 'src/assets/images/contacts/instagram.svg'
+import twitter from 'src/assets/images/contacts/twitter.svg'
+import youtube from 'src/assets/images/contacts/youtube.svg'
+
 import s from '../style.module.scss'
-import github from '../../../assets/images/contacts/github.svg'
-import vk from '../../../assets/images/contacts/vk.svg'
-import facebook from '../../../assets/images/contacts/facebook.svg'
-import instagram from '../../../assets/images/contacts/instagram.svg'
-import twitter from '../../../assets/images/contacts/twitter.svg'
-import youtube from '../../../assets/images/contacts/youtube.svg'
 
 type ContactPropsType = {
   contactTitle: string

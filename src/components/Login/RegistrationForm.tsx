@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { RegistrationFormValuesType } from '../../types/types'
-import { registration } from '../../redux/auth-reducer'
+import { RegistrationFormValuesType } from 'src/types/types'
+import { registration } from 'src/redux/auth'
 
-import viewIco from '../../assets/images/view.svg'
+import viewIco from 'src/assets/images/view.svg'
 
 import s from './style.module.scss'
 

@@ -4,8 +4,8 @@ import { Provider, useDispatch, useSelector } from 'react-redux'
 import { compose } from 'redux'
 
 import store, { StateType } from './redux'
-import { toggleBlackTheme, toggleDynamicBackground } from './redux/settings-reducer'
-import { getAuthUserData } from './redux/auth-reducer'
+import { toggleBlackTheme, toggleDynamicBackground } from './redux/settings'
+import { getAuthUserData } from './redux/auth'
 
 import Users from './components/Users'
 import Navbar from './components/Navbar'
@@ -16,7 +16,8 @@ import LoginPage from './components/Login'
 import Settings from './components/Settings'
 import News from './components/News'
 import Follow from './components/Follow'
-import BackgroundEffect from './components/BackgroundEffect'
+import BackgroundEffect from './components/common/BackgroundEffect'
+import Notification from './components/common/Notification'
 
 import './styles/index.scss'
 
@@ -34,6 +35,7 @@ const App: React.FC = () => {
   return (
     <>
       {isDynamicBackgroundActivated && <BackgroundEffect />}
+      <Notification />
       <Header />
       <main>
         <Navbar />

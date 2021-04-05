@@ -1,7 +1,7 @@
 import io from 'socket.io-client'
 
+import { ChatType, MessageType } from 'src/types/types'
 import { BaseThunkType, InferActionsTypes } from '.'
-import { ChatType, MessageType } from '../types/types'
 
 const socket = io('https://gazzati-sc-backend.herokuapp.com', {
   auth: {
@@ -16,7 +16,7 @@ const initialState = {
   isFetching: false
 }
 
-const dialogsReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
+const dialogs = (state = initialState, action: ActionsTypes): InitialStateType => {
   switch (action.type) {
     case 'dialogs/SET_CHATS': {
       return {
@@ -51,7 +51,7 @@ export const actions = {
   toggleIsFetching: (isFetching: boolean) => ({ type: 'dialogs/TOGGLE_IS_FETCHING', isFetching } as const)
 }
 
-export default dialogsReducer
+export default dialogs
 
 export type InitialStateType = typeof initialState
 type ActionsTypes = InferActionsTypes<typeof actions>
@@ -61,7 +61,6 @@ export const connect = (): ThunkType => async (dispatch) => {
   socket.connect()
 
   socket.on('chats', (chats: ChatType[]) => {
-    console.log(chats)
     dispatch(actions.setChats(chats))
     dispatch(actions.toggleIsFetching(false))
   })

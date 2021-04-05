@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { GithubPicker } from 'react-color'
 
-import { ProfileType } from '../../../types/types'
+import { ProfileType } from 'src/types/types'
 
-import userPhoto from '../../../assets/images/user.png'
+import userPhoto from 'src/assets/images/user.png'
 import ProfileStatus from './ProfileStatus'
 
 import s from '../style.module.scss'

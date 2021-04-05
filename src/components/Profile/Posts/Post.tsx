@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { ProfileType } from '../../../types/types'
-import formatDate from '../../../helpers/formatDate'
+import { ProfileType } from 'src/types/types'
+import formatDate from 'src/helpers/formatDate'
 
-import userPhoto from '../../../assets/images/user.png'
-import likeIcon from '../../../assets/images/like.png'
-import removePost from '../../../assets/images/removePost.svg'
+import userPhoto from 'src/assets/images/user.png'
+import likeIcon from 'src/assets/images/like.png'
+import removePost from 'src/assets/images/removePost.svg'
 
 import s from './style.module.scss'
 

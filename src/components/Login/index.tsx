@@ -1,9 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-import { StateType } from '../../redux'
+import { StateType } from 'src/redux'
 
-import Preloader from '../common/Preloader'
+import Preloader from 'src/components/common/Preloader'
 import LoginForm from './LoginForm'
 import RegistrationForm from './RegistrationForm'
 

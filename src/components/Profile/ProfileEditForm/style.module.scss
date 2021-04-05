@@ -131,6 +131,18 @@
 .contacts {
   display: flex;
   flex-wrap: wrap;
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--b-w-text-color);
+  }
+
+  p {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--b-w-text-color);
+  }
 }
 
 .contactsItem {
@@ -156,18 +168,6 @@
 
 .saveBtn {
   margin-left: 16px;
-}
-
-h3 {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--b-w-text-color);
-}
-
-p {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--b-w-text-color);
 }
 
 @media (max-width: 600px) {

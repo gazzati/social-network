@@ -2,10 +2,10 @@ import React, { FC } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-import { ProfileType } from '../../types/types'
-import { unfollow } from '../../redux/follow-reducer'
+import { ProfileType } from 'src/types/types'
+import { unfollow } from 'src/redux/follow'
 
-import userPhoto from '../../assets/images/user.png'
+import userPhoto from 'src/assets/images/user.png'
 
 import s from './style.module.scss'
 

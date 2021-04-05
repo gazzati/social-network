@@ -3,7 +3,8 @@ import io from 'socket.io-client'
 import { ChatType, MessageType } from 'src/types/types'
 import { BaseThunkType, InferActionsTypes } from '.'
 
-const socket = io('https://gazzati-sc-backend.herokuapp.com', {
+const socket = io('https://gazzati-social-network-socket.herokuapp.com', {
+  // const socket = io('http://localhost:8001', {
   auth: {
     token: localStorage.getItem('authToken')
   }

@@ -9,7 +9,8 @@ const initialState = {
     id: null,
     name: null,
     surname: null,
-    photo: null
+    photo: null,
+    isMale: true
   } as UserDataType,
   isAuth: false,
   isFetching: false as boolean
@@ -70,7 +71,6 @@ export const login = (data: LoginFormValuesType): ThunkType => async (dispatch) 
   } else {
     dispatch(addNotification('error', res.message))
   }
-
   dispatch(authActions.toggleIsFetching(false))
 }
 
@@ -82,8 +82,9 @@ export const registration = (data: RegistrationFormValuesType): ThunkType => asy
     localStorage.setItem('authToken', res.data.authToken)
     dispatch(authActions.setAuthUserData(res.data.userData, true))
     dispatch(addNotification('success', res.message))
+  } else {
+    dispatch(addNotification('error', res.message))
   }
-  dispatch(addNotification('error', res.message))
   dispatch(authActions.toggleIsFetching(false))
 }
 
@@ -98,7 +99,8 @@ export const logout = (): ThunkType => async (dispatch) => {
           id: null,
           name: null,
           surname: null,
-          photo: null
+          photo: null,
+          isMale: true
         },
         false
       )

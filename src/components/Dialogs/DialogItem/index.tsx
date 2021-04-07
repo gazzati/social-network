@@ -21,7 +21,7 @@ const DialogItem: React.FC<PropsType> = ({ chat, currentDialog, changeChat, isUn
     className={cn(s.item, { [s.activeDialogItem]: currentDialog === chat._id })}
     onClick={changeChat}
   >
-    <img src={chat.photo || userPhoto} alt="" />
+    <img src={chat.photo || userPhoto} alt="" className={cn(s.photo, { [s.malePhoto]: chat.isMale })} />
     <div className={s.userName}>{chat.title}</div>
     <div className={cn(s.unreadTicket, { [s.activeTicket]: isUnread })} />
   </NavLink>

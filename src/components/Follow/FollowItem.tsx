@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import cn from 'classnames'
 
 import { ProfileType } from 'src/types/types'
 import { unfollow } from 'src/redux/follow'
@@ -23,7 +24,11 @@ const FollowItem: FC<PropsType> = ({ user, unfollowingInProgress, onSendMessage,
     <div className={s.followItem}>
       <div>
         <NavLink to={`profile:${user._id}`}>
-          <img src={user.photo?.url ? user.photo?.url : userPhoto} className={s.photo} alt="" />
+          <img
+            src={user.photo?.url ? user.photo?.url : userPhoto}
+            className={cn(s.photo, { [s.malePhoto]: user.info.isMale })}
+            alt=""
+          />
         </NavLink>
       </div>
       <div className={s.descriptionUser}>

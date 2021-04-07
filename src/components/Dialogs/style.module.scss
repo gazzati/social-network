@@ -79,12 +79,16 @@
       outline: none;
     }
 
-    img {
+    .photo {
       width: 40px;
       margin-right: 10px;
-      border: solid 2px #61dafb;
+      border: solid 2px var(--female-color);
       border-radius: 25px;
       margin-left: 5px;
+    }
+
+    .malePhoto {
+      border: solid 2px var(--male-color);
     }
   }
 

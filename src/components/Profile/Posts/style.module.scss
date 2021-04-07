@@ -40,8 +40,12 @@
         .userPhoto {
           width: 36px;
           height: 36px;
-          border: solid 2px #61dafb;
+          border: solid 2px var(--female-color);
           border-radius: 25px;
+        }
+
+        .malePhoto {
+          border: solid 2px var(--male-color);
         }
 
         .userDescription {

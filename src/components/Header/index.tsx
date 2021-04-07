@@ -28,7 +28,7 @@ const Header: React.FC = () => {
     <div className={s.header}>
       <div className={s.headerWrap}>
         <div className={s.mainIcon}>
-          <NavLink to="/profile/" className={s.logoLink}>
+          <NavLink to={`/profile${userData.id ? `:${userData.id}` : ''}`} className={s.logoLink}>
             <img src={reactIcon} alt="" className={s.logo} />
           </NavLink>
           <p className={s.title}>
@@ -41,7 +41,11 @@ const Header: React.FC = () => {
             {isAuth ? (
               <span className={s.isAuthUserBlock}>
                 <span className={s.userLogName}>{`${userData.name} ${userData.surname}`}</span>
-                <img className={s.userPhoto} src={userData.photo || userPhoto} alt="" />
+                <img
+                  className={cn(s.userPhoto, { [s.malePhoto]: userData.isMale })}
+                  src={userData.photo || userPhoto}
+                  alt=""
+                />
                 <img className={s.function} src={userLogIcon} alt="" onClick={() => setShowMenu(!showMenu)} />
               </span>
             ) : (

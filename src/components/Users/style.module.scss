@@ -48,7 +48,11 @@
   height: 100px;
   margin-right: 20px;
   border-radius: 60px;
-  border: solid 2px #61dafb;
+  border: solid 2px var(--female-color);
+}
+
+.malePhoto {
+  border: solid 2px var(--male-color);
 }
 
 .fol {

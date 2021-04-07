@@ -1,7 +1,7 @@
 import { PostType, ProfileInfoType, ProfileType } from 'src/types/types'
 import { profileAPI } from 'src/api/profile-api'
-import { authActions } from './auth'
 import { addNotification } from './app'
+import { authActions } from './auth'
 import { BaseThunkType, InferActionsTypes } from '.'
 
 const initialState = {
@@ -91,7 +91,7 @@ export const savePhoto = (file: File): ThunkType => async (dispatch) => {
   dispatch(actions.toggleIsFetching(true))
   const data = await profileAPI.savePhoto(file)
   dispatch(actions.savePhotoSuccess(data.data.photo))
-  // @ts-ignore
+  // @ts-ignore //TODO
   dispatch(authActions.setAuthPhoto(data.data.photo))
   dispatch(actions.toggleIsFetching(false))
 }

@@ -4,7 +4,7 @@ import Particles from 'react-particles-js'
 import s from './style.module.scss'
 
 const BackgroundEffect: React.FC = () => {
-  const color = document.documentElement.getAttribute('data-theme') === 'dark' ? '#242630' : '#1a122d'
+  const color = document.documentElement.getAttribute('data-theme') === 'dark' ? '#2d2f3b' : '#cdccdd'
   return (
     <Particles
       className={s.bg}
@@ -24,7 +24,7 @@ const BackgroundEffect: React.FC = () => {
             random: true,
             anim: {
               speed: 4,
-              size_min: 0.3
+              size_min: 0.6
             }
           },
           line_linked: {

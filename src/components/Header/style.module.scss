@@ -65,11 +65,15 @@
 .userPhoto {
   width: 48px;
   border-radius: 24px;
-  border: solid 2px #61dafb;
+  border: solid 2px var(--female-color);
   @media screen and (max-width: 1440px) {
     width: 45px;
     height: 45px;
   }
+}
+
+.malePhoto {
+  border: solid 2px var(--male-color);
 }
 
 .function {

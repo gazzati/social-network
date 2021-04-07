@@ -17,12 +17,17 @@ const Navbar: React.FC = () => {
 
   const getIsActive = () => {
     const url = history.location.pathname
-    return url.includes('user') || (url.includes('profile') && profile._id !== userData.id)
+    return url.includes('user') || (!!userData.id && url.includes('profile') && profile._id !== userData.id)
   }
 
   return (
     <div className={s.navbar}>
-      <NavLink exact to={`/profile:${userData.id}`} className={s.link} activeClassName={s.activeItem}>
+      <NavLink
+        exact
+        to={`/profile${userData.id ? `:${userData.id}` : ''}`}
+        className={s.link}
+        activeClassName={s.activeItem}
+      >
         <ProfileIco />
         <span className={s.item}>My Profile</span>
       </NavLink>

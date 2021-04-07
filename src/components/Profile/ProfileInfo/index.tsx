@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { GithubPicker } from 'react-color'
+import cn from 'classnames'
 
 import { ProfileType } from 'src/types/types'
 
@@ -19,6 +20,7 @@ type PropsType = {
 
 const ProfileInfo: React.FC<PropsType> = ({ profile, updateStatus, isOwner, goToEditMode, onSendMessage }) => {
   const [colorMode, setColorMode] = useState(false)
+  const [openPhotoModal, setPhotoModal] = useState(false)
 
   useEffect(() => {
     document
@@ -46,7 +48,12 @@ const ProfileInfo: React.FC<PropsType> = ({ profile, updateStatus, isOwner, goTo
       {profile && (
         <div className={s.mainInfo}>
           <label id="user-color" className={s.colorBlock} onClick={() => setColorMode(!colorMode)} />
-          <img src={profile && profile.photo?.url ? profile.photo?.url : userPhoto} className={s.mainPhoto} alt="" />
+          <img
+            onClick={() => setPhotoModal(true)}
+            src={profile && profile.photo?.url ? profile.photo?.url : userPhoto}
+            className={cn(s.mainPhoto, { [s.malePhoto]: profile.info.isMale })}
+            alt="user img"
+          />
           <div className={s.name}>{`${profile.info.name} ${profile.info.surname}`}</div>
           <div className={s.status}>
             <ProfileStatus status={profile.status} updateStatus={updateStatus} isOwner={isOwner} />
@@ -60,6 +67,13 @@ const ProfileInfo: React.FC<PropsType> = ({ profile, updateStatus, isOwner, goTo
               Send message
             </button>
           )}
+        </div>
+      )}
+
+      {openPhotoModal && profile.photo?.urlOriginal && (
+        <div className={s.modal}>
+          <div className={s.overlayModal} onClick={() => setPhotoModal(false)} />
+          <img className={s.modalPhoto} src={profile.photo?.urlOriginal} alt="big user img" />
         </div>
       )}
 

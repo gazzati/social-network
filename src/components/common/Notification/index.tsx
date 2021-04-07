@@ -13,14 +13,6 @@ const Notification: React.FC = () => {
   const dispatch = useDispatch()
   const notifications = useSelector((state: StateType) => state.app.notifications)
 
-  const formatMessage = (message: string) => {
-    return message.split('<br />').map((paragraph: string, index: number) => (
-      <p key={index.toString()} className={style.notificationMessage}>
-        {paragraph}
-      </p>
-    ))
-  }
-
   return (
     <>
       <div className={style.notification}>
@@ -35,7 +27,7 @@ const Notification: React.FC = () => {
                 { [style.error]: item.type === NotificationType.error }
               )}
             >
-              {formatMessage(item.message)}
+              <p className={style.notificationMessage}>{item.message}</p>
               <img src={close} alt="close" onClick={() => dispatch(removeNotification(item.id))} />
             </div>
           ))}

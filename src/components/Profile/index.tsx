@@ -4,7 +4,7 @@ import { compose } from 'redux'
 import { RouteComponentProps, useHistory, withRouter } from 'react-router-dom'
 
 import { getChatsData, startChat } from 'src/redux/dialogs'
-import { getUserProfile, savePhoto, saveProfile, updateStatus } from 'src/redux/profile'
+import { getUserProfile, saveProfile, updateStatus } from 'src/redux/profile'
 import { StateType } from 'src/redux'
 import { ProfileInfoType, ProfileType } from 'src/types/types'
 
@@ -42,7 +42,7 @@ const Profile: React.FC<PropsType> = ({ match }) => {
       ?._id
 
     if (!chatId) {
-      await startChat(profile._id)
+      await dispatch(startChat(profile._id))
       chatId = newChatId
     } else {
       dispatch(getChatsData(chatId))
@@ -58,7 +58,6 @@ const Profile: React.FC<PropsType> = ({ match }) => {
         <ProfileEditForm
           profile={profile as ProfileType}
           onSubmit={onSubmit}
-          savePhoto={savePhoto}
           exitOfEditMode={() => setEditMode(false)}
           isOwner={isOwner}
           isLoading={isFetching}

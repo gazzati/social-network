@@ -6,6 +6,7 @@ type MeResponseDataType = {
   name: string
   surname: string
   photo: string
+  isMale: boolean
 }
 
 type LoginRegistrationResponseDataType = {

@@ -68,4 +68,46 @@
       top: 9px;
     }
   }
+
+  .chooseGender {
+    margin-bottom: 12px;
+    .title {
+      font-size: 12px;
+    }
+    .radios {
+      display: flex;
+      margin-top: 6px;
+      .item {
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        .label {
+          margin-left: 2px;
+        }
+        .radioButton {
+          position: relative;
+          width: 14px;
+          height: 14px;
+          background-color: var(--body-bg-color);
+          border: 1px var(--b-w-text-color) solid;
+          border-radius: 20px;
+        }
+        .active {
+          &:before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            top: 2px;
+            left: 2px;
+            background-color: var(--secondary-color);
+            border-radius: 20px;
+          }
+        }
+      }
+      .item:last-child {
+        margin-left: 16px;
+      }
+    }
+  }
 }

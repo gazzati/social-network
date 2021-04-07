@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import cn from 'classnames'
 
 import { RegistrationFormValuesType } from 'src/types/types'
 import { registration } from 'src/redux/auth'
@@ -13,7 +14,8 @@ const RegistrationForm: React.FC = () => {
     email: '',
     name: '',
     surname: '',
-    password: ''
+    password: '',
+    isMale: true
   })
   const dispatch = useDispatch()
   const [showPassword, setShowPassword] = useState(false)
@@ -25,14 +27,6 @@ const RegistrationForm: React.FC = () => {
 
   return (
     <form className={s.registration} onSubmit={(e) => handleSubmit(e)}>
-      <input
-        type="email"
-        placeholder="email"
-        value={data.email}
-        onChange={(e) => setData({ ...data, email: e.target.value })}
-        required
-      />
-
       <input
         type="text"
         placeholder="name"
@@ -46,6 +40,14 @@ const RegistrationForm: React.FC = () => {
         placeholder="surname"
         value={data.surname}
         onChange={(e) => setData({ ...data, surname: e.target.value })}
+        required
+      />
+
+      <input
+        type="email"
+        placeholder="email"
+        value={data.email}
+        onChange={(e) => setData({ ...data, email: e.target.value })}
         required
       />
 
@@ -63,9 +65,24 @@ const RegistrationForm: React.FC = () => {
         )}
       </div>
 
+      <div className={s.chooseGender}>
+        <div className={s.title}>Choose gender</div>
+
+        <div className={s.radios}>
+          <div className={s.item} onClick={() => setData({ ...data, isMale: true })}>
+            <div className={cn(s.radioButton, { [s.active]: data.isMale })} />
+            <div className={s.label}>Male</div>
+          </div>
+          <div className={s.item} onClick={() => setData({ ...data, isMale: false })}>
+            <div className={cn(s.radioButton, { [s.active]: !data.isMale })} />
+            <div className={s.label}>Female</div>
+          </div>
+        </div>
+      </div>
+
       <div>
         <button className="button button--primary" type="submit">
-          Log In
+          Register
         </button>
       </div>
     </form>

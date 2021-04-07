@@ -1,4 +1,5 @@
 import React from 'react'
+import cn from 'classnames'
 
 import { ProfileType } from 'src/types/types'
 import formatDate from 'src/helpers/formatDate'
@@ -26,8 +27,8 @@ const Post: React.FC<PropsType> = (props) => (
       <div className={s.user}>
         <div className={s.userInfo}>
           <img
-            className={s.userPhoto}
-            src={props.profile && props.profile.photo?.url ? props.profile.photo.url : userPhoto}
+            className={cn(s.userPhoto, { [s.malePhoto]: props.profile?.info.isMale })}
+            src={props.profile.photo?.url ? props.profile.photo.url : userPhoto}
             alt=""
           />
           <div className={s.userDescription}>

@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
+import { savePhoto } from 'src/redux/profile'
 import { ProfileInfoType, ProfileType } from 'src/types/types'
 
 import userPhoto from 'src/assets/images/user.png'
@@ -10,13 +12,13 @@ import s from './style.module.scss'
 type PropsType = {
   profile: ProfileType
   onSubmit: (formData: ProfileInfoType) => void
-  savePhoto: (photo: File) => void
   exitOfEditMode: () => void
   isOwner: boolean
   isLoading: boolean
 }
 
-const ProfileEditForm: React.FC<PropsType> = ({ profile, onSubmit, savePhoto, exitOfEditMode, isOwner, isLoading }) => {
+const ProfileEditForm: React.FC<PropsType> = ({ profile, onSubmit, exitOfEditMode, isOwner, isLoading }) => {
+  const dispatch = useDispatch()
   const [infoData, setInfoData] = useState<ProfileInfoType>(profile.info)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -25,8 +27,9 @@ const ProfileEditForm: React.FC<PropsType> = ({ profile, onSubmit, savePhoto, ex
   }
 
   const onMainPhotoSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length) {
-      savePhoto(e.target.files[0])
+    const { files } = e.target
+    if (files && files.length) {
+      dispatch(savePhoto(files[0]))
     }
   }
 

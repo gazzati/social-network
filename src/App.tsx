@@ -59,7 +59,7 @@ const App: React.FC = () => {
 
                 <Route path="/followers" render={() => <Follow type="followers" />} />
 
-                <Route exact path="/">
+                <Route exact path="/profile">
                   <Redirect to={`/profile:${userData.id}`} />
                 </Route>
               </>

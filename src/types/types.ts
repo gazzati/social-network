@@ -20,6 +20,7 @@ export type RegistrationFormValuesType = {
   name: string
   surname: string
   password: string
+  isMale: boolean
 }
 
 export type UserDataType = {
@@ -27,6 +28,7 @@ export type UserDataType = {
   name: string | null
   surname: string | null
   photo: string | null
+  isMale: boolean
 }
 
 export type ProfileType = {
@@ -49,6 +51,7 @@ export type ProfileInfoType = {
   lookingForAJob?: boolean
   lookingForAJobDescription?: string
   contacts: ContactsType
+  isMale: boolean
 }
 
 export type ContactsType = {
@@ -83,6 +86,7 @@ export type ChatType = {
   participants: string[]
   title: string
   photo: string
+  isMale: boolean
   messages: MessageType[]
   isUnreadFor: string[]
   updatedAt: string

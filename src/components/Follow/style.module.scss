@@ -63,9 +63,13 @@
   width: 70px;
   height: 70px;
   margin-top: 28px;
-  border: solid 2px #61dafb;
+  border: solid 2px var(--female-color);
   border-radius: 40px;
   background-color: var(--b-w-text-color);
+}
+
+.malePhoto {
+  border: solid 2px var(--male-color);
 }
 
 .name {

@@ -62,6 +62,10 @@ const App: React.FC = () => {
                 <Route exact path="/profile">
                   <Redirect to={`/profile:${userData.id}`} />
                 </Route>
+
+                <Route exact path="/">
+                  <Redirect to={`/profile:${userData.id}`} />
+                </Route>
               </>
             )}
           </Switch>

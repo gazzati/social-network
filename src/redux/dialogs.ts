@@ -1,14 +1,5 @@
-import io from 'socket.io-client'
-
 import { ChatType, MessageType } from 'src/types/types'
-import { BaseThunkType, InferActionsTypes } from '.'
-
-const socket = io('https://gazzati-social-network-socket.herokuapp.com', {
-  // const socket = io('http://localhost:8001', {
-  auth: {
-    token: localStorage.getItem('authToken')
-  }
-})
+import { InferActionsTypes } from '.'
 
 const initialState = {
   chats: [] as ChatType[],
@@ -56,50 +47,3 @@ export default dialogs
 
 export type InitialStateType = typeof initialState
 type ActionsTypes = InferActionsTypes<typeof actions>
-type ThunkType = BaseThunkType<ActionsTypes>
-
-export const connect = (): ThunkType => async (dispatch) => {
-  socket.connect()
-
-  socket.on('chats', (chats: ChatType[]) => {
-    dispatch(actions.setChats(chats))
-    dispatch(actions.toggleIsFetching(false))
-  })
-
-  socket.on('messages', (messages: MessageType[]) => {
-    dispatch(actions.setMessages(messages))
-    dispatch(actions.toggleIsFetching(false))
-  })
-
-  socket.on('newChatId', (newChatId: string) => {
-    dispatch(actions.setNewChatId(newChatId))
-    dispatch(actions.toggleIsFetching(false))
-  })
-}
-
-export const disconnect = (): ThunkType => async () => {
-  socket.disconnect()
-}
-
-export const sendMessage = (chatId: string, messageText: string): ThunkType => async (dispatch) => {
-  dispatch(actions.toggleIsFetching(true))
-  socket.emit('sendMessage', { chatId, messageText }, (err: any) => {
-    if (err) console.log(err)
-  })
-}
-
-export const getChatsData = (chatId?: string): ThunkType => async (dispatch) => {
-  dispatch(actions.toggleIsFetching(true))
-
-  socket.emit('loadData', { chatId }, (err: any) => {
-    if (err) console.log(err)
-  })
-}
-
-export const startChat = (userId: string): ThunkType => async (dispatch) => {
-  dispatch(actions.toggleIsFetching(true))
-
-  socket.emit('startChat', { companionId: userId }, (err: any) => {
-    if (err) console.log(err)
-  })
-}

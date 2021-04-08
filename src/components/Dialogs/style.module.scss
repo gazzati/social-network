@@ -162,8 +162,12 @@
 
       .topBlockPhoto {
         width: 32px;
-        border: solid 2px #61dafb;
+        border: solid 2px var(--female-color);
         border-radius: 25px;
+      }
+
+      .topBlockMalePhoto {
+        border: solid 2px var(--male-color);
       }
 
       .topBlockName {

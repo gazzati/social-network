@@ -5,7 +5,7 @@ import { RouteComponentProps, withRouter } from 'react-router-dom'
 import cn from 'classnames'
 
 import { StateType } from 'src/redux'
-import { disconnect, sendMessage, connect, getChatsData } from 'src/redux/dialogs'
+import { disconnect, sendMessage, connect, getChatsData } from 'src/redux/socket'
 import { MessageType } from 'src/types/types'
 import formatDate from 'src/helpers/formatDate'
 
@@ -95,14 +95,18 @@ const Dialogs: React.FC<PropsType> = ({ match }) => {
           {currentUser && (
             <div className={s.topBlockUser}>
               <div className={s.topBlockName}>{currentUser.title}</div>
-              <img className={s.topBlockPhoto} src={currentUser.photo || userPhoto} alt="" />
+              <img
+                className={cn(s.topBlockPhoto, { [s.topBlockMalePhoto]: currentUser.isMale })}
+                src={currentUser.photo || userPhoto}
+                alt=""
+              />
             </div>
           )}
         </div>
         <ul className={s.messagesBlock}>
           {isFetching && <Preloader />}
 
-          {messages === 'no choose' ? (
+          {!chatId ? (
             <div className={s.noMessages}>Please choose chat</div>
           ) : messagesElements && messagesElements.length ? (
             messagesElements
@@ -111,7 +115,10 @@ const Dialogs: React.FC<PropsType> = ({ match }) => {
           )}
         </ul>
         {!isFetching && (
-          <AddMessageForm sendMessage={(messageText) => chatId && dispatch(sendMessage(chatId, messageText))} />
+          <AddMessageForm
+            disabled={!chatId}
+            sendMessage={(messageText) => chatId && dispatch(sendMessage(chatId, messageText))}
+          />
         )}
       </div>
     </div>

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 
 import { getFollow } from 'src/redux/follow'
 import { StateType } from 'src/redux'
-import { getChatsData, startChat } from 'src/redux/dialogs'
+import { getChatsData, startChat } from 'src/redux/socket'
 
 import Preloader from 'src/components/common/Preloader'
 import FollowItem from './FollowItem'
@@ -43,22 +43,18 @@ const Follow: React.FC<PropsType> = ({ type }) => {
       {isFetching ? <Preloader /> : null}
       <div className={s.followTitle}>{type === 'followers' ? 'Followers' : 'Following'}</div>
       <div className={s.follow}>
-        {users.length ? (
-          users.map((user) => (
-            <FollowItem
-              user={user}
-              key={user._id}
-              type={type}
-              unfollowingInProgress={unfollowingInProgress}
-              onSendMessage={onSendMessage}
-            />
-          ))
-        ) : (
-          <div className={s.usersBlock}>Not found users</div>
-        )}
+        {users.length
+          ? users.map((user) => (
+              <FollowItem
+                user={user}
+                key={user._id}
+                type={type}
+                unfollowingInProgress={unfollowingInProgress}
+                onSendMessage={onSendMessage}
+              />
+            ))
+          : !isFetching && <div className={s.usersBlock}>Not found users</div>}
       </div>
-      {/* <Paginator currentPage={props.currentPage} onPageChanged={props.onPageChanged}
-               totalItemsCount={props.totalFriendsCount} pageSize={props.pageSize}/> */}
     </div>
   )
 }

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { compose } from 'redux'
 import { RouteComponentProps, useHistory, withRouter } from 'react-router-dom'
 
-import { getChatsData, startChat } from 'src/redux/dialogs'
+import { getChatsData, startChat } from 'src/redux/socket'
 import { getUserProfile, saveProfile, updateStatus } from 'src/redux/profile'
 import { StateType } from 'src/redux'
 import { ProfileInfoType, ProfileType } from 'src/types/types'

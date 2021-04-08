@@ -55,20 +55,18 @@ const Users: React.FC = () => {
         </form>
       </div>
       <div className={s.usersBlock}>
-        {users.length ? (
-          users.map((u) => (
-            <User
-              user={u}
-              followingInProgress={followingInProgress}
-              key={u._id}
-              currentUserId={userData.id}
-              follow={(userId) => dispatch(follow(userId))}
-              unfollow={(userId) => dispatch(unfollow(userId))}
-            />
-          ))
-        ) : (
-          <div className={s.notFound}>Not found users</div>
-        )}
+        {users.length
+          ? users.map((u) => (
+              <User
+                user={u}
+                followingInProgress={followingInProgress}
+                key={u._id}
+                currentUserId={userData.id}
+                follow={(userId) => dispatch(follow(userId))}
+                unfollow={(userId) => dispatch(unfollow(userId))}
+              />
+            ))
+          : !isFetching && <div className={s.notFound}>Not found users</div>}
       </div>
       <div className={s.paginator}>
         <Paginator

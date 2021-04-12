@@ -46,9 +46,12 @@
     height: 100px;
     width: 100px;
     position: absolute;
-    top: 180px;
-    left: 35%;
+    top: 50px;
+    left: 150px;
     z-index: 3;
+    @media screen and (max-width: 678px) {
+      left: 100px;
+    }
   }
 
   .mainPhoto {

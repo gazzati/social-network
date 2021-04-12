@@ -29,13 +29,13 @@ const Users: React.FC = () => {
 
   const onSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    dispatch(resetCurrentPage())
     setSearchTerm(searchTerm)
-    dispatch(resetCurrentPage)
   }
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(resetCurrentPage())
     setSearchTerm(e.target.value)
-    dispatch(resetCurrentPage)
   }
 
   return (

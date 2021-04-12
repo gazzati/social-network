@@ -36,17 +36,17 @@ const ProfileInfo: React.FC<PropsType> = ({ profile, updateStatus, isOwner, goTo
 
   return (
     <div className={s.infoBlock} onDoubleClick={() => setColorMode(false)}>
-      {colorMode && (
-        <div className={s.chooserColor}>
-          <GithubPicker
-            onChange={changeColor}
-            width="215px"
-            colors={['#d435b7', '#ff2600', '#ffd900', '#65d435', '#61dafb', '#359ad4', '#6d57f6', '#3827a0']}
-          />
-        </div>
-      )}
       {profile && (
         <div className={s.mainInfo}>
+          {colorMode && (
+            <div className={s.chooserColor}>
+              <GithubPicker
+                onChange={changeColor}
+                width="215px"
+                colors={['#d435b7', '#ff2600', '#ffd900', '#65d435', '#61dafb', '#359ad4', '#6d57f6', '#3827a0']}
+              />
+            </div>
+          )}
           <label id="user-color" className={s.colorBlock} onClick={() => setColorMode(!colorMode)} />
           <img
             onClick={() => setPhotoModal(true)}

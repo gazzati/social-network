@@ -1,3 +1,4 @@
+import { Dispatch } from 'redux'
 import update from 'immutability-helper'
 
 import { ProfileType } from 'src/types/types'
@@ -125,7 +126,7 @@ export const unfollow = (userId: string): ThunkType => async (dispatch) => {
   dispatch(actions.toggleFollowingProgress(false, userId))
 }
 
-export const resetCurrentPage = (): ThunkType => async (dispatch) => {
+export const resetCurrentPage = () => async (dispatch: Dispatch) => {
   dispatch(actions.resetCurrentPage())
 }
 

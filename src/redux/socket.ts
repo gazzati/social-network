@@ -3,6 +3,7 @@ import io from 'socket.io-client'
 
 import { ChatType, MessageType } from 'src/types/types'
 import { actions } from './dialogs'
+import { addNotification } from './app'
 
 let socket: any = null
 
@@ -38,7 +39,7 @@ export const disconnect = () => async () => {
 export const sendMessage = (chatId: string, messageText: string) => async (dispatch: Dispatch) => {
   dispatch(actions.toggleIsFetching(true))
   socket?.emit('sendMessage', { chatId, messageText }, (err: any) => {
-    if (err) console.log(err)
+    if (err) addNotification('error', err)
   })
 }
 
@@ -46,7 +47,7 @@ export const getChatsData = (chatId?: string) => async (dispatch: Dispatch) => {
   dispatch(actions.toggleIsFetching(true))
 
   socket?.emit('loadData', { chatId }, (err: any) => {
-    if (err) console.log(err)
+    if (err) addNotification('error', err)
   })
 }
 
@@ -54,6 +55,6 @@ export const startChat = (userId: string) => async (dispatch: Dispatch) => {
   dispatch(actions.toggleIsFetching(true))
 
   socket?.emit('startChat', { companionId: userId }, (err: any) => {
-    if (err) console.log(err)
+    if (err) addNotification('error', err)
   })
 }

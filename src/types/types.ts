@@ -74,11 +74,9 @@ export type NewsType = {
   title: string
   description: string
   url: string
-  urlToImage: string
-  publishedAt: string
-  source: {
-    name: string
-  }
+  image: string
+  published_at: string
+  source: string
 }
 
 export type ChatType = {

@@ -2,17 +2,21 @@ import axios from 'axios'
 import { NewsType } from '../types/types'
 
 type NewsResponseType = {
-  totalResults: number
-  status: string
-  articles: Array<NewsType>
+  data: Array<NewsType>
+  pagination: {
+    count: number
+    limit: number
+    offset: number
+    total: number
+  }
 }
 
-const apiKey = '3d368681f4414a9fb4ffa48ef6d52ea6'
+const baseUrl = 'http://api.mediastack.com/v1/news'
+const apiKey = '8589b3def0cb55eae5e810ea67bd8d67'
 
-export const getNewsData = (currentPage: number, pageSize: number, category: string) =>
+export const getNewsData = (page: number, limit: number, category: string = 'general') =>
   axios
     .get<NewsResponseType>(
-      'https://newsapi.org/v2/top-headlines?' +
-        `category=${category}&country=ru&apiKey=${apiKey}&pageSize=${pageSize}&page=${currentPage}`
+      `${baseUrl}?access_key=${apiKey}&languages=en&categories=${category}&limit=${limit}&offset=${page * limit}`
     )
     .then((res) => res.data)

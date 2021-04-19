@@ -6,9 +6,9 @@ import { StateType, InferActionsTypes } from '.'
 const initialState = {
   news: [] as Array<NewsType>,
   isFetching: true as boolean,
-  pageSize: 5 as number,
-  totalNewsCount: 0 as number,
-  currentPage: 1 as number,
+  total: 0 as number,
+  page: 1 as number,
+  limit: 10 as number,
   category: 'general' as string
 }
 
@@ -19,13 +19,13 @@ const news = (state = initialState, action: ActionsTypes): InitialState => {
     case 'SET_NEWS':
       return {
         ...state,
-        news: action.news
+        news: action.news.filter((v, i, a) => a.findIndex((t) => t.title === v.title) === i)
       }
     case 'SET_CURRENT_PAGE': {
-      return { ...state, currentPage: action.currentPage }
+      return { ...state, page: action.page }
     }
     case 'SET_TOTAL_NEWS_COUNT': {
-      return { ...state, totalNewsCount: action.count }
+      return { ...state, total: action.count }
     }
     case 'SET_CATEGORY': {
       return { ...state, category: action.category }
@@ -38,27 +38,26 @@ const news = (state = initialState, action: ActionsTypes): InitialState => {
   }
 }
 
-type ActionsTypes = InferActionsTypes<typeof actions>
-
 export const actions = {
   setNews: (news: Array<NewsType>) => ({ type: 'SET_NEWS', news } as const),
   toggleIsFetching: (isFetching: boolean) => ({ type: 'TOGGLE_IS_FETCHING', isFetching } as const),
-  setCurrentPage: (currentPage: number) => ({ type: 'SET_CURRENT_PAGE', currentPage } as const),
-  setTotalNewsCount: (totalNewsCount: number) => ({ type: 'SET_TOTAL_NEWS_COUNT', count: totalNewsCount } as const),
+  setCurrentPage: (page: number) => ({ type: 'SET_CURRENT_PAGE', page } as const),
+  setTotalNewsCount: (total: number) => ({ type: 'SET_TOTAL_NEWS_COUNT', count: total } as const),
   setCategory: (category: string) => ({ type: 'SET_CATEGORY', category } as const)
 }
 
-type ThunkType = ThunkAction<Promise<void>, StateType, unknown, ActionsTypes>
-
-export const getNews = (page: number, pageSize: number, category: string): ThunkType => async (dispatch) => {
+export const getNews = (page: number, limit: number, category?: string): ThunkType => async (dispatch) => {
   dispatch(actions.toggleIsFetching(true))
   dispatch(actions.setCurrentPage(page))
-  dispatch(actions.setCategory(category))
+  category && dispatch(actions.setCategory(category))
 
-  const data = await getNewsData(page, pageSize, category)
-  dispatch(actions.setTotalNewsCount(data.totalResults))
-  dispatch(actions.setNews(data.articles))
+  const res = await getNewsData(page, limit, category)
+  dispatch(actions.setTotalNewsCount(res.pagination.total))
+  dispatch(actions.setNews(res.data))
   dispatch(actions.toggleIsFetching(false))
 }
+
+type ActionsTypes = InferActionsTypes<typeof actions>
+type ThunkType = ThunkAction<Promise<void>, StateType, unknown, ActionsTypes>
 
 export default news

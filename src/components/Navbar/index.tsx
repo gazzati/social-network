@@ -47,12 +47,12 @@ const Navbar: React.FC = () => {
         <span className={s.item}>Followers</span>
       </NavLink>
 
-      <NavLink to="/following" className={s.link} activeClassName={s.activeItem}>
+      <NavLink to="/following" className={`${s.link} ${s.hideOnMobile}`} activeClassName={s.activeItem}>
         <FollowingIco />
         <span className={s.item}>Following</span>
       </NavLink>
 
-      <NavLink to="/news" className={`${s.link} ${s.hideOnMobile}`} activeClassName={s.activeItem}>
+      <NavLink to="/news" className={s.link} activeClassName={s.activeItem}>
         <NewsIco />
         <span className={s.item}>News</span>
       </NavLink>

@@ -1,20 +1,21 @@
 {
   "files": {
-    "main.css": "/social-network/static/css/main.50f5dfd9.chunk.css",
-    "main.js": "/social-network/static/js/main.8e7f0810.chunk.js",
-    "main.js.map": "/social-network/static/js/main.8e7f0810.chunk.js.map",
+    "main.css": "/social-network/static/css/main.e94261d0.chunk.css",
+    "main.js": "/social-network/static/js/main.713aca0e.chunk.js",
+    "main.js.map": "/social-network/static/js/main.713aca0e.chunk.js.map",
     "runtime-main.js": "/social-network/static/js/runtime-main.22b85455.js",
     "runtime-main.js.map": "/social-network/static/js/runtime-main.22b85455.js.map",
     "static/js/2.242efa74.chunk.js": "/social-network/static/js/2.242efa74.chunk.js",
     "static/js/2.242efa74.chunk.js.map": "/social-network/static/js/2.242efa74.chunk.js.map",
     "index.html": "/social-network/index.html",
-    "static/css/main.50f5dfd9.chunk.css.map": "/social-network/static/css/main.50f5dfd9.chunk.css.map",
+    "static/css/main.e94261d0.chunk.css.map": "/social-network/static/css/main.e94261d0.chunk.css.map",
     "static/js/2.242efa74.chunk.js.LICENSE.txt": "/social-network/static/js/2.242efa74.chunk.js.LICENSE.txt",
     "static/media/close.71f7d8e2.svg": "/social-network/static/media/close.71f7d8e2.svg",
     "static/media/facebook.fa01b5f9.svg": "/social-network/static/media/facebook.fa01b5f9.svg",
     "static/media/github.aba2803d.svg": "/social-network/static/media/github.aba2803d.svg",
     "static/media/instagram.6156ac54.svg": "/social-network/static/media/instagram.6156ac54.svg",
     "static/media/left-arrow.327f49ff.svg": "/social-network/static/media/left-arrow.327f49ff.svg",
+    "static/media/leftArrowIcon.ee7f4c78.svg": "/social-network/static/media/leftArrowIcon.ee7f4c78.svg",
     "static/media/preloader.cd33075e.svg": "/social-network/static/media/preloader.cd33075e.svg",
     "static/media/preloaderMini.1885e0fb.svg": "/social-network/static/media/preloaderMini.1885e0fb.svg",
     "static/media/removePost.72246ab3.svg": "/social-network/static/media/removePost.72246ab3.svg",
@@ -28,7 +29,7 @@
   "entrypoints": [
     "static/js/runtime-main.22b85455.js",
     "static/js/2.242efa74.chunk.js",
-    "static/css/main.50f5dfd9.chunk.css",
-    "static/js/main.8e7f0810.chunk.js"
+    "static/css/main.e94261d0.chunk.css",
+    "static/js/main.713aca0e.chunk.js"
   ]
 }

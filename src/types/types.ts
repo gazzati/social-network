@@ -71,17 +71,16 @@ export type PostType = {
 }
 
 export type NewsType = {
-  id: string
-  title: string
+  name: string
   description: string
   url: string
   datePublished: string
   image: {
-    url: string | null
+    thumbnail?: {
+      contentUrl: string | null
+    }
   }
-  provider: {
-    name: string
-  }
+  provider: Array<{ name: string }>
 }
 
 export type ChatType = {

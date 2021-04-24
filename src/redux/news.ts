@@ -6,10 +6,10 @@ import { StateType, InferActionsTypes } from '.'
 const initialState = {
   news: [] as Array<NewsType>,
   isFetching: true as boolean,
-  total: 0 as number,
+  total: 1000 as number,
   page: 1 as number,
-  limit: 10 as number,
-  category: 'general' as string
+  limit: 12 as number,
+  category: 'World' as string
 }
 
 type InitialState = typeof initialState
@@ -47,15 +47,22 @@ export const actions = {
   setCategory: (category: string) => ({ type: 'SET_CATEGORY', category } as const)
 }
 
-export const getNews = (page: number, limit: number, category?: string): ThunkType => async (dispatch) => {
+export const getNews = (): ThunkType => async (dispatch, getState) => {
   dispatch(actions.toggleIsFetching(true))
-  dispatch(actions.setCurrentPage(page))
-  category && dispatch(actions.setCategory(category))
-
-  const res = await getNewsData(page, limit, category)
-  dispatch(actions.setTotalNewsCount(res.totalCount))
+  const res = await getNewsData(getState().news.page, getState().news.limit, getState().news.category)
   dispatch(actions.setNews(res.value))
   dispatch(actions.toggleIsFetching(false))
+}
+
+export const getNewsByPage = (page: number): ThunkType => async (dispatch) => {
+  dispatch(actions.setCurrentPage(page))
+  await dispatch(getNews())
+}
+
+export const getNewsByCategory = (category: string): ThunkType => async (dispatch) => {
+  dispatch(actions.setCurrentPage(1))
+  dispatch(actions.setCategory(category))
+  await dispatch(getNews())
 }
 
 type ActionsTypes = InferActionsTypes<typeof actions>

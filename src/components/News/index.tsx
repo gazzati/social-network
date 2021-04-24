@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { nanoid } from 'nanoid'
 
 import { StateType } from 'src/redux'
-import { getNews } from 'src/redux/news'
+import { getNewsByPage, getNewsByCategory } from 'src/redux/news'
 
 import Paginator from 'src/components/common/Paginator'
 import Preloader from 'src/components/common/Preloader'
@@ -16,16 +15,16 @@ const News: React.FC = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getNews(page, limit))
+    dispatch(getNewsByPage(1))
   }, [])
 
   const onPageChanged = (pageNumber: number) => {
-    dispatch(getNews(pageNumber, limit))
+    dispatch(getNewsByPage(pageNumber))
   }
 
   const onCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const term = e.target.value
-    dispatch(getNews(page, limit, term))
+    dispatch(getNewsByCategory(term))
   }
 
   return (
@@ -34,13 +33,13 @@ const News: React.FC = () => {
         <Paginator currentPage={page} onPageChanged={onPageChanged} totalItemsCount={total} pageSize={limit} />
 
         <select className={s.select} defaultValue={category} onChange={(e) => onCategoryChange(e)}>
-          <option value="business">Business</option>
-          <option value="entertainment">Entertainment</option>
-          <option value="general">General</option>
-          <option value="health">Health</option>
-          <option value="science">Science</option>
-          <option value="sports">Sports</option>
-          <option value="technology">Technology</option>
+          <option value="Business">Business</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Health">Health</option>
+          <option value="Politics">Politics</option>
+          <option value="ScienceAndTechnology">Science</option>
+          <option value="Sports">Sports</option>
+          <option value="World">World</option>
         </select>
       </div>
 
@@ -48,7 +47,7 @@ const News: React.FC = () => {
       <div className={s.newsList}>
         {!news.length && !isFetching && <div className={s.notFound}>Not found news</div>}
         {news.map((item) => (
-          <NewsItem key={nanoid()} newsItem={item} />
+          <NewsItem key={item.datePublished} newsItem={item} />
         ))}
       </div>
     </div>

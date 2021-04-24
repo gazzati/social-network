@@ -13,7 +13,7 @@ type PostId = {
   postId: string
 }
 
-export const profileAPI = {
+export const profileApi = {
   getProfile(userId: string) {
     return instance.get<APIResponseType<ProfileType>>(`profile/${userId}`).then((res) => res.data.data)
   },

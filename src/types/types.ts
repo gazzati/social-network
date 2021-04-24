@@ -71,12 +71,17 @@ export type PostType = {
 }
 
 export type NewsType = {
+  id: string
   title: string
   description: string
   url: string
-  image: string
-  published_at: string
-  source: string
+  datePublished: string
+  image: {
+    url: string | null
+  }
+  provider: {
+    name: string
+  }
 }
 
 export type ChatType = {

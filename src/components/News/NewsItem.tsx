@@ -18,13 +18,13 @@ const NewsItem: FC<PropsType> = ({ newsItem }) => (
       <p className={style.description}>{newsItem.description}</p>
       <div className={style.info}>
         <a href={newsItem.url} className={style.publish} target="_blank" rel="noopener noreferrer">
-          <b>{newsItem.source}</b>
+          <b>{newsItem.provider.name}</b>
         </a>
-        <div className={style.date}>{formatDate(newsItem.published_at).getDate}</div>
+        <div className={style.date}>{formatDate(newsItem.datePublished).getDate}</div>
       </div>
     </div>
 
-    {newsItem.image && <img src={newsItem.image} alt="img" className={style.image} />}
+    {newsItem.image.url && <img src={newsItem.image.url} alt="img" className={style.image} />}
   </div>
 )
 

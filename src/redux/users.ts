@@ -2,7 +2,7 @@ import { Dispatch } from 'redux'
 import update from 'immutability-helper'
 
 import { ProfileType } from 'src/types/types'
-import { usersAPI, FollowUnfollow } from 'src/api/users-api'
+import { usersApi, FollowUnfollow } from 'src/api/users'
 import { BaseThunkType, InferActionsTypes } from '.'
 
 const initialState = {
@@ -100,7 +100,7 @@ export const requestUsers = (page: number, term: string): ThunkType => async (di
   dispatch(actions.toggleIsFetching(true))
   dispatch(actions.setCurrentPage(page))
 
-  const res = await usersAPI.getUsers(page, initialState.pageSize, term)
+  const res = await usersApi.getUsers(page, initialState.pageSize, term)
   dispatch(actions.setUsers(res.data.users))
   dispatch(actions.setTotalUsersCount(res.data.total))
   dispatch(actions.toggleIsFetching(false))
@@ -110,7 +110,7 @@ export const follow = (userId: string): ThunkType => async (dispatch) => {
   dispatch(actions.toggleIsFetching(true))
   dispatch(actions.toggleFollowingProgress(true, userId))
 
-  const res = await usersAPI.follow(userId)
+  const res = await usersApi.follow(userId)
   dispatch(actions.updateUsers(res.data))
   dispatch(actions.toggleIsFetching(false))
   dispatch(actions.toggleFollowingProgress(false, userId))
@@ -120,7 +120,7 @@ export const unfollow = (userId: string): ThunkType => async (dispatch) => {
   dispatch(actions.toggleIsFetching(true))
   dispatch(actions.toggleFollowingProgress(true, userId))
 
-  const res = await usersAPI.unFollow(userId)
+  const res = await usersApi.unFollow(userId)
   dispatch(actions.updateUsers(res.data))
   dispatch(actions.toggleIsFetching(false))
   dispatch(actions.toggleFollowingProgress(false, userId))

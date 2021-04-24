@@ -31,7 +31,7 @@ password: vova123
 :dart: **[Following](https://gazzati.github.io/social-network/#/following)** (List of following, unfollow and chat with user buttons)
 
 
-:dart: **[News](https://gazzati.github.io/social-network/#/news)** (News by [API](https://mediastack.com/) with pagination and choice of category)
+:dart: **[News](https://gazzati.github.io/social-network/#/news)** (News by [API](https://english.api.rakuten.net/contextualwebsearch/api/web-search) with pagination and choice of category)
 
 
 :dart: **[Settings](https://gazzati.github.io/social-network/#/settings)** (Buttons to switch to dark theme and activate diamic background(with save in LocalStorage))

@@ -9,12 +9,12 @@ type MeResponseDataType = {
   isMale: boolean
 }
 
-type LoginRegistrationResponseDataType = {
+export type LoginRegistrationResponseDataType = {
   userData: MeResponseDataType
   authToken: string
 }
 
-export const authAPI = {
+export const authApi = {
   me() {
     return instance.get<APIResponseType<MeResponseDataType>>('auth/me').then((res) => res.data)
   },

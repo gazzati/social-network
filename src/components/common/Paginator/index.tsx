@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import cn from 'classnames'
-import leftArrowIcon from 'src/assets/images/exit.png'
+import leftArrowIcon from 'src/assets/images/leftArrowIcon.svg'
 import rightArrowIcon from 'src/assets/images/rightArrowIcon.svg'
 
 import styles from './style.module.scss'

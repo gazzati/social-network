@@ -1,5 +1,5 @@
-import { instance, ResultCodeEnum } from 'src/api'
-import { authAPI } from 'src/api/auth-api'
+import { APIResponseType, instance, ResultCodeEnum } from 'src/api'
+import { authApi, LoginRegistrationResponseDataType } from 'src/api/auth'
 import { LoginFormValuesType, RegistrationFormValuesType, UserDataType } from 'src/types/types'
 import { BaseThunkType, InferActionsTypes } from '.'
 import { addNotification } from './app'
@@ -53,16 +53,14 @@ export const authActions = {
 
 export const getAuthUserData = (): ThunkType => async (dispatch) => {
   dispatch(authActions.toggleIsFetching(true))
-  const res = await authAPI.me()
+  const res = await authApi.me()
   if (res.resultCode === ResultCodeEnum.Success) {
     dispatch(authActions.setAuthUserData(res.data, true))
   }
   dispatch(authActions.toggleIsFetching(false))
 }
 
-export const login = (data: LoginFormValuesType): ThunkType => async (dispatch) => {
-  dispatch(authActions.toggleIsFetching(true))
-  const res = await authAPI.login(data)
+const loginRegistrationHelper = (res: APIResponseType<LoginRegistrationResponseDataType>, dispatch: any) => {
   if (res.resultCode === ResultCodeEnum.Success) {
     instance.defaults.headers.authToken = res.data.authToken
     localStorage.setItem('authToken', res.data.authToken)
@@ -72,24 +70,22 @@ export const login = (data: LoginFormValuesType): ThunkType => async (dispatch) 
     dispatch(addNotification('error', res.message))
   }
   dispatch(authActions.toggleIsFetching(false))
+}
+
+export const login = (data: LoginFormValuesType): ThunkType => async (dispatch) => {
+  dispatch(authActions.toggleIsFetching(true))
+  const res = await authApi.login(data)
+  loginRegistrationHelper(res, dispatch)
 }
 
 export const registration = (data: RegistrationFormValuesType): ThunkType => async (dispatch) => {
   dispatch(authActions.toggleIsFetching(true))
-  const res = await authAPI.registration(data)
-  if (res.resultCode === ResultCodeEnum.Success) {
-    instance.defaults.headers.authToken = res.data.authToken
-    localStorage.setItem('authToken', res.data.authToken)
-    dispatch(authActions.setAuthUserData(res.data.userData, true))
-    dispatch(addNotification('success', res.message))
-  } else {
-    dispatch(addNotification('error', res.message))
-  }
-  dispatch(authActions.toggleIsFetching(false))
+  const res = await authApi.registration(data)
+  loginRegistrationHelper(res, dispatch)
 }
 
 export const logout = (): ThunkType => async (dispatch) => {
-  const res = await authAPI.logout()
+  const res = await authApi.logout()
   if (res.resultCode === ResultCodeEnum.Success) {
     instance.defaults.headers.authToken = ''
     localStorage.removeItem('authToken')

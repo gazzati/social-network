@@ -18,6 +18,9 @@
     height: 35px;
     background-color: var(--wrap-bg-color);
     border-radius: 10px;
+
+    display: none;
+
     @media screen and (max-width: 678px) {
       bottom: 0;
       height: 22px;
@@ -35,6 +38,9 @@
     padding: 0 8px;
     margin: 0 8px 6px 0;
     border: none;
+
+    display: none;
+
     @media screen and (max-width: 678px) {
       border-radius: 5px;
       height: 22px;

@@ -1,6 +1,6 @@
 import { ProfileType } from 'src/types/types'
-import { followApi } from 'src/api/follow-api'
-import { usersAPI } from 'src/api/users-api'
+import { followApi } from 'src/api/follow'
+import { usersApi } from 'src/api/users'
 import { ResultCodeEnum } from 'src/api'
 import { BaseThunkType, InferActionsTypes } from '.'
 
@@ -92,7 +92,7 @@ export const requestFollowers = (page: number): ThunkType => async (dispatch) =>
 
 export const unfollow = (userId: string): ThunkType => async (dispatch) => {
   dispatch(actions.toggleIsFetching(true))
-  const res = await usersAPI.unFollow(userId)
+  const res = await usersApi.unFollow(userId)
   if (res.resultCode === ResultCodeEnum.Success) {
     dispatch(actions.unfollowSuccess(userId))
   }

@@ -1,5 +1,5 @@
 import { PostType, ProfileInfoType, ProfileType } from 'src/types/types'
-import { profileAPI } from 'src/api/profile-api'
+import { profileApi } from 'src/api/profile'
 import { addNotification } from './app'
 import { authActions } from './auth'
 import { BaseThunkType, InferActionsTypes } from '.'
@@ -75,13 +75,13 @@ export const actions = {
 
 export const getUserProfile = (userId: string): ThunkType => async (dispatch) => {
   dispatch(actions.toggleIsFetching(true))
-  const data = await profileAPI.getProfile(userId)
+  const data = await profileApi.getProfile(userId)
   dispatch(actions.setUserProfile(data))
   dispatch(actions.toggleIsFetching(false))
 }
 
 export const updateStatus = (status: string): ThunkType => async (dispatch) => {
-  const data = await profileAPI.updateStatus(status)
+  const data = await profileApi.updateStatus(status)
   if (data.resultCode === 0) {
     dispatch(actions.setStatus(status))
   }
@@ -89,7 +89,7 @@ export const updateStatus = (status: string): ThunkType => async (dispatch) => {
 
 export const savePhoto = (file: File): ThunkType => async (dispatch) => {
   dispatch(actions.toggleIsFetching(true))
-  const data = await profileAPI.savePhoto(file)
+  const data = await profileApi.savePhoto(file)
   dispatch(actions.savePhotoSuccess(data.data.photo))
   // @ts-ignore //TODO
   dispatch(authActions.setAuthPhoto(data.data.photo))
@@ -98,7 +98,7 @@ export const savePhoto = (file: File): ThunkType => async (dispatch) => {
 
 export const saveProfile = (profile: ProfileInfoType): ThunkType => async (dispatch) => {
   dispatch(actions.toggleIsFetching(true))
-  const res = await profileAPI.saveProfile(profile)
+  const res = await profileApi.saveProfile(profile)
   if (res.resultCode === 0) {
     dispatch(actions.setUserProfile(res.data))
     dispatch(addNotification('success', res.message))
@@ -109,17 +109,17 @@ export const saveProfile = (profile: ProfileInfoType): ThunkType => async (dispa
 }
 
 export const addPost = (text: string): ThunkType => async (dispatch) => {
-  const res = await profileAPI.addPost(text)
+  const res = await profileApi.addPost(text)
   dispatch(actions.refreshPostsActionCreator(res.data.posts))
 }
 
 export const addLikes = (postId: string): ThunkType => async (dispatch) => {
-  const res = await profileAPI.addLike(postId)
+  const res = await profileApi.addLike(postId)
   dispatch(actions.refreshPostsActionCreator(res.data.posts))
 }
 
 export const deletePost = (postId: string): ThunkType => async (dispatch) => {
-  const res = await profileAPI.deletePost(postId)
+  const res = await profileApi.deletePost(postId)
   dispatch(actions.deletePostActionCreator(res.data.postId))
 }
 

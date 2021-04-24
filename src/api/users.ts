@@ -11,7 +11,7 @@ export type FollowUnfollow = {
   userId: string
 }
 
-export const usersAPI = {
+export const usersApi = {
   getUsers(page: number, limit: number, term = '') {
     return instance
       .get<APIResponseType<GetUsersType>>(`users/?${term && `term=${term}&`}page=${page}&limit=${limit}`)

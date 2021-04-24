@@ -1,6 +1,6 @@
 import { ThunkAction } from 'redux-thunk'
 import { NewsType } from 'src/types/types'
-import { getNewsData } from 'src/api/news-api'
+import { getNewsData } from 'src/api/news'
 import { StateType, InferActionsTypes } from '.'
 
 const initialState = {
@@ -19,7 +19,8 @@ const news = (state = initialState, action: ActionsTypes): InitialState => {
     case 'SET_NEWS':
       return {
         ...state,
-        news: action.news.filter((v, i, a) => a.findIndex((t) => t.title === v.title) === i)
+        // news: action.news.filter((v, i, a) => a.findIndex((t) => t.title === v.title) === i)
+        news: action.news
       }
     case 'SET_CURRENT_PAGE': {
       return { ...state, page: action.page }
@@ -52,8 +53,8 @@ export const getNews = (page: number, limit: number, category?: string): ThunkTy
   category && dispatch(actions.setCategory(category))
 
   const res = await getNewsData(page, limit, category)
-  dispatch(actions.setTotalNewsCount(res.pagination.total))
-  dispatch(actions.setNews(res.data))
+  dispatch(actions.setTotalNewsCount(res.totalCount))
+  dispatch(actions.setNews(res.value))
   dispatch(actions.toggleIsFetching(false))
 }
 

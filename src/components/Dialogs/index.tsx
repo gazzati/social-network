@@ -107,7 +107,7 @@ const Dialogs: React.FC<PropsType> = ({ match }) => {
           {isFetching && <Preloader />}
 
           {!chatId ? (
-            <div className={s.noMessages}>Please choose chat</div>
+            !isFetching && <div className={s.noMessages}>Please choose chat</div>
           ) : messagesElements && messagesElements.length ? (
             messagesElements
           ) : (

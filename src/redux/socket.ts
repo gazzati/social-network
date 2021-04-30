@@ -9,7 +9,7 @@ let socket: any = null
 
 export const connect = () => async (dispatch: Dispatch) => {
   socket = io('https://gazzati-social-network-socket.herokuapp.com', {
-    // socket = io('http://localhost:8001', {
+  // socket = io('http://localhost:8001', {
     auth: {
       token: localStorage.getItem('authToken')
     }
@@ -38,6 +38,7 @@ export const disconnect = () => async () => {
 
 export const sendMessage = (chatId: string, messageText: string) => async (dispatch: Dispatch) => {
   dispatch(actions.toggleIsFetching(true))
+
   socket?.emit('sendMessage', { chatId, messageText }, (err: any) => {
     if (err) addNotification('error', err)
   })
@@ -54,6 +55,7 @@ export const getChatsData = (chatId?: string) => async (dispatch: Dispatch) => {
 export const startChat = (userId: string) => async (dispatch: Dispatch) => {
   dispatch(actions.toggleIsFetching(true))
 
+  socket?.connect()
   socket?.emit('startChat', { companionId: userId }, (err: any) => {
     if (err) addNotification('error', err)
   })

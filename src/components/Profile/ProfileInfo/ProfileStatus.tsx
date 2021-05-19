@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
 import s from '../style.module.scss'
 
 type PropsType = {
@@ -8,25 +7,24 @@ type PropsType = {
   isOwner: boolean
 }
 
-const ProfileStatusWithHooks: React.FC<PropsType> = (props) => {
+const ProfileStatus: React.FC<PropsType> = ({ status, isOwner, updateStatus }) => {
   const [editMode, setEditMode] = useState(false)
-  const [status, setStatus] = useState(props.status)
+  const [statusValue, setStatusValue] = useState(status)
 
   useEffect(() => {
-    setStatus(props.status)
-  }, [props.status])
+    setStatusValue(status)
+  }, [status])
 
   const activateEditMode = () => {
-    props.isOwner && setEditMode(true)
+    isOwner && setEditMode(true)
   }
 
   const deactivateEditMode = () => {
     setEditMode(false)
-    props.status !== status && props.updateStatus(status)
-  }
-
-  const onStatusChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setStatus(e.currentTarget.value)
+    console.log(status, statusValue)
+    if (status !== statusValue) {
+      updateStatus(statusValue)
+    }
   }
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -38,8 +36,8 @@ const ProfileStatusWithHooks: React.FC<PropsType> = (props) => {
       {editMode ? (
         <div className={s.statusEdit}>
           <input
-            value={status}
-            onChange={onStatusChange}
+            value={statusValue}
+            onChange={(e) => setStatusValue(e.target.value)}
             onKeyPress={onKeyPress}
             onBlur={deactivateEditMode}
             autoFocus
@@ -47,11 +45,11 @@ const ProfileStatusWithHooks: React.FC<PropsType> = (props) => {
         </div>
       ) : (
         <div>
-          <span onClick={activateEditMode}>{props.status}</span>
+          <span onClick={activateEditMode}>{status || ' '}</span>
         </div>
       )}
     </>
   )
 }
 
-export default ProfileStatusWithHooks
+export default ProfileStatus

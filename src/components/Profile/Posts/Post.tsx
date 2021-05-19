@@ -36,12 +36,9 @@ const Post: React.FC<PropsType> = (props) => (
             <div className={s.date}>{formatDate(props.date).getDate}</div>
           </div>
         </div>
-        <img
-          className={s.removePost}
-          onClick={() => props.isOwner && props.deletePost(props.id)}
-          src={removePost}
-          alt=""
-        />
+        {props.isOwner && (
+          <img className={s.removePost} onClick={() => props.deletePost(props.id)} src={removePost} alt="" />
+        )}
       </div>
     )}
     <div className={s.bottomBlock}>

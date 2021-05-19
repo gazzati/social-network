@@ -69,7 +69,7 @@ const Profile: React.FC<PropsType> = ({ match }) => {
               <ProfileInfo
                 isOwner={isOwner}
                 profile={profile}
-                updateStatus={updateStatus}
+                updateStatus={(status) => dispatch(updateStatus(status))}
                 goToEditMode={() => setEditMode(true)}
                 onSendMessage={onSendMessage}
               />

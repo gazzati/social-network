@@ -113,8 +113,8 @@ export const addPost = (text: string): ThunkType => async (dispatch) => {
   dispatch(actions.refreshPostsActionCreator(res.data.posts))
 }
 
-export const addLikes = (postId: string): ThunkType => async (dispatch) => {
-  const res = await profileApi.addLike(postId)
+export const addLikes = (postId: string, userId: string): ThunkType => async (dispatch) => {
+  const res = await profileApi.addLike(postId, userId)
   dispatch(actions.refreshPostsActionCreator(res.data.posts))
 }
 

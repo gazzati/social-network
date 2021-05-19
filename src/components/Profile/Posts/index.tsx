@@ -31,7 +31,7 @@ const Posts: React.FC<{ isOwner: boolean }> = ({ isOwner }) => {
         date={p.date}
         profile={profile}
         isOwner={isOwner}
-        addLikes={(postId) => dispatch(addLikes(postId))}
+        addLikes={(postId) => dispatch(addLikes(postId, profile._id))}
         deletePost={(postId) => dispatch(deletePost(postId))}
       />
     ))

@@ -41,9 +41,9 @@ export const profileApi = {
       .post<APIResponseType<PostsType>>('profile/post', { postMessage: text })
       .then((res) => res.data)
   },
-  addLike(postId: string) {
+  addLike(postId: string, userId: string) {
     return instance
-      .put<APIResponseType<PostsType>>('profile/like', { postId })
+      .put<APIResponseType<PostsType>>('profile/like', { postId, userId })
       .then((res) => res.data)
   },
   deletePost(postId: string) {

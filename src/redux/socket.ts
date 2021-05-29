@@ -51,12 +51,3 @@ export const getChatsData = (chatId?: string) => async (dispatch: Dispatch) => {
     if (err) addNotification('error', err)
   })
 }
-
-export const startChat = (userId: string) => async (dispatch: Dispatch) => {
-  dispatch(actions.toggleIsFetching(true))
-
-  socket?.connect()
-  socket?.emit('startChat', { companionId: userId }, (err: any) => {
-    if (err) addNotification('error', err)
-  })
-}

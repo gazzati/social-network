@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom'
 
 import { getFollow } from 'src/redux/follow'
 import { StateType } from 'src/redux'
-import { getChatsData, startChat } from 'src/redux/socket'
 
 import Preloader from 'src/components/common/Preloader'
 import FollowItem from './FollowItem'
@@ -17,7 +16,7 @@ type PropsType = {
 
 const Follow: React.FC<PropsType> = ({ type }) => {
   const { following, followers, isFetching, unfollowingInProgress } = useSelector((state: StateType) => state.follow)
-  const { chats, newChatId } = useSelector((state: StateType) => state.dialogs)
+  const { chats } = useSelector((state: StateType) => state.dialogs)
   const dispatch = useDispatch()
 
   const history = useHistory()
@@ -28,14 +27,10 @@ const Follow: React.FC<PropsType> = ({ type }) => {
   }, [type])
 
   const onSendMessage = async (userId: string) => {
-    let chatId = chats.filter((chat) => chat.participants.includes(userId) && chat.participants.length === 2)[0]?._id
-    if (!chatId) {
-      await dispatch(startChat(userId))
-      chatId = newChatId
-    } else {
-      dispatch(getChatsData(chatId))
-    }
-    history.push(`dialogs/${chatId}`)
+    const chatId = chats.filter((chat) => chat.participants.includes(userId) && chat.participants.length === 2)[0]
+      ?._id
+
+    history.replace(`/dialogs/${chatId || userId}`, `/${type}`)
   }
 
   return (

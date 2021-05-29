@@ -23,7 +23,7 @@ const FollowItem: FC<PropsType> = ({ user, unfollowingInProgress, onSendMessage,
   return (
     <div className={s.followItem}>
       <div>
-        <NavLink to={`profile:${user._id}`}>
+        <NavLink to={`profile/${user._id}`}>
           <img
             src={user.photo?.url ? user.photo?.url : userPhoto}
             className={cn(s.photo, { [s.malePhoto]: user.info.isMale })}

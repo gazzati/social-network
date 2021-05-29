@@ -74,9 +74,21 @@
   fill: var(--secondary-color)
 }
 
-
 .hideOnMobile {
   @media screen and (max-width: 678px) {
     display: none;
   }
+}
+
+.messagesCount {
+  width: 16px;
+  height: 16px;
+  border-radius: 25px;
+  background-color: #f00;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  margin: 5px 0 0 4px;
 }

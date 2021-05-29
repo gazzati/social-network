@@ -68,10 +68,11 @@
           width: 20px;
           margin-right: 10px;
           cursor: pointer;
+          opacity: 0.7;
         }
 
         .removePost:hover {
-          filter: drop-shadow(2px 4px 6px black)
+          opacity: 0.8;
         }
       }
 
@@ -105,7 +106,7 @@
         }
 
         .likes img:hover {
-          filter: drop-shadow(2px 4px 6px black)
+          filter: brightness(1.2);
         }
       }
     }

@@ -6,6 +6,7 @@ import { compose } from 'redux'
 import store, { StateType } from './redux'
 import { toggleBlackTheme, toggleDynamicBackground } from './redux/settings'
 import { getAuthUserData } from './redux/auth'
+import { connect, disconnect, getChatsData } from './redux/socket'
 
 import Users from './components/Users'
 import Navbar from './components/Navbar'
@@ -27,9 +28,14 @@ const App: React.FC = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    dispatch(connect())
+    dispatch(getChatsData())
     dispatch(getAuthUserData())
     dispatch(toggleBlackTheme(localStorage.getItem('black-theme') === 'light'))
     dispatch(toggleDynamicBackground(localStorage.getItem('dynamic-bg') === 'false'))
+    return () => {
+      dispatch(disconnect())
+    }
   }, [])
 
   return (
@@ -39,32 +45,32 @@ const App: React.FC = () => {
       <Header />
       <main>
         <Navbar />
-        <div className="wrapper">
+        <div className='wrapper'>
           <Switch>
-            <Route path="/users" render={() => <Users />} />
+            <Route path='/users' render={() => <Users />} />
 
-            <Route exact path="/settings" render={() => <Settings />} />
+            <Route exact path='/settings' render={() => <Settings />} />
 
-            <Route path="/news" render={() => <News />} />
+            <Route path='/news' render={() => <News />} />
 
             {!isAuth ? (
               <LoginPage />
             ) : (
               <>
-                <Route path="/profile::userId?" render={() => <Profile />} />
+                <Route path='/profile/:userId?' render={() => <Profile />} />
 
-                <Route path="/dialogs/:chatId?" render={() => <Dialogs />} />
+                <Route path='/dialogs/:chatId?' render={() => <Dialogs />} />
 
-                <Route path="/following" render={() => <Follow type="following" />} />
+                <Route path='/following' render={() => <Follow type='following' />} />
 
-                <Route path="/followers" render={() => <Follow type="followers" />} />
+                <Route path='/followers' render={() => <Follow type='followers' />} />
 
-                <Route exact path="/profile">
-                  <Redirect to={`/profile:${userData.id}`} />
+                <Route exact path='/profile'>
+                  <Redirect to={`/profile/${userData.id}`} />
                 </Route>
 
-                <Route exact path="/">
-                  <Redirect to={`/profile:${userData.id}`} />
+                <Route exact path='/'>
+                  <Redirect to={`/profile/${userData.id}`} />
                 </Route>
               </>
             )}

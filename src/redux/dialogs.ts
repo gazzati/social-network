@@ -1,4 +1,5 @@
 import { ChatType, MessageType } from 'src/types/types'
+import { Dispatch } from 'redux'
 import { InferActionsTypes } from '.'
 
 const initialState = {
@@ -44,6 +45,10 @@ export const actions = {
 }
 
 export default dialogs
+
+export const resetNewChatId = () => async (dispatch: Dispatch) => {
+  dispatch(actions.setNewChatId(''))
+}
 
 export type InitialStateType = typeof initialState
 type ActionsTypes = InferActionsTypes<typeof actions>

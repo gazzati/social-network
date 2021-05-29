@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink, useHistory } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { logout } from 'src/redux/auth'
@@ -10,21 +10,16 @@ import { DialogsIco, FollowersIco, FollowingIco, NewsIco, ProfileIco, SettingsIc
 import s from './style.module.scss'
 
 const Navbar: React.FC = () => {
-  const { isAuth, userData } = useSelector((state: StateType) => state.auth)
-  const { profile } = useSelector((state: StateType) => state.profile)
   const dispatch = useDispatch()
-  const history = useHistory()
-
-  const getIsActive = () => {
-    const url = history.location.pathname
-    return url.includes('user') || (!!userData.id && url.includes('profile') && profile._id !== userData.id)
-  }
+  const { isAuth, userData } = useSelector((state: StateType) => state.auth)
+  const { chats } = useSelector((state: StateType) => state.dialogs)
+  const unreadMessagesCount = chats.filter(chat => userData.id && chat.isUnreadFor.includes(userData.id)).length
 
   return (
     <div className={s.navbar}>
       <NavLink
         exact
-        to={`/profile${userData.id ? `:${userData.id}` : ''}`}
+        to={`/profile${userData.id ? `/${userData.id}` : ''}`}
         className={s.link}
         activeClassName={s.activeItem}
       >
@@ -35,9 +30,10 @@ const Navbar: React.FC = () => {
       <NavLink to="/dialogs" className={s.link} activeClassName={s.activeItem}>
         <DialogsIco />
         <span className={s.item}>Messages</span>
+        {unreadMessagesCount ? <span className={s.messagesCount}>{unreadMessagesCount}</span> : null}
       </NavLink>
 
-      <NavLink to="/users" isActive={getIsActive} className={s.link} activeClassName={s.activeItem}>
+      <NavLink to="/users" className={s.link} activeClassName={s.activeItem}>
         <UsersIco />
         <span className={s.item}>Users</span>
       </NavLink>

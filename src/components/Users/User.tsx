@@ -20,7 +20,7 @@ const User: FC<PropsType> = ({ user, currentUserId, followingInProgress, follow,
   return (
     <div className={s.userContainer}>
       <div className={s.user}>
-        <NavLink to={`profile:${user._id}`}>
+        <NavLink to={`profile/${user._id}`}>
           <img
             src={user.photo?.url ? user.photo?.url : userPhoto}
             className={cn(s.photo, { [s.malePhoto]: user.info.isMale })}

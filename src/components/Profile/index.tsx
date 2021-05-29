@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { compose } from 'redux'
 import { RouteComponentProps, useHistory, withRouter } from 'react-router-dom'
 
-import { getChatsData, startChat } from 'src/redux/socket'
 import { getUserProfile, saveProfile, updateStatus } from 'src/redux/profile'
 import { StateType } from 'src/redux'
 import { ProfileInfoType, ProfileType } from 'src/types/types'
@@ -20,7 +19,7 @@ type PropsType = RouteComponentProps<{ userId: string }>
 const Profile: React.FC<PropsType> = ({ match }) => {
   const { userData } = useSelector((state: StateType) => state.auth)
   const { profile, isFetching } = useSelector((state: StateType) => state.profile)
-  const { chats, newChatId } = useSelector((state: StateType) => state.dialogs)
+  const { chats } = useSelector((state: StateType) => state.dialogs)
   const dispatch = useDispatch()
 
   const history = useHistory()
@@ -38,17 +37,10 @@ const Profile: React.FC<PropsType> = ({ match }) => {
   }
 
   const onSendMessage = async () => {
-    let chatId = chats.filter((chat) => chat.participants.includes(profile._id) && chat.participants.length === 2)[0]
+    const chatId = chats.filter((chat) => chat.participants.includes(profile._id) && chat.participants.length === 2)[0]
       ?._id
 
-    if (!chatId) {
-      await dispatch(startChat(profile._id))
-      chatId = newChatId
-    } else {
-      dispatch(getChatsData(chatId))
-    }
-
-    history.push(`dialogs/${chatId}`)
+    history.replace(`/dialogs/${chatId || profile._id}`, '/profile/:userId?')
   }
 
   return (

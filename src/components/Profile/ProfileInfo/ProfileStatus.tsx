@@ -21,7 +21,6 @@ const ProfileStatus: React.FC<PropsType> = ({ status, isOwner, updateStatus }) =
 
   const deactivateEditMode = () => {
     setEditMode(false)
-    console.log(status, statusValue)
     if (status !== statusValue) {
       updateStatus(statusValue)
     }

@@ -6,11 +6,12 @@ import { StateType } from 'src/redux'
 import Preloader from 'src/components/common/Preloader'
 import LoginForm from './LoginForm'
 import RegistrationForm from './RegistrationForm'
+import RegistrationSubmitForm from './RegistrationSubmitForm'
 
 import s from './style.module.scss'
 
 const Login: React.FC = () => {
-  const { isFetching } = useSelector((state: StateType) => state.auth)
+  const { isFetching, verificationId } = useSelector((state: StateType) => state.auth)
 
   return (
     <div className={s.loginPage}>
@@ -24,8 +25,15 @@ const Login: React.FC = () => {
         <h4>or</h4>
 
         <div className={s.registration}>
-          <h2>REGISTRATION</h2>
-          <RegistrationForm />
+          {!verificationId
+            ? <>
+              <h2>REGISTRATION</h2>
+              <RegistrationForm />
+            </>
+            : <>
+              <h2>SUBMIT REGISTRATION</h2>
+              <RegistrationSubmitForm />
+            </>}
         </div>
       </div>
     </div>

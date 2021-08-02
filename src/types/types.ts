@@ -23,6 +23,11 @@ export type RegistrationFormValuesType = {
   isMale: boolean
 }
 
+export type RegistrationSubmitData = {
+  id: string
+  verificationCode: number
+}
+
 export type UserDataType = {
   id: string | null
   name: string | null

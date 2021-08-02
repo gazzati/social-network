@@ -31,7 +31,7 @@ const RegistrationForm: React.FC = () => {
         type="text"
         placeholder="name"
         value={data.name}
-        maxLength={12}
+        maxLength={16}
         onChange={(e) => setData({ ...data, name: e.target.value })}
         required
       />

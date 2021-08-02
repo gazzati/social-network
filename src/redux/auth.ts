@@ -1,6 +1,6 @@
 import { APIResponseType, instance, ResultCodeEnum } from 'src/api'
 import { authApi, LoginRegistrationResponseDataType } from 'src/api/auth'
-import { LoginFormValuesType, RegistrationFormValuesType, UserDataType } from 'src/types/types'
+import { LoginFormValuesType, RegistrationFormValuesType, RegistrationSubmitData, UserDataType } from 'src/types/types'
 import { BaseThunkType, InferActionsTypes } from '.'
 import { addNotification } from './app'
 
@@ -13,7 +13,8 @@ const initialState = {
     isMale: true
   } as UserDataType,
   isAuth: false,
-  isFetching: false as boolean
+  isFetching: false as boolean,
+  verificationId: ''
 }
 
 const auth = (state = initialState, action: ActionsType): initialStateType => {
@@ -36,6 +37,9 @@ const auth = (state = initialState, action: ActionsType): initialStateType => {
     case 'auth/TOGGLE_IS_FETCHING': {
       return { ...state, isFetching: action.isFetching }
     }
+    case 'auth/SET_VERIFICATION_ID': {
+      return { ...state, verificationId: action.verificationId }
+    }
     default:
       return state
   }
@@ -48,6 +52,7 @@ export const authActions = {
       payload: { userData, isAuth }
     } as const),
   setAuthPhoto: (photo: string) => ({ type: 'auth/SET_USER_PHOTO', photo } as const),
+  setVerificationId: (verificationId: string) => ({ type: 'auth/SET_VERIFICATION_ID', verificationId } as const),
   toggleIsFetching: (isFetching: boolean) => ({ type: 'auth/TOGGLE_IS_FETCHING', isFetching } as const)
 }
 
@@ -61,6 +66,7 @@ export const getAuthUserData = (): ThunkType => async (dispatch) => {
 }
 
 const loginRegistrationHelper = (res: APIResponseType<LoginRegistrationResponseDataType>, dispatch: any) => {
+  dispatch(authActions.toggleIsFetching(true))
   if (res.resultCode === ResultCodeEnum.Success) {
     instance.defaults.headers.authToken = res.data.authToken
     localStorage.setItem('authToken', res.data.authToken)
@@ -73,7 +79,6 @@ const loginRegistrationHelper = (res: APIResponseType<LoginRegistrationResponseD
 }
 
 export const login = (data: LoginFormValuesType): ThunkType => async (dispatch) => {
-  dispatch(authActions.toggleIsFetching(true))
   const res = await authApi.login(data)
   loginRegistrationHelper(res, dispatch)
 }
@@ -81,6 +86,19 @@ export const login = (data: LoginFormValuesType): ThunkType => async (dispatch) 
 export const registration = (data: RegistrationFormValuesType): ThunkType => async (dispatch) => {
   dispatch(authActions.toggleIsFetching(true))
   const res = await authApi.registration(data)
+  if (res.resultCode === ResultCodeEnum.Success) {
+    dispatch(authActions.setVerificationId(res.data.id))
+    dispatch(addNotification('success', res.message))
+  } else {
+    dispatch(addNotification('error', res.message))
+  }
+
+  dispatch(authActions.toggleIsFetching(false))
+}
+
+export const submitRegistration = (data: RegistrationSubmitData): ThunkType => async (dispatch) => {
+  dispatch(authActions.setVerificationId(''))
+  const res = await authApi.registrationSubmit(data)
   loginRegistrationHelper(res, dispatch)
 }
 

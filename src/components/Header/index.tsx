@@ -28,7 +28,7 @@ const Header: React.FC = () => {
     <div className={s.header}>
       <div className={s.headerWrap}>
         <div className={s.mainIcon}>
-          <NavLink to={`/profile${userData.id ? `:${userData.id}` : ''}`} className={s.logoLink}>
+          <NavLink to={`/profile${userData.id ? `/${userData.id}` : ''}`} className={s.logoLink}>
             <img src={reactIcon} alt="" className={s.logo} />
           </NavLink>
           <p className={s.title}>
